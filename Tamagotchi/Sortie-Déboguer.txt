@@ -1,0 +1,99 @@
+﻿'Tamagotchi.exe' (Win32) : Chargé 'F:\Downloads\Projet 2\Tamagotchi\Debug\Tamagotchi.exe'. Les symboles ont été chargés.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\ntdll.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\kernel32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\KernelBase.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\gdi32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\gdi32full.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\msvcp_win.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\ucrtbase.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\opengl32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\msvcrt.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\winmm.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\user32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\advapi32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\win32u.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\sechost.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\winmmbase.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\rpcrt4.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\winmmbase.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\winmmbase.dll'
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\cfgmgr32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\sspicli.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\cryptbase.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\bcryptprimitives.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\winmmbase.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\winmmbase.dll'
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\msvcp140d.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\vcruntime140d.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\glu32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\vcruntime140d.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\vcruntime140d.dll'
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\ucrtbased.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\ucrtbased.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\ucrtbased.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\ucrtbased.dll'
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\ucrtbased.dll'
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\imm32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\combase.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\uxtheme.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\msctf.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\oleaut32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_7a39871618b19f06\nvoglv32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_7a39871618b19f06\nvoglv32.dll'
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_7a39871618b19f06\nvoglv32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\shell32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\SHCore.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\windows.storage.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\shlwapi.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\kernel.appcore.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\powrprof.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\profapi.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\setupapi.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\ole32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\wtsapi32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\version.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\devobj.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\wintrust.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\msasn1.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\crypt32.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\ntmarta.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+Le thread 0x590 s'est arrêté avec le code 0 (0x0).
+Le thread 0x2d44 s'est arrêté avec le code 0 (0x0).
+Le thread 0x20ac s'est arrêté avec le code 0 (0x0).
+Le thread 0x4e0 s'est arrêté avec le code 0 (0x0).
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\dwmapi.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\nvspcap.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\winsta.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\dinput.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\InputHost.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\InputHost.dll'
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\InputHost.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\CoreMessaging.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\CoreMessaging.dll'
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\CoreUIComponents.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\CoreUIComponents.dll'
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\CoreMessaging.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\CoreUIComponents.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\WinTypes.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\WinTypes.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\WinTypes.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\WinTypes.dll'
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\WinTypes.dll'
+'Tamagotchi.exe' (Win32) : Déchargé 'C:\Windows\SysWOW64\WinTypes.dll'
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\WinTypes.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\hid.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+'Tamagotchi.exe' (Win32) : Chargé 'C:\Windows\SysWOW64\TextInputFramework.dll'. Impossible de trouver ou d'ouvrir le fichier PDB.
+Le thread 0x1214 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x8f8 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x2fdc s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x26e8 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x198 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x1288 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x32d8 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x1590 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x2e98 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x15b0 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x2194 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x26a8 s'est arrêté avec le code -1073741510 (0xc000013a).
+Le thread 0x8dc s'est arrêté avec le code -1073741510 (0xc000013a).
+Le programme '[10096] Tamagotchi.exe' s'est arrêté avec le code -1073741510 (0xc000013a).
