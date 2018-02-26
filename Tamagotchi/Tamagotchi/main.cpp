@@ -12,13 +12,13 @@ int main()
 	//Création du sprite
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	//Limitation du framerate
-	window.setFramerateLimit(60);
+	window.setFramerateLimit(24);
 
 	sf::Clock clock;
 
 	while (window.isOpen())
 	{
-
+	
 		//Touches de déplacement (à faire en switch-case)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 		{
@@ -44,7 +44,7 @@ int main()
 				break;
 			}
 
-			spritePerso.move(0, -5);
+			spritePerso.move(0, -4);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
@@ -70,7 +70,7 @@ int main()
 				break;
 			}
 
-			spritePerso.move(0, 5);
+			spritePerso.move(0, 4);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
@@ -96,7 +96,7 @@ int main()
 				break;
 			}
 
-			spritePerso.move(5, 0);
+			spritePerso.move(4, 0);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 		{
@@ -122,7 +122,7 @@ int main()
 				break;
 			}
 
-			spritePerso.move(-5, 0);
+			spritePerso.move(-4, 0);
 		}
 
 		window.clear();
