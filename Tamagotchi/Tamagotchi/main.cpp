@@ -1,5 +1,6 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Window.hpp>
+#include <iostream>
 #include "Jeu.h"
 #include "Creature.h"
 #include "Nourriture.h"
@@ -8,18 +9,28 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(640, 480), "GRAF Timothée");
-	//Texture
+	sf::RenderWindow window(sf::VideoMode(800, 600), "GRAF Timothée");
+	//Textures
+	sf::Texture backgroundDay;
 	sf::Texture texturePerso;
+	backgroundDay.loadFromFile("backgroundDay.png");
 	texturePerso.loadFromFile("alien.png");
 	//Rectangle de sélection
 	sf::IntRect rectSource(0, 0, 64, 64);
-	//Création du sprite
+	//Création des sprites
+	sf::Sprite background(backgroundDay);
 	sf::Sprite spritePerso(texturePerso, rectSource);
+	
+	//Coordonnées
+	spritePerso.setPosition(100, 400);
 	//Limitation du framerate
 	window.setFramerateLimit(24);
-
+	window.setMouseCursorVisible(true);
+	window.setMouseCursorGrabbed(true);
+	//Creation horloge interne
 	sf::Clock clock;
+
+	
 
 	while (window.isOpen())
 	{
@@ -48,7 +59,7 @@ int main()
 				break;
 			}
 
-			spritePerso.move(0, -4);
+			spritePerso.move(0, 0);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
@@ -74,12 +85,11 @@ int main()
 				break;
 			}
 
-			spritePerso.move(0, 4);
+			spritePerso.move(0, 0);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)/* || spritePerso.getPosition().x + spritePerso.getLocalBounds().width >= window.getSize().x*/)
 		{
 			rectSource.top = 64*2;
-
 			switch (rectSource.left)
 			{
 			case 0:
@@ -99,13 +109,12 @@ int main()
 				spritePerso.setTextureRect(rectSource);
 				break;
 			}
-
 			spritePerso.move(4, 0);
+
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)/* || spritePerso.getPosition().x <= 0*/)
 		{
 			rectSource.top = 64;
-
 			switch (rectSource.left)
 			{
 			case 0:
@@ -125,11 +134,14 @@ int main()
 				spritePerso.setTextureRect(rectSource);
 				break;
 			}
-
 			spritePerso.move(-4, 0);
 		}
 
+		//Collisions bordure fenêtre
+
+
 		window.clear();
+		window.draw(background);
 		window.draw(spritePerso);
 		window.display();
 
