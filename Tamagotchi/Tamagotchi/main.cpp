@@ -1,5 +1,10 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Window.hpp>
+#include "Jeu.h"
+#include "Creature.h"
+#include "Nourriture.h"
+#include "Options.h"
+
 
 int main()
 {
@@ -18,7 +23,6 @@ int main()
 
 	while (window.isOpen())
 	{
-	
 		//Touches de déplacement (à faire en switch-case)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 		{
@@ -130,5 +134,7 @@ int main()
 		window.display();
 
 	}
+	
 	return 0;
+
 }

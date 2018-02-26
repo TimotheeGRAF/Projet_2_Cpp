@@ -1,3 +1,10 @@
-﻿  main.cpp
+﻿  Partie.cpp
+  Options.cpp
+  Nourriture.cpp
+  Medicament.cpp
+  main.cpp
+  Jeu.cpp
+  Creature.cpp
+  Génération de code en cours...
   Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.exe
   Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.pdb (Partial PDB)

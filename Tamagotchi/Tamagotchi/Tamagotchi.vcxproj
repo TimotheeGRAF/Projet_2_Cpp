@@ -119,10 +119,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="Jeu.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Medicament.cpp" />
+    <ClCompile Include="Nourriture.cpp" />
+    <ClCompile Include="Options.cpp" />
+    <ClCompile Include="Partie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="alien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Creature.h" />
+    <ClInclude Include="Jeu.h" />
+    <ClInclude Include="Medicament.h" />
+    <ClInclude Include="Nourriture.h" />
+    <ClInclude Include="Options.h" />
+    <ClInclude Include="Partie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
