@@ -26,7 +26,7 @@ int main()
 	//Limitation du framerate
 	window.setFramerateLimit(24);
 	window.setMouseCursorVisible(true);
-	window.setMouseCursorGrabbed(true);
+	window.setMouseCursorGrabbed(false);
 	//Creation horloge interne
 	sf::Clock clock;
 
@@ -109,7 +109,15 @@ int main()
 				spritePerso.setTextureRect(rectSource);
 				break;
 			}
-			spritePerso.move(4, 0);
+			//spritePerso.move(4, 0);
+			if (spritePerso.getPosition().x == 0)
+			{
+				spritePerso.move(4, 0);
+			}
+			else
+			{
+				spritePerso.move(-4, 0);
+			}
 
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)/* || spritePerso.getPosition().x <= 0*/)
@@ -134,7 +142,14 @@ int main()
 				spritePerso.setTextureRect(rectSource);
 				break;
 			}
-			spritePerso.move(-4, 0);
+			if (spritePerso.getPosition().x == 0)
+			{
+				spritePerso.move(-4, 0);
+			}
+			else
+			{
+				spritePerso.move(4, 0);
+			}
 		}
 
 		//Collisions bordure fenêtre
