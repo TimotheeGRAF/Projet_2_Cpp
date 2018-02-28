@@ -130,6 +130,7 @@
     <Image Include="alien.png" />
     <Image Include="backgroundDay.png" />
     <Image Include="Cursor.png" />
+    <Image Include="Donut.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature.h" />

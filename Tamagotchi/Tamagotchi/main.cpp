@@ -9,7 +9,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "GRAF Timothée");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Un Xénomorph d'amour");
 	//Textures
 	sf::Texture backgroundDay;
 	sf::Texture texturePerso;
@@ -17,7 +17,7 @@ int main()
 	backgroundDay.loadFromFile("backgroundDay.png");
 	texturePerso.loadFromFile("alien.png");
 	cursor.loadFromFile("Cursor.png");
-	//Rectangle de sélection pour personnage
+	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 64, 64);
 	sf::IntRect rectCursor(0,0,32,38);
 	//Création des sprites
@@ -27,52 +27,23 @@ int main()
 
 	
 	//Coordonnées
+	sf::Vector2i posSouris;
 	spritePerso.setPosition(100, 400);
 	//Limitation du framerate
-	window.setFramerateLimit(18);
+	window.setFramerateLimit(60);
+	//Curseur visible ou non
 	window.setMouseCursorVisible(false);
+	//On dessine un curseur de souris perso à la position du curseur.
+	spriteCursor.setTextureRect(rectCursor);
 	
 	//Creation horloge interne
 	sf::Clock clock;
 
-	
-
 	while (window.isOpen())
 	{
+		
+		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 		//Touches de déplacement (à faire en switch-case)
-		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		//{
-		//	rectSource.top = 64*3;
-
-		//	switch (rectSource.left)
-		//	{
-		//	case 0:
-		//		rectSource.left = 64;
-		//		spritePerso.setTextureRect(rectSource);
-		//		break;
-		//	case 64:
-		//		rectSource.left = 64 * 2;
-		//		spritePerso.setTextureRect(rectSource);
-		//		break;
-		//	case 64 * 2:
-		//		rectSource.left = 64 * 3;
-		//		spritePerso.setTextureRect(rectSource);
-		//		break;
-		//	case 64 * 3:
-		//		rectSource.left = 0;
-		//		spritePerso.setTextureRect(rectSource);
-		//		break;
-		//	}
-
-		//	spritePerso.move(0, 0);
-		//}
-		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		//{
-		//	rectSource.top = 0;
-
-
-		//	spritePerso.move(0, 0);
-		//}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && spritePerso.getPosition().x + spritePerso.getLocalBounds().width <= window.getSize().x)
 		{
 			rectSource.top = 64*2;
@@ -123,24 +94,24 @@ int main()
 			spritePerso.move(-4, 0);
 		}
 
+		//Bordures des Sprites
+		sf::FloatRect boxPerso = spritePerso.getGlobalBounds();
+		sf::FloatRect boxSouris = spriteCursor.getGlobalBounds();
+		
 		//On change le curseur quand on clique
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxPerso.intersects(boxSouris)))
 		{
-			rectCursor.left = 32;
-			spriteCursor.setTextureRect(rectCursor);
+			posSouris = sf::Mouse::getPosition(window);
+			spritePerso.setPosition(posSouris.x, posSouris.y);
+			rectCursor.left = 32;	
 		}
 		else
 		{
 			rectCursor.left = 0;
-			spriteCursor.setTextureRect(rectCursor);
 		}
 
-
-
 		window.clear();
-		//On dessine un curseur de souris perso à la position du curseur.
-		spriteCursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
-
+	
 		window.draw(background);
 		window.draw(spritePerso);
 		window.draw(spriteCursor);
