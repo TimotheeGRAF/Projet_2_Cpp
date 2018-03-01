@@ -110,8 +110,11 @@ int main()
 			rectCursor.left = 0;
 		}
 
+
+
+
+
 		window.clear();
-	
 		window.draw(background);
 		window.draw(spritePerso);
 		window.draw(spriteCursor);

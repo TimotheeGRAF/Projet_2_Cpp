@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Nourriture.h"
 
 using namespace std;
 
@@ -15,9 +16,11 @@ public:
 	int getJoie();
 	int getStatut();
 	int getStade();
-	void faireCaca();
-	void tomberMalade();
-	
+	int faireCaca();
+	void jouer();
+	int donnerAManger();
+	void soigner();
+	int laver();
 
 private:
 
@@ -28,6 +31,10 @@ private:
 	int statut;
 	int stade;
 	bool enVie;
+	int nbNourris;
+	int nbCacas;
+	int nbLave;
+	int nbSoigne;
 
 protected:
 
