@@ -1,5 +1,19 @@
 #include "Creature.h"
 
+enum Statut
+{
+	deprime,
+	affame,
+	extenue
+};
+
+enum Stade
+{
+	oeuf,
+	enfant,
+	ado,
+	adulte
+};
 
 
 Creature::Creature()
@@ -57,6 +71,10 @@ int Creature::laver()
 {
 	nbCacas = 0;
 	joie++;
-	
 	return	nbLave++;
+}
+int Creature::soigner()
+{
+	statut = 0;
+	return nbSoigne++;
 }

@@ -19,7 +19,7 @@ public:
 	int faireCaca();
 	void jouer();
 	int donnerAManger();
-	void soigner();
+	int soigner();
 	int laver();
 
 private:
