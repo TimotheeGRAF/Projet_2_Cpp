@@ -1,7 +1,7 @@
 #pragma once
 #include "Nourriture.h"
 
-class Medicament
+class Medicament : public Nourriture
 {
 public:
 	Medicament();

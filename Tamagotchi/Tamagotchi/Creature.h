@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include "Nourriture.h"
+#include <iostream>
+#include "SFML\Graphics.hpp"
 
 using namespace std;
 
@@ -11,6 +13,7 @@ public:
 	~Creature();
 
 	string getNom();
+	void setNom();
 	int getPV();
 	int getEnergie();
 	int getJoie();
@@ -25,16 +28,16 @@ public:
 private:
 
 	string nom;
-	int PV;
-	int energie;
-	int joie;
-	int statut;
-	int stade;
-	bool enVie;
-	int nbNourris;
-	int nbCacas;
-	int nbLave;
-	int nbSoigne;
+	int PV=100;
+	int energie=100;
+	int joie=100;
+	int statut=0;
+	int stade=0;
+	bool enVie=true;
+	int nbNourris=0;
+	int nbCacas=0;
+	int nbLave=0;
+	int nbSoigne=0;
 
 protected:
 

@@ -2,6 +2,13 @@
 #include "Nourriture.h"
 
 
+enum typeMedicament
+{
+	antidepresseur,
+	hyperproteine,
+	stimulant
+};
+
 Medicament::Medicament()
 {
 }
