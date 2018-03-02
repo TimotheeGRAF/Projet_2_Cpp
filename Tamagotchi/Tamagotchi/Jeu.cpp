@@ -1,6 +1,4 @@
 #include "Jeu.h"
-#include "SFML\Graphics.hpp"
-#include "Creature.h"
 
 
 
@@ -10,18 +8,18 @@ Jeu::Jeu()
 
 	//Textures
 	sf::Texture backgroundDay;
-	sf::Texture textureUI;
+//	sf::Texture textureUI;
 	sf::Texture texturePerso;
 	sf::Texture cursor;
 	backgroundDay.loadFromFile("backgroundDay.png");
-	textureUI.loadFromFile("UI.png");
+//	textureUI.loadFromFile("UI.png");
 	texturePerso.loadFromFile("alien.png");
 	cursor.loadFromFile("Cursor.png");
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 64, 64);
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	//Création des sprites
-	sf::Sprite GUI(textureUI);
+//	sf::Sprite GUI(textureUI);
 	sf::Sprite background(backgroundDay);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
@@ -39,13 +37,13 @@ Jeu::Jeu()
 	font.loadFromFile("Mak Dah.ttf");
 	sf::Text nomCrea;
 	nomCrea.setFont(font);
-	nomCrea.setCharacterSize(44);
-	nomCrea.setFillColor(sf::Color::Black);
+	nomCrea.setCharacterSize(40);
+	nomCrea.setFillColor(sf::Color::White);
 	//Creation créature
 	Creature Bestiole;
 	Bestiole.setNom();
 	nomCrea.setString(Bestiole.getNom());
-	nomCrea.setPosition(150, 515);
+	nomCrea.setPosition(150, 525);
 
 
 
@@ -145,7 +143,7 @@ Jeu::Jeu()
 		window.clear();
 		window.draw(background);
 		window.draw(spritePerso);
-		window.draw(GUI);
+//		window.draw(GUI);
 		window.draw(nomCrea);
 		window.draw(spriteCursor);
 		

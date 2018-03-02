@@ -1,5 +1,13 @@
 #pragma once
 #include "Nourriture.h"
+#include "Creature.h"
+
+enum typeMedicament
+{
+	antidepresseur,
+	hyperproteine,
+	stimulant
+};
 
 class Medicament : public Nourriture
 {
@@ -7,11 +15,10 @@ public:
 	Medicament();
 	~Medicament();
 
-	int getMedicament();
-	void guerirStatut();
+	int soigner(typeMedicament);
 
 private:
-	int typeMedicament;
+
 protected:
 
 };

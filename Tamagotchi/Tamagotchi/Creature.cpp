@@ -1,30 +1,11 @@
 #include "Creature.h"
 
-enum Statut
-{
-	deprime,
-	affame,
-	extenue
-};
-
-enum Stade
-{
-	oeuf,
-	enfant,
-	ado,
-	adulte
-};
-
-
 Creature::Creature()
 {
 }
-
-
 Creature::~Creature()
 {
 }
-
 
 string Creature::getNom()
 {
@@ -38,32 +19,47 @@ void Creature::setNom()
 
 int Creature::getPV()
 {
-	return PV;
+	return pvActuel;
+}
+void Creature::setPV()
+{
+	this->pvActuel = 100;
 }
 
 int Creature::getEnergie()
 {
-	return energie;
+	return energieActuel;
+}
+void Creature::setEnergie()
+{
+	this->energieActuel = 100;
 }
 
 int Creature::getJoie()
 {
-	return joie;
+	return joieActuel;
+}
+void Creature::setJoie()
+{
+	this->energieActuel = 100;
 }
 
 int Creature::getStatut()
 {
 	return statut;
 }
+void Creature::setStatut()
+{
+	this->statut = enforme;
+}
+
 int Creature::getStade()
 {
 	return stade;
 }
-
-int Creature::donnerAManger()
+void Creature::setStade()
 {
-	joie++;
-	return nbNourris++;
+	this->stade = oeuf;
 }
 
 int Creature::faireCaca()
@@ -75,11 +71,6 @@ int Creature::faireCaca()
 int Creature::laver()
 {
 	nbCacas = 0;
-	joie++;
+	joieActuel++;
 	return	nbLave++;
-}
-int Creature::soigner()
-{
-	statut = 0;
-	return nbSoigne++;
 }

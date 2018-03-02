@@ -1,62 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Fichiers sources">
+    <Filter Include="src">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête">
+    <Filter Include="include">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Fichiers de ressources">
+    <Filter Include="content">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClInclude Include="Creature.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Jeu.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Medicament.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Nourriture.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="fruit.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="viande.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="bonbon.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Creature.cpp">
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Jeu.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Creature.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Nourriture.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Medicament.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Nourriture.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="fruit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="viande.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="bonbon.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Mak Dah.ttf">
+      <Filter>content</Filter>
+    </Font>
   </ItemGroup>
   <ItemGroup>
     <Image Include="alien.png">
-      <Filter>Fichiers de ressources</Filter>
+      <Filter>content</Filter>
     </Image>
     <Image Include="backgroundDay.png">
-      <Filter>Fichiers de ressources</Filter>
+      <Filter>content</Filter>
     </Image>
     <Image Include="Cursor.png">
-      <Filter>Fichiers de ressources</Filter>
+      <Filter>content</Filter>
     </Image>
-    <Image Include="Donut.png">
-      <Filter>Fichiers de ressources</Filter>
+    <Image Include="EmptyBar.png">
+      <Filter>content</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Jeu.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Creature.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Nourriture.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Medicament.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
+    <Image Include="EnergyBar.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="HealthBar.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="HungryBar.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="NameBox.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="UI.png">
+      <Filter>content</Filter>
+    </Image>
   </ItemGroup>
 </Project>

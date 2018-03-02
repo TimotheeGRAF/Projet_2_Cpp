@@ -1,7 +1,15 @@
 #pragma once
-#include <string>
+#include "Creature.h"
 
 using namespace std;
+
+enum typeNourriture
+{
+	fruit,
+	viande,
+	bonbon
+};
+
 
 class Nourriture
 {
@@ -9,15 +17,16 @@ public:
 	Nourriture();
 	~Nourriture();
 
+	int donnerAManger(typeNourriture);
 
 private:
 
-	int typeNourriture;
 
 protected:
 	int PVrestaure;
 	int joieRestaure;
-	int energieRestaure;
+	int faimRestaure;
+
 
 };
 
