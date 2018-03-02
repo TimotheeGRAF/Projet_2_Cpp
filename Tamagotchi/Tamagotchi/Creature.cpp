@@ -32,16 +32,8 @@ string Creature::getNom()
 }
 void Creature::setNom()
 {
-	sf::Text nomCrea;
-	nomCrea.setCharacterSize(24);
-	nomCrea.setFillColor(sf::Color::Black);
-	nomCrea.setStyle(sf::Text::Bold);
-
 	std::cout << "Quel sera le nom de ta petite bestiole ?" << std::endl;
 	std::cin >> this->nom;
-
-	nomCrea.setString(nom);
-	nomCrea.setPosition(0, 800);
 }
 
 int Creature::getPV()

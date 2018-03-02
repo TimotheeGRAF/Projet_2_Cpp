@@ -34,10 +34,19 @@ Jeu::Jeu()
 	window.setMouseCursorVisible(false);
 	//On dessine un curseur de souris perso à la position du curseur.
 	spriteCursor.setTextureRect(rectCursor);
-
+	//Police de caractère et texte
+	sf::Font font;
+	font.loadFromFile("Mak Dah.ttf");
+	sf::Text nomCrea;
+	nomCrea.setFont(font);
+	nomCrea.setCharacterSize(44);
+	nomCrea.setFillColor(sf::Color::Black);
 	//Creation créature
 	Creature Bestiole;
 	Bestiole.setNom();
+	nomCrea.setString(Bestiole.getNom());
+	nomCrea.setPosition(150, 515);
+
 
 
 	//Creation horloge interne
@@ -137,12 +146,7 @@ Jeu::Jeu()
 		window.draw(background);
 		window.draw(spritePerso);
 		window.draw(GUI);
-
-
-		string nomBestiole = Bestiole.getNom();
-		
-
-
+		window.draw(nomCrea);
 		window.draw(spriteCursor);
 		
 
