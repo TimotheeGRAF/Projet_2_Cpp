@@ -8,18 +8,18 @@ Jeu::Jeu()
 
 	//Textures
 	sf::Texture backgroundDay;
-//	sf::Texture textureUI;
+
 	sf::Texture texturePerso;
 	sf::Texture cursor;
 	backgroundDay.loadFromFile("backgroundDay.png");
-//	textureUI.loadFromFile("UI.png");
+
 	texturePerso.loadFromFile("alien.png");
 	cursor.loadFromFile("Cursor.png");
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 64, 64);
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	//Création des sprites
-//	sf::Sprite GUI(textureUI);
+
 	sf::Sprite background(backgroundDay);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
@@ -53,6 +53,14 @@ Jeu::Jeu()
 	while (window.isOpen())
 	{
 
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+				window.close();
+		}
 
 
 		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));

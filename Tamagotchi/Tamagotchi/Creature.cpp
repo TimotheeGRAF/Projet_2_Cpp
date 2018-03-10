@@ -1,4 +1,6 @@
 #include "Creature.h"
+#include <string>
+#include <iostream>
 
 Creature::Creature()
 {
