@@ -11,7 +11,7 @@ Nourriture::~Nourriture()
 {
 }
 
-//int Nourriture::donnerAManger(typeNourriture)
-//{
-//
-//}
+int Nourriture::donnerAManger(typeNourriture)
+{
+	return compteurNourriture++;
+}

@@ -1,2 +1,4 @@
-﻿  Tamagotchi.vcxproj -> F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.exe
-  Tamagotchi.vcxproj -> F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.pdb (Partial PDB)
+﻿  Jeu.cpp
+c:\users\adai05\desktop\projet 2\projet_2_cpp\tamagotchi\tamagotchi\jeu.cpp(139): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.exe
+  Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.pdb (Partial PDB)

@@ -1,31 +1,32 @@
 #include "Jeu.h"
 
 
-
 Jeu::Jeu()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Un Xénomorph d'amour");
 
 	//Textures
 	sf::Texture backgroundDay;
-
 	sf::Texture texturePerso;
 	sf::Texture cursor;
+	sf::Texture emptyBar;
 	backgroundDay.loadFromFile("backgroundDay.png");
-
-	texturePerso.loadFromFile("alien.png");
+	texturePerso.loadFromFile("Adulte.png");
 	cursor.loadFromFile("Cursor.png");
+	emptyBar.loadFromFile("EmptyBar.png");
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 64, 64);
 	sf::IntRect rectCursor(0, 0, 32, 38);
+	sf::IntRect rectEmptyBar(0, 0, 180, 80);
 	//Création des sprites
-
 	sf::Sprite background(backgroundDay);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
+	sf::Sprite spriteEmptyBar(emptyBar, rectEmptyBar);
 	//Coordonnées
 	sf::Vector2i posSouris;
 	spritePerso.setPosition(100, 400);
+	spriteEmptyBar.setPosition(0, 0);
 	//Limitation du framerate
 	window.setFramerateLimit(60);
 	//Curseur visible ou non
@@ -45,14 +46,11 @@ Jeu::Jeu()
 	nomCrea.setString(Bestiole.getNom());
 	nomCrea.setPosition(150, 525);
 
-
-
 	//Creation horloge interne
 	sf::Clock clock;
 
 	while (window.isOpen())
 	{
-
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -61,7 +59,6 @@ Jeu::Jeu()
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
 				window.close();
 		}
-
 
 		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 
@@ -147,18 +144,15 @@ Jeu::Jeu()
 			rectCursor.left = 0;
 		}
 
-
 		window.clear();
 		window.draw(background);
+
 		window.draw(spritePerso);
-//		window.draw(GUI);
+		window.draw(spriteEmptyBar);
 		window.draw(nomCrea);
+
 		window.draw(spriteCursor);
-		
-
-
 		window.display();
-
 	}
 }
 

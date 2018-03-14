@@ -12,8 +12,8 @@ Medicament::Medicament()
 Medicament::~Medicament()
 {
 }
-//
-//int Medicament::soigner(typeMedicament)
-//{
-//
-//}
+
+int Medicament::soigner(typeMedicament)
+{
+	return nouveauStatut;
+}

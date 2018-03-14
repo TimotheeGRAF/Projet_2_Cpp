@@ -69,9 +69,6 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="alien.png">
-      <Filter>content</Filter>
-    </Image>
     <Image Include="backgroundDay.png">
       <Filter>content</Filter>
     </Image>
@@ -93,7 +90,28 @@
     <Image Include="NameBox.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="UI.png">
+    <Image Include="Adulte.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Ado.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Enfant.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Oeuf.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Viande.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Biscuit.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Fruit.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Poop.png">
       <Filter>content</Filter>
     </Image>
   </ItemGroup>
