@@ -114,5 +114,17 @@
     <Image Include="Poop.png">
       <Filter>content</Filter>
     </Image>
+    <Image Include="boutonMenu.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="cadreCrea.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="coeur.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="portraitCrea.png">
+      <Filter>content</Filter>
+    </Image>
   </ItemGroup>
 </Project>

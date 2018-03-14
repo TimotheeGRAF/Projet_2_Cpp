@@ -145,6 +145,9 @@
     <Image Include="Adulte.png" />
     <Image Include="backgroundDay.png" />
     <Image Include="Biscuit.png" />
+    <Image Include="boutonMenu.png" />
+    <Image Include="cadreCrea.png" />
+    <Image Include="coeur.png" />
     <Image Include="Cursor.png" />
     <Image Include="EmptyBar.png" />
     <Image Include="EnergyBar.png" />
@@ -155,6 +158,7 @@
     <Image Include="NameBox.png" />
     <Image Include="Oeuf.png" />
     <Image Include="Poop.png" />
+    <Image Include="portraitCrea.png" />
     <Image Include="Viande.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

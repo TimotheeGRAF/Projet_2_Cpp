@@ -10,23 +10,38 @@ Jeu::Jeu()
 	sf::Texture texturePerso;
 	sf::Texture cursor;
 	sf::Texture emptyBar;
+	sf::Texture fruit;
+	sf::Texture viande;
+	sf::Texture biscuit;
+	sf::Texture caca;
 	backgroundDay.loadFromFile("backgroundDay.png");
 	texturePerso.loadFromFile("Adulte.png");
 	cursor.loadFromFile("Cursor.png");
 	emptyBar.loadFromFile("EmptyBar.png");
+	fruit.loadFromFile("Fruit.png");
+	viande.loadFromFile("Viande.png");
+	biscuit.loadFromFile("Biscuit.png");
+	caca.loadFromFile("Poop.png");
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 64, 64);
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	sf::IntRect rectEmptyBar(0, 0, 180, 80);
+	sf::IntRect nourriture(0, 0, 50, 50);
+
 	//Création des sprites
 	sf::Sprite background(backgroundDay);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
 	sf::Sprite spriteEmptyBar(emptyBar, rectEmptyBar);
+	sf::Sprite spriteFruit(fruit, nourriture);
+	sf::Sprite spriteViande(viande, nourriture);
+	sf::Sprite spriteBiscuit(biscuit, nourriture);
+
 	//Coordonnées
 	sf::Vector2i posSouris;
 	spritePerso.setPosition(100, 400);
 	spriteEmptyBar.setPosition(0, 0);
+	spriteBiscuit.setPosition(250, 400);
 	//Limitation du framerate
 	window.setFramerateLimit(60);
 	//Curseur visible ou non
@@ -131,23 +146,22 @@ Jeu::Jeu()
 		//Bordures des Sprites
 		sf::FloatRect boxPerso = spritePerso.getGlobalBounds();
 		sf::FloatRect boxSouris = spriteCursor.getGlobalBounds();
+		sf::FloatRect boxBiscuit = spriteBiscuit.getGlobalBounds();
 
 		//On bouge le sprite du perso via drag&drop avec la souris
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxPerso.intersects(boxSouris)))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxBiscuit.intersects(boxSouris)))
 		{
 			posSouris = sf::Mouse::getPosition(window);
-			spritePerso.setPosition(posSouris.x, posSouris.y);
+			spriteBiscuit.setPosition(posSouris.x, posSouris.y);
 			rectCursor.left = 32;
 		}
-		else
-		{
-			rectCursor.left = 0;
-		}
+
 
 		window.clear();
 		window.draw(background);
 
 		window.draw(spritePerso);
+		window.draw(spriteBiscuit);
 		window.draw(spriteEmptyBar);
 		window.draw(nomCrea);
 
