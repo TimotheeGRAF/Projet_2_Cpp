@@ -3,13 +3,15 @@
 
 Jeu::Jeu()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Un Xénomorph d'amour");
+	sf::RenderWindow window(sf::VideoMode(800, 665), "Un Xénomorph d'amour");
 
 	//Textures
 	sf::Texture backgroundDay;
 	sf::Texture texturePerso;
 	sf::Texture cursor;
 	sf::Texture emptyBar;
+	sf::Texture cadreCrea;
+	sf::Texture portraitCrea;
 	sf::Texture fruit;
 	sf::Texture viande;
 	sf::Texture biscuit;
@@ -18,6 +20,8 @@ Jeu::Jeu()
 	texturePerso.loadFromFile("Adulte.png");
 	cursor.loadFromFile("Cursor.png");
 	emptyBar.loadFromFile("EmptyBar.png");
+	cadreCrea.loadFromFile("cadreCrea.png");
+	portraitCrea.loadFromFile("portraitCrea.png");
 	fruit.loadFromFile("Fruit.png");
 	viande.loadFromFile("Viande.png");
 	biscuit.loadFromFile("Biscuit.png");
@@ -27,12 +31,16 @@ Jeu::Jeu()
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	sf::IntRect rectEmptyBar(0, 0, 180, 80);
 	sf::IntRect nourriture(0, 0, 50, 50);
+	sf::IntRect rectCadreCrea(0, 0, 128, 128);
+	sf::IntRect rectPortraitCrea(0, 0, 100, 128);
 
 	//Création des sprites
 	sf::Sprite background(backgroundDay);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
 	sf::Sprite spriteEmptyBar(emptyBar, rectEmptyBar);
+	sf::Sprite spriteCadreCrea(cadreCrea, rectCadreCrea);
+	sf::Sprite spritePortraitCrea(portraitCrea, rectPortraitCrea);
 	sf::Sprite spriteFruit(fruit, nourriture);
 	sf::Sprite spriteViande(viande, nourriture);
 	sf::Sprite spriteBiscuit(biscuit, nourriture);
@@ -42,6 +50,8 @@ Jeu::Jeu()
 	spritePerso.setPosition(100, 400);
 	spriteEmptyBar.setPosition(0, 0);
 	spriteBiscuit.setPosition(250, 400);
+	spriteCadreCrea.setPosition(0, 537);
+	spritePortraitCrea.setPosition(10, 537);
 	//Limitation du framerate
 	window.setFramerateLimit(60);
 	//Curseur visible ou non
@@ -162,9 +172,12 @@ Jeu::Jeu()
 
 		window.draw(spritePerso);
 		window.draw(spriteBiscuit);
+		//UI
 		window.draw(spriteEmptyBar);
 		window.draw(nomCrea);
-
+		window.draw(spritePortraitCrea);
+		window.draw(spriteCadreCrea);
+		//Curseur
 		window.draw(spriteCursor);
 		window.display();
 	}
