@@ -143,6 +143,7 @@
   <ItemGroup>
     <Image Include="Ado.png" />
     <Image Include="Adulte.png" />
+    <Image Include="background.png" />
     <Image Include="backgroundDay.png" />
     <Image Include="Biscuit.png" />
     <Image Include="boutonMenu.png" />

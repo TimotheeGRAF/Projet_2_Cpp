@@ -3,7 +3,7 @@
 
 Jeu::Jeu()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 665), "Un Xénomorph d'amour");
+	sf::RenderWindow window(sf::VideoMode(665, 800), "Un Xénomorph d'amour");
 
 	//Textures
 	sf::Texture backgroundDay;
@@ -16,16 +16,19 @@ Jeu::Jeu()
 	sf::Texture viande;
 	sf::Texture biscuit;
 	sf::Texture caca;
-	backgroundDay.loadFromFile("backgroundDay.png");
+	sf::Texture nameBox;
+	backgroundDay.loadFromFile("background.png");
 	texturePerso.loadFromFile("Adulte.png");
 	cursor.loadFromFile("Cursor.png");
 	emptyBar.loadFromFile("EmptyBar.png");
 	cadreCrea.loadFromFile("cadreCrea.png");
 	portraitCrea.loadFromFile("portraitCrea.png");
+	nameBox.loadFromFile("NameBox.png");
 	fruit.loadFromFile("Fruit.png");
 	viande.loadFromFile("Viande.png");
 	biscuit.loadFromFile("Biscuit.png");
 	caca.loadFromFile("Poop.png");
+
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 64, 64);
 	sf::IntRect rectCursor(0, 0, 32, 38);
@@ -33,6 +36,7 @@ Jeu::Jeu()
 	sf::IntRect nourriture(0, 0, 50, 50);
 	sf::IntRect rectCadreCrea(0, 0, 128, 128);
 	sf::IntRect rectPortraitCrea(0, 0, 100, 128);
+	sf::IntRect rectNameBox(0, 0, 209, 54);
 
 	//Création des sprites
 	sf::Sprite background(backgroundDay);
@@ -44,14 +48,18 @@ Jeu::Jeu()
 	sf::Sprite spriteFruit(fruit, nourriture);
 	sf::Sprite spriteViande(viande, nourriture);
 	sf::Sprite spriteBiscuit(biscuit, nourriture);
+	sf::Sprite spriteNameBox(nameBox, rectNameBox);
 
 	//Coordonnées
 	sf::Vector2i posSouris;
-	spritePerso.setPosition(100, 400);
+	spritePerso.setPosition(300, 558);
 	spriteEmptyBar.setPosition(0, 0);
-	spriteBiscuit.setPosition(250, 400);
-	spriteCadreCrea.setPosition(0, 537);
-	spritePortraitCrea.setPosition(10, 537);
+	spriteFruit.setPosition(360, 705);
+	spriteViande.setPosition(420, 705);
+	spriteBiscuit.setPosition(480, 705);
+	spriteCadreCrea.setPosition(0, 672);
+	spritePortraitCrea.setPosition(10, 672);
+	spriteNameBox.setPosition(128, 680);
 	//Limitation du framerate
 	window.setFramerateLimit(60);
 	//Curseur visible ou non
@@ -63,13 +71,13 @@ Jeu::Jeu()
 	font.loadFromFile("Mak Dah.ttf");
 	sf::Text nomCrea;
 	nomCrea.setFont(font);
-	nomCrea.setCharacterSize(40);
-	nomCrea.setFillColor(sf::Color::White);
+	nomCrea.setCharacterSize(36);
+	nomCrea.setFillColor(sf::Color::Black);
 	//Creation créature
 	Creature Bestiole;
 	Bestiole.setNom();
 	nomCrea.setString(Bestiole.getNom());
-	nomCrea.setPosition(150, 525);
+	nomCrea.setPosition(200, 680);
 
 	//Creation horloge interne
 	sf::Clock clock;
@@ -157,26 +165,40 @@ Jeu::Jeu()
 		sf::FloatRect boxPerso = spritePerso.getGlobalBounds();
 		sf::FloatRect boxSouris = spriteCursor.getGlobalBounds();
 		sf::FloatRect boxBiscuit = spriteBiscuit.getGlobalBounds();
+		sf::FloatRect boxFruit = spriteFruit.getGlobalBounds();
+		sf::FloatRect boxViande = spriteViande.getGlobalBounds();
 
-		//On bouge le sprite du perso via drag&drop avec la souris
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxBiscuit.intersects(boxSouris)))
+		//On bouge le sprite du biscuit via drag&drop avec la souris
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && ((boxBiscuit.intersects(boxSouris))))
 		{
 			posSouris = sf::Mouse::getPosition(window);
 			spriteBiscuit.setPosition(posSouris.x, posSouris.y);
-			rectCursor.left = 32;
+		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxFruit.intersects(boxSouris)))
+		{
+			posSouris = sf::Mouse::getPosition(window);
+			spriteFruit.setPosition(posSouris.x, posSouris.y);
+		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxViande.intersects(boxSouris)))
+		{
+			posSouris = sf::Mouse::getPosition(window);
+			spriteViande.setPosition(posSouris.x, posSouris.y);
 		}
 
 
 		window.clear();
 		window.draw(background);
-
-		window.draw(spritePerso);
-		window.draw(spriteBiscuit);
 		//UI
 		window.draw(spriteEmptyBar);
+		window.draw(spriteNameBox);
 		window.draw(nomCrea);
 		window.draw(spritePortraitCrea);
 		window.draw(spriteCadreCrea);
+		//Crea
+		window.draw(spritePerso);
+		window.draw(spriteBiscuit);
+		window.draw(spriteFruit);
+		window.draw(spriteViande);
 		//Curseur
 		window.draw(spriteCursor);
 		window.display();

@@ -87,9 +87,6 @@
     <Image Include="HungryBar.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="NameBox.png">
-      <Filter>content</Filter>
-    </Image>
     <Image Include="Adulte.png">
       <Filter>content</Filter>
     </Image>
@@ -124,6 +121,12 @@
       <Filter>content</Filter>
     </Image>
     <Image Include="portraitCrea.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="background.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="NameBox.png">
       <Filter>content</Filter>
     </Image>
   </ItemGroup>

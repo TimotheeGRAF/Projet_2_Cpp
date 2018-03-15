@@ -1,4 +1,6 @@
 ﻿  Jeu.cpp
-c:\users\adai05\desktop\projet 2\projet_2_cpp\tamagotchi\tamagotchi\jeu.cpp(165): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\adai05\desktop\projet 2\projet_2_cpp\tamagotchi\tamagotchi\jeu.cpp(176): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\adai05\desktop\projet 2\projet_2_cpp\tamagotchi\tamagotchi\jeu.cpp(181): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\adai05\desktop\projet 2\projet_2_cpp\tamagotchi\tamagotchi\jeu.cpp(186): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.exe
   Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.pdb (Partial PDB)
