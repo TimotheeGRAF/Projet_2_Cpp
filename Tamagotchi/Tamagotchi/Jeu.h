@@ -9,6 +9,8 @@ class Jeu
 public:
 	Jeu();
 	~Jeu();
+
+	bool isDragging = false;
 private:
 
 protected:

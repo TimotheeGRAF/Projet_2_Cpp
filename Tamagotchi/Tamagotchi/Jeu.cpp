@@ -16,7 +16,7 @@ Jeu::Jeu()
 	sf::Texture cadreCrea;
 	sf::Texture portraitCrea;
 	sf::Texture fruit;
-	sf::Texture viande;
+	sf::Texture steak;
 	sf::Texture biscuit;
 	sf::Texture caca;
 	sf::Texture nameBox;
@@ -28,7 +28,7 @@ Jeu::Jeu()
 	portraitCrea.loadFromFile("portraitCrea.png");
 	nameBox.loadFromFile("NameBox.png");
 	fruit.loadFromFile("Fruit.png");
-	viande.loadFromFile("Viande.png");
+	steak.loadFromFile("Viande.png");
 	biscuit.loadFromFile("Biscuit.png");
 	caca.loadFromFile("Poop.png");
 
@@ -49,7 +49,7 @@ Jeu::Jeu()
 	sf::Sprite spriteCadreCrea(cadreCrea, rectCadreCrea);
 	sf::Sprite spritePortraitCrea(portraitCrea, rectPortraitCrea);
 	sf::Sprite spriteFruit(fruit, nourriture);
-	sf::Sprite spriteViande(viande, nourriture);
+	sf::Sprite spriteViande(steak, nourriture);
 	sf::Sprite spriteBiscuit(biscuit, nourriture);
 	sf::Sprite spriteNameBox(nameBox, rectNameBox);
 
@@ -81,7 +81,8 @@ Jeu::Jeu()
 	Bestiole.setNom();
 	nomCrea.setString(Bestiole.getNom());
 	nomCrea.setPosition(180, 680);
-	
+	//Creation nourriture
+	Nourriture Repas;
 
 	//Creation horloge interne
 	sf::Clock clock;
@@ -176,7 +177,7 @@ Jeu::Jeu()
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxBiscuit.intersects(boxSouris)))
 			{
-
+				isDragging = true;
 				posSouris = sf::Mouse::getPosition(window);
 				spriteBiscuit.setPosition(posSouris.x, posSouris.y);
 				if (boxBiscuit.intersects(boxFruit))
@@ -190,7 +191,7 @@ Jeu::Jeu()
 			}
 			else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxFruit.intersects(boxSouris)))
 			{
-
+				isDragging = true;
 				posSouris = sf::Mouse::getPosition(window);
 				spriteFruit.setPosition(posSouris.x, posSouris.y);
 				if (boxFruit.intersects(boxViande))
@@ -204,7 +205,7 @@ Jeu::Jeu()
 			}
 			else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxViande.intersects(boxSouris)))
 			{
-
+				isDragging = true;
 				posSouris = sf::Mouse::getPosition(window);
 				spriteViande.setPosition(posSouris.x, posSouris.y);
 				if (boxViande.intersects(boxFruit))
@@ -216,7 +217,16 @@ Jeu::Jeu()
 					spriteBiscuit.setPosition(480, 705);
 				}
 			}
-		
+			else 
+			{
+				isDragging = false;
+			}
+			
+			while (isDragging == true)
+			{
+				// Je vais placer ici l'intéraction avec la bouffe
+			}
+
 
 		window.clear();
 		window.draw(background);
