@@ -119,23 +119,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="bonbon.h" />
     <ClInclude Include="Creature.h" />
-    <ClInclude Include="fruit.h" />
     <ClInclude Include="Jeu.h" />
     <ClInclude Include="Medicament.h" />
     <ClInclude Include="Nourriture.h" />
-    <ClInclude Include="viande.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bonbon.cpp" />
     <ClCompile Include="Creature.cpp" />
-    <ClCompile Include="fruit.cpp" />
     <ClCompile Include="Jeu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Medicament.cpp" />
     <ClCompile Include="Nourriture.cpp" />
-    <ClCompile Include="viande.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Mak Dah.ttf" />

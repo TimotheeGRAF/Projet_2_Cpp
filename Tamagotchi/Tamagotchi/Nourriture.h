@@ -3,12 +3,7 @@
 
 using namespace std;
 
-enum typeNourriture
-{
-	fruit,
-	viande,
-	bonbon
-};
+
 
 
 class Nourriture
@@ -16,7 +11,16 @@ class Nourriture
 public:
 	Nourriture();
 	~Nourriture();
+	
+	enum typeNourriture
+	{
+		fruit,
+		viande,
+		biscuit
+	};
+
 	int donnerAManger(typeNourriture);
+	sf::Sprite spriteNourriture;
 
 private:
 
@@ -26,6 +30,7 @@ protected:
 	int PVrestaure;
 	int joieRestaure;
 	int faimRestaure;
+
 
 
 };

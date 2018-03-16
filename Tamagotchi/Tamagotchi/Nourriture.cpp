@@ -1,4 +1,5 @@
 #include "Nourriture.h"
+#include "Creature.h"
 
 
 
@@ -13,5 +14,7 @@ Nourriture::~Nourriture()
 
 int Nourriture::donnerAManger(typeNourriture)
 {
+	
+
 	return compteurNourriture++;
 }

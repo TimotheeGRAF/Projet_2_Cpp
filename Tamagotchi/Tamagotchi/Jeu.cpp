@@ -1,6 +1,9 @@
 #include "Jeu.h"
 
 
+
+
+
 Jeu::Jeu()
 {
 	sf::RenderWindow window(sf::VideoMode(665, 800), "Un Xénomorph d'amour");
@@ -61,7 +64,7 @@ Jeu::Jeu()
 	spritePortraitCrea.setPosition(10, 672);
 	spriteNameBox.setPosition(128, 680);
 	//Limitation du framerate
-	window.setFramerateLimit(60);
+	//window.setFramerateLimit(60);
 	//Curseur visible ou non
 	window.setMouseCursorVisible(false);
 	//On dessine un curseur de souris perso à la position du curseur.
@@ -77,7 +80,8 @@ Jeu::Jeu()
 	Creature Bestiole;
 	Bestiole.setNom();
 	nomCrea.setString(Bestiole.getNom());
-	nomCrea.setPosition(200, 680);
+	nomCrea.setPosition(180, 680);
+	
 
 	//Creation horloge interne
 	sf::Clock clock;
@@ -169,22 +173,50 @@ Jeu::Jeu()
 		sf::FloatRect boxViande = spriteViande.getGlobalBounds();
 
 		//On bouge le sprite du biscuit via drag&drop avec la souris
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && ((boxBiscuit.intersects(boxSouris))))
-		{
-			posSouris = sf::Mouse::getPosition(window);
-			spriteBiscuit.setPosition(posSouris.x, posSouris.y);
-		}
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxFruit.intersects(boxSouris)))
-		{
-			posSouris = sf::Mouse::getPosition(window);
-			spriteFruit.setPosition(posSouris.x, posSouris.y);
-		}
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxViande.intersects(boxSouris)))
-		{
-			posSouris = sf::Mouse::getPosition(window);
-			spriteViande.setPosition(posSouris.x, posSouris.y);
-		}
 
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxBiscuit.intersects(boxSouris)))
+			{
+
+				posSouris = sf::Mouse::getPosition(window);
+				spriteBiscuit.setPosition(posSouris.x, posSouris.y);
+				if (boxBiscuit.intersects(boxFruit))
+				{
+					spriteFruit.setPosition(360, 705);
+				}
+				else if (boxBiscuit.intersects(boxViande))
+				{
+					spriteViande.setPosition(420, 705);
+				}
+			}
+			else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxFruit.intersects(boxSouris)))
+			{
+
+				posSouris = sf::Mouse::getPosition(window);
+				spriteFruit.setPosition(posSouris.x, posSouris.y);
+				if (boxFruit.intersects(boxViande))
+				{
+					spriteViande.setPosition(420, 705);
+				}
+				else if (boxFruit.intersects(boxBiscuit))
+				{
+					spriteBiscuit.setPosition(480, 705);
+				}
+			}
+			else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxViande.intersects(boxSouris)))
+			{
+
+				posSouris = sf::Mouse::getPosition(window);
+				spriteViande.setPosition(posSouris.x, posSouris.y);
+				if (boxViande.intersects(boxFruit))
+				{
+					spriteFruit.setPosition(360, 705);
+				}
+				else if (boxViande.intersects(boxBiscuit))
+				{
+					spriteBiscuit.setPosition(480, 705);
+				}
+			}
+		
 
 		window.clear();
 		window.draw(background);

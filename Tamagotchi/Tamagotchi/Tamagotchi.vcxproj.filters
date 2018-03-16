@@ -27,15 +27,6 @@
     <ClInclude Include="Nourriture.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="fruit.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="viande.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="bonbon.h">
-      <Filter>include</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Creature.cpp">
@@ -51,15 +42,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Nourriture.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="fruit.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="viande.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="bonbon.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
