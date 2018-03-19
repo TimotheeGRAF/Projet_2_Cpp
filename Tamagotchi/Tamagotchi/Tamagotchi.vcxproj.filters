@@ -111,5 +111,23 @@
     <Image Include="NameBox.png">
       <Filter>content</Filter>
     </Image>
+    <Image Include="background1.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Douche.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Drip.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Lune.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Soleil.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Stim.png">
+      <Filter>content</Filter>
+    </Image>
   </ItemGroup>
 </Project>
