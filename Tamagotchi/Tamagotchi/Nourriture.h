@@ -19,7 +19,7 @@ public:
 
 
 	int donnerAManger(typeNourriture);
-	sf::Sprite spriteNourriture;
+
 
 private:
 

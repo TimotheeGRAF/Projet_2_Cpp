@@ -15,8 +15,7 @@ string Creature::getNom()
 }
 void Creature::setNom()
 {
-	std::cout << "Quel sera le nom de ta petite bestiole ?" << std::endl;
-	std::cin >> this->nom;
+ this->nom="Poupette";
 }
 
 int Creature::getPV()
