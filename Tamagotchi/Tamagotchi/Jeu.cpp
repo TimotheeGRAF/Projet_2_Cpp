@@ -13,6 +13,7 @@ Jeu::Jeu()
 	sf::Texture texturePerso;
 	sf::Texture cursor;
 	sf::Texture portraitCrea;
+	sf::Texture alpha;
 
 	backgroundDay.loadFromFile("background1.png");
 	texturePerso.loadFromFile("Adulte.png");
@@ -23,13 +24,14 @@ Jeu::Jeu()
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 64, 64);
 	sf::IntRect rectCursor(0, 0, 32, 38);
-	sf::IntRect nourriture(0, 0, 50, 50);
+	sf::IntRect nourriture(0, 0, 53, 53);
 	sf::IntRect rectPortraitCrea(0, 0, 100, 128);
 	//Création des sprites
 	sf::Sprite background(backgroundDay);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
 	sf::Sprite spritePortraitCrea(portraitCrea, rectPortraitCrea);
+	sf::Sprite spriteSelection(alpha, nourriture);
 
 
 	//Coordonnées
@@ -42,7 +44,7 @@ Jeu::Jeu()
 	window.setMouseCursorVisible(false);
 	//On dessine un curseur de souris perso à la position du curseur.
 	spriteCursor.setTextureRect(rectCursor);
-	spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
+
 	//Police de caractère et texte
 	sf::Font font;
 	font.loadFromFile("Mak Dah.ttf");
@@ -71,6 +73,8 @@ Jeu::Jeu()
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
 				window.close();
 		}
+
+		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 
 		//Touches de déplacement (à faire en switch-case)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && spritePerso.getPosition().x + spritePerso.getLocalBounds().width <= window.getSize().x)
@@ -142,7 +146,6 @@ Jeu::Jeu()
 
 		//Bordures des Sprites
 		sf::FloatRect boxPerso = spritePerso.getGlobalBounds();
-		sf::FloatRect boxSouris = spriteCursor.getGlobalBounds();
 		/*sf::FloatRect boxBiscuit = spriteBiscuit.getGlobalBounds();
 		sf::FloatRect boxFruit = spriteFruit.getGlobalBounds();
 		sf::FloatRect boxViande = spriteViande.getGlobalBounds();*/
@@ -152,7 +155,7 @@ Jeu::Jeu()
 			//if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxBiscuit.intersects(boxSouris)))
 			//{
 
-			//	posSouris = sf::Mouse::getPosition(window);
+
 			//	spriteBiscuit.setPosition(posSouris.x, posSouris.y);
 			//	if (boxBiscuit.intersects(boxFruit))
 			//	{
