@@ -1,0 +1,14 @@
+menu : 150 , 710
+fraise : 231, 685
+viande : 308, 685
+biscuit : 386, 685
+stim : 231, 745
+pill : 308, 745
+happp : 386, 745
+douche : 478, 713
+soleil : 575, 684
+lune : 575, 741
+
+barrevie : 7, 6
+barrenrj : 7, 33
+barrefaim : 7, 60

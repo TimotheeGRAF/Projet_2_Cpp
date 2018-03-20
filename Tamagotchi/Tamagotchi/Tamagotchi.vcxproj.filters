@@ -81,5 +81,11 @@
     <Image Include="Poupon.png">
       <Filter>content</Filter>
     </Image>
+    <Image Include="Lune.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Soleil.png">
+      <Filter>content</Filter>
+    </Image>
   </ItemGroup>
 </Project>

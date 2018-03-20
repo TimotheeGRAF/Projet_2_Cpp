@@ -1,5 +1,6 @@
 #include "Jeu.h"
 #include <iostream>
+#include <vector>
 
 
 using namespace std;
@@ -15,6 +16,9 @@ Jeu::Jeu()
 	sf::Texture cursor;
 	sf::Texture portraitCrea;
 	sf::Texture alpha;
+	sf::Texture jour;
+	sf::Texture nuit;
+	
 
 
 	backgroundDay.loadFromFile("background1.png");
@@ -22,27 +26,54 @@ Jeu::Jeu()
 	texturePerso.loadFromFile("Poupon.png");
 	cursor.loadFromFile("Cursor.png");
 	portraitCrea.loadFromFile("portraitCrea.png");
+	jour.loadFromFile("Soleil.png");
+	nuit.loadFromFile("Lune.png");
+	
 
 
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 250, 295);
 	sf::IntRect rectCursor(0, 0, 32, 38);
-	sf::IntRect nourriture(0, 0, 53, 53);
+	sf::IntRect selectBox(0, 0, 50, 50);
 	sf::IntRect rectPortraitCrea(0, 0, 100, 128);
+	sf::IntRect daynight(0, 0, 100, 100);
 	//Création des sprites
 	sf::Sprite backgroundD(backgroundDay);
 	sf::Sprite backgroundN(backgroundNight);
+	sf::Sprite spriteSoleil(jour, daynight);
+	sf::Sprite spriteLune(nuit, daynight);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
 	sf::Sprite spritePortraitCrea(portraitCrea, rectPortraitCrea);
-	sf::Sprite spriteSelection(alpha, nourriture);
+	sf::Sprite spriteSelection(alpha, selectBox);
+
+	//création vector de sprites de sélection
+	vector<sf::Sprite> casesSelection;
+	for (int i = 1; i <= 10; i++)
+	{
+		casesSelection.push_back(spriteSelection);
+	}
+
+	spriteSelection.setColor(sf::Color::Transparent);
 
 	bool isDay = true;
 
 	//Coordonnées
 	sf::Vector2i posSouris;
 	spritePerso.setPosition(124, 330);
-	spritePortraitCrea.setPosition(10, 672);
+	spritePortraitCrea.setPosition(10, 674);
+	spriteSoleil.setPosition(460, 10);
+	spriteLune.setPosition(460, 10);
+	casesSelection[0].setPosition(150, 710);
+	casesSelection[1].setPosition(231, 685);
+	casesSelection[2].setPosition(308, 685);
+	casesSelection[3].setPosition(386, 685);
+	casesSelection[4].setPosition(231, 745);
+	casesSelection[5].setPosition(308, 745);
+	casesSelection[6].setPosition(386, 745);
+	casesSelection[7].setPosition(478, 713);
+	casesSelection[8].setPosition(575, 684);
+	casesSelection[9].setPosition(575, 741);
 	//Bordures des Sprites
 	sf::FloatRect boxPerso = spritePerso.getGlobalBounds();
 	//Limitation du framerate
@@ -82,6 +113,7 @@ Jeu::Jeu()
 		}
 
 		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
 		{
 			isDay = true;
@@ -216,13 +248,20 @@ Jeu::Jeu()
 		{
 			window.clear();
 			window.draw(backgroundD);
+			window.draw(spriteSoleil);
 		}
 
 		if (isDay == false)
 		{
 			window.clear();
 			window.draw(backgroundN);
+			window.draw(spriteLune);
 		}
+		for (int i = 1; i >= 10; i++)
+		{
+			window.draw(casesSelection[i]);
+		}
+
 		window.draw(nomCrea);
 		window.draw(spritePortraitCrea);
 		//Crea

@@ -143,8 +143,10 @@
     <Image Include="EnergyBar.png" />
     <Image Include="HealthBar.png" />
     <Image Include="HungryBar.png" />
+    <Image Include="Lune.png" />
     <Image Include="portraitCrea.png" />
     <Image Include="Poupon.png" />
+    <Image Include="Soleil.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
