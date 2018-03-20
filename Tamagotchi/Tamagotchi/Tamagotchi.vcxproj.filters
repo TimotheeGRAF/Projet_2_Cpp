@@ -51,13 +51,7 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="backgroundDay.png">
-      <Filter>content</Filter>
-    </Image>
     <Image Include="Cursor.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="EmptyBar.png">
       <Filter>content</Filter>
     </Image>
     <Image Include="EnergyBar.png">
@@ -72,61 +66,19 @@
     <Image Include="Adulte.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="Ado.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="Enfant.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="Oeuf.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="Viande.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="Biscuit.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="Fruit.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="Poop.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="boutonMenu.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="cadreCrea.png">
-      <Filter>content</Filter>
-    </Image>
     <Image Include="coeur.png">
       <Filter>content</Filter>
     </Image>
     <Image Include="portraitCrea.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="background.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="NameBox.png">
-      <Filter>content</Filter>
-    </Image>
     <Image Include="background1.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="Douche.png">
+    <Image Include="background2.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="Drip.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="Lune.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="Soleil.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="Stim.png">
+    <Image Include="Poupon.png">
       <Filter>content</Filter>
     </Image>
   </ItemGroup>

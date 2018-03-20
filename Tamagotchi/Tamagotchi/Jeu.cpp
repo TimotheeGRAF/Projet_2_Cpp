@@ -10,34 +10,41 @@ Jeu::Jeu()
 
 	//Textures
 	sf::Texture backgroundDay;
+	sf::Texture backgroundNight;
 	sf::Texture texturePerso;
 	sf::Texture cursor;
 	sf::Texture portraitCrea;
 	sf::Texture alpha;
 
+
 	backgroundDay.loadFromFile("background1.png");
-	texturePerso.loadFromFile("Adulte.png");
+	backgroundNight.loadFromFile("background2.png");
+	texturePerso.loadFromFile("Poupon.png");
 	cursor.loadFromFile("Cursor.png");
 	portraitCrea.loadFromFile("portraitCrea.png");
 
 
 	//Rectangles de sélection
-	sf::IntRect rectSource(0, 0, 64, 64);
+	sf::IntRect rectSource(0, 0, 250, 295);
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	sf::IntRect nourriture(0, 0, 53, 53);
 	sf::IntRect rectPortraitCrea(0, 0, 100, 128);
 	//Création des sprites
-	sf::Sprite background(backgroundDay);
+	sf::Sprite backgroundD(backgroundDay);
+	sf::Sprite backgroundN(backgroundNight);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
 	sf::Sprite spritePortraitCrea(portraitCrea, rectPortraitCrea);
 	sf::Sprite spriteSelection(alpha, nourriture);
 
+	bool isDay = true;
 
 	//Coordonnées
 	sf::Vector2i posSouris;
-	spritePerso.setPosition(300, 558);
+	spritePerso.setPosition(124, 330);
 	spritePortraitCrea.setPosition(10, 672);
+	//Bordures des Sprites
+	sf::FloatRect boxPerso = spritePerso.getGlobalBounds();
 	//Limitation du framerate
 	window.setFramerateLimit(60);
 	//Curseur visible ou non
@@ -75,77 +82,84 @@ Jeu::Jeu()
 		}
 
 		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+		{
+			isDay = true;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+		{
+			isDay = false;
+		}
 
 		//Touches de déplacement (à faire en switch-case)
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && spritePerso.getPosition().x + spritePerso.getLocalBounds().width <= window.getSize().x)
-		{
-			//On change de sprite chaque 0.07 secondes tant que la touche est pressée
-			if (clock.getElapsedTime().asSeconds() > 0.07f)	
-			{
-				rectSource.top = 64 * 2;
-				switch (rectSource.left)
-				{
-				case 0:
-					rectSource.left = 64;
-					spritePerso.setTextureRect(rectSource);
-					clock.restart();
-					break;
-				case 64:
-					rectSource.left = 64 * 2;
-					spritePerso.setTextureRect(rectSource);
-					clock.restart();
-					break;
-				case 64 * 2:
-					rectSource.left = 64 * 3;
-					spritePerso.setTextureRect(rectSource);
-					clock.restart();
-					break;
-				case 64 * 3:
-					rectSource.left = 0;
-					spritePerso.setTextureRect(rectSource);
-					clock.restart();
-					break;
-				}
-				spritePerso.move(5, 0);
-			}
-		}
-		
-		
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && spritePerso.getPosition().x >= 0)
-		{
-			//On change de sprite chaque 0.07 secondes tant que la touche est pressée
-			if (clock.getElapsedTime().asSeconds() > 0.07f)
-			{
-				rectSource.top = 64;
-				switch (rectSource.left)
-				{
-				case 0:
-					rectSource.left = 64;
-					spritePerso.setTextureRect(rectSource);
-					clock.restart();
-					break;
-				case 64:
-					rectSource.left = 64 * 2;
-					spritePerso.setTextureRect(rectSource);
-					clock.restart();
-					break;
-				case 64 * 2:
-					rectSource.left = 64 * 3;
-					spritePerso.setTextureRect(rectSource);
-					clock.restart();
-					break;
-				case 64 * 3:
-					rectSource.left = 0;
-					spritePerso.setTextureRect(rectSource);
-					clock.restart();
-					break;
-				}
-				spritePerso.move(-5, 0);
-			}
-		}
+		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && spritePerso.getPosition().x + spritePerso.getLocalBounds().width <= window.getSize().x)
+		//{
+		//	//On change de sprite chaque 0.07 secondes tant que la touche est pressée
+		//	if (clock.getElapsedTime().asSeconds() > 0.07f)	
+		//	{
+		//		rectSource.top = 64 * 2;
+		//		switch (rectSource.left)
+		//		{
+		//		case 0:
+		//			rectSource.left = 64;
+		//			spritePerso.setTextureRect(rectSource);
+		//			clock.restart();
+		//			break;
+		//		case 64:
+		//			rectSource.left = 64 * 2;
+		//			spritePerso.setTextureRect(rectSource);
+		//			clock.restart();
+		//			break;
+		//		case 64 * 2:
+		//			rectSource.left = 64 * 3;
+		//			spritePerso.setTextureRect(rectSource);
+		//			clock.restart();
+		//			break;
+		//		case 64 * 3:
+		//			rectSource.left = 0;
+		//			spritePerso.setTextureRect(rectSource);
+		//			clock.restart();
+		//			break;
+		//		}
+		//		spritePerso.move(5, 0);
+		//	}
+		//}
+		//
+		//
+		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && spritePerso.getPosition().x >= 0)
+		//{
+		//	//On change de sprite chaque 0.07 secondes tant que la touche est pressée
+		//	if (clock.getElapsedTime().asSeconds() > 0.07f)
+		//	{
+		//		rectSource.top = 64;
+		//		switch (rectSource.left)
+		//		{
+		//		case 0:
+		//			rectSource.left = 64;
+		//			spritePerso.setTextureRect(rectSource);
+		//			clock.restart();
+		//			break;
+		//		case 64:
+		//			rectSource.left = 64 * 2;
+		//			spritePerso.setTextureRect(rectSource);
+		//			clock.restart();
+		//			break;
+		//		case 64 * 2:
+		//			rectSource.left = 64 * 3;
+		//			spritePerso.setTextureRect(rectSource);
+		//			clock.restart();
+		//			break;
+		//		case 64 * 3:
+		//			rectSource.left = 0;
+		//			spritePerso.setTextureRect(rectSource);
+		//			clock.restart();
+		//			break;
+		//		}
+		//		spritePerso.move(-5, 0);
+		//	}
+		//}
 
-		//Bordures des Sprites
-		sf::FloatRect boxPerso = spritePerso.getGlobalBounds();
+
 		/*sf::FloatRect boxBiscuit = spriteBiscuit.getGlobalBounds();
 		sf::FloatRect boxFruit = spriteFruit.getGlobalBounds();
 		sf::FloatRect boxViande = spriteViande.getGlobalBounds();*/
@@ -197,8 +211,18 @@ Jeu::Jeu()
 
 				
 		window.clear();
-		window.draw(background);
 		//UI
+		if (isDay == true)
+		{
+			window.clear();
+			window.draw(backgroundD);
+		}
+
+		if (isDay == false)
+		{
+			window.clear();
+			window.draw(backgroundN);
+		}
 		window.draw(nomCrea);
 		window.draw(spritePortraitCrea);
 		//Crea
