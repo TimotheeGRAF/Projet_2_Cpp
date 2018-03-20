@@ -2,18 +2,20 @@
 #include "Nourriture.h"
 #include "Creature.h"
 
-enum typeMedicament
-{
-	antidepresseur,
-	hyperproteine,
-	stimulant
-};
+
 
 class Medicament : public Nourriture
 {
 public:
 	Medicament();
 	~Medicament();
+
+	enum typeMedicament
+	{
+		antidepresseur,
+		hyperproteine,
+		stimulant
+	};
 
 	int soigner(typeMedicament);
 

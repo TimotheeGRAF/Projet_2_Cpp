@@ -1,4 +1,4 @@
 ﻿  Jeu.cpp
-cl : Ligne de commande warning D9028: échec de la régénération minimale, passage à la génération normale
+c:\users\adai05\desktop\projet 2\projet_2_cpp\tamagotchi\tamagotchi\jeu.cpp(191): warning C4018: '<' : incompatibilité signed/unsigned
   Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.exe
   Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Debug\Tamagotchi.pdb (Partial PDB)

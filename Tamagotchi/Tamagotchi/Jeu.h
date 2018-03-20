@@ -10,8 +10,14 @@ public:
 	Jeu();
 	~Jeu();
 
-	bool isDragging = false;
+	enum gameState {
+		jouer,
+		menu
+	};
+
 private:
+
+
 
 protected:
 

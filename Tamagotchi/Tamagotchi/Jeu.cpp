@@ -19,23 +19,19 @@ Jeu::Jeu()
 	sf::Texture jour;
 	sf::Texture nuit;
 	
-
-
 	backgroundDay.loadFromFile("background1.png");
 	backgroundNight.loadFromFile("background2.png");
 	texturePerso.loadFromFile("Poupon.png");
 	cursor.loadFromFile("Cursor.png");
-	portraitCrea.loadFromFile("portraitCrea.png");
+	//portraitCrea.loadFromFile("portraitCrea.png");
 	jour.loadFromFile("Soleil.png");
 	nuit.loadFromFile("Lune.png");
-	
-
 
 	//Rectangles de sélection
-	sf::IntRect rectSource(0, 0, 250, 295);
+	sf::IntRect rectSource(0, 0, 240, 275);
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	sf::IntRect selectBox(0, 0, 50, 50);
-	sf::IntRect rectPortraitCrea(0, 0, 100, 128);
+	//sf::IntRect rectPortraitCrea(0, 0, 100, 128);
 	sf::IntRect daynight(0, 0, 100, 100);
 	//Création des sprites
 	sf::Sprite backgroundD(backgroundDay);
@@ -44,8 +40,9 @@ Jeu::Jeu()
 	sf::Sprite spriteLune(nuit, daynight);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
-	sf::Sprite spritePortraitCrea(portraitCrea, rectPortraitCrea);
+	//sf::Sprite spritePortraitCrea(portraitCrea, rectPortraitCrea);
 	sf::Sprite spriteSelection(alpha, selectBox);
+	spriteSelection.setColor(sf::Color::Transparent);
 
 	//création vector de sprites de sélection
 	vector<sf::Sprite> casesSelection;
@@ -54,14 +51,12 @@ Jeu::Jeu()
 		casesSelection.push_back(spriteSelection);
 	}
 
-	spriteSelection.setColor(sf::Color::Transparent);
-
 	bool isDay = true;
 
 	//Coordonnées
 	sf::Vector2i posSouris;
-	spritePerso.setPosition(124, 330);
-	spritePortraitCrea.setPosition(10, 674);
+	spritePerso.setPosition(100, 345);
+	//spritePortraitCrea.setPosition(10, 674);
 	spriteSoleil.setPosition(460, 10);
 	spriteLune.setPosition(460, 10);
 	casesSelection[0].setPosition(150, 710);
@@ -108,89 +103,24 @@ Jeu::Jeu()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-				window.close();
 		}
 
 		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+		if (casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		{
+			gameState::menu;
+		}
+		else if (casesSelection[8].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)))
 		{
 			isDay = true;
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+		else if (casesSelection[9].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)))
 		{
 			isDay = false;
 		}
 
-		//Touches de déplacement (à faire en switch-case)
-		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && spritePerso.getPosition().x + spritePerso.getLocalBounds().width <= window.getSize().x)
-		//{
-		//	//On change de sprite chaque 0.07 secondes tant que la touche est pressée
-		//	if (clock.getElapsedTime().asSeconds() > 0.07f)	
-		//	{
-		//		rectSource.top = 64 * 2;
-		//		switch (rectSource.left)
-		//		{
-		//		case 0:
-		//			rectSource.left = 64;
-		//			spritePerso.setTextureRect(rectSource);
-		//			clock.restart();
-		//			break;
-		//		case 64:
-		//			rectSource.left = 64 * 2;
-		//			spritePerso.setTextureRect(rectSource);
-		//			clock.restart();
-		//			break;
-		//		case 64 * 2:
-		//			rectSource.left = 64 * 3;
-		//			spritePerso.setTextureRect(rectSource);
-		//			clock.restart();
-		//			break;
-		//		case 64 * 3:
-		//			rectSource.left = 0;
-		//			spritePerso.setTextureRect(rectSource);
-		//			clock.restart();
-		//			break;
-		//		}
-		//		spritePerso.move(5, 0);
-		//	}
-		//}
-		//
-		//
-		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && spritePerso.getPosition().x >= 0)
-		//{
-		//	//On change de sprite chaque 0.07 secondes tant que la touche est pressée
-		//	if (clock.getElapsedTime().asSeconds() > 0.07f)
-		//	{
-		//		rectSource.top = 64;
-		//		switch (rectSource.left)
-		//		{
-		//		case 0:
-		//			rectSource.left = 64;
-		//			spritePerso.setTextureRect(rectSource);
-		//			clock.restart();
-		//			break;
-		//		case 64:
-		//			rectSource.left = 64 * 2;
-		//			spritePerso.setTextureRect(rectSource);
-		//			clock.restart();
-		//			break;
-		//		case 64 * 2:
-		//			rectSource.left = 64 * 3;
-		//			spritePerso.setTextureRect(rectSource);
-		//			clock.restart();
-		//			break;
-		//		case 64 * 3:
-		//			rectSource.left = 0;
-		//			spritePerso.setTextureRect(rectSource);
-		//			clock.restart();
-		//			break;
-		//		}
-		//		spritePerso.move(-5, 0);
-		//	}
-		//}
-
+		
 
 		/*sf::FloatRect boxBiscuit = spriteBiscuit.getGlobalBounds();
 		sf::FloatRect boxFruit = spriteFruit.getGlobalBounds();
@@ -257,13 +187,14 @@ Jeu::Jeu()
 			window.draw(backgroundN);
 			window.draw(spriteLune);
 		}
-		for (int i = 1; i >= 10; i++)
+		
+		for (int i = 0; i < casesSelection.size();i++)
 		{
 			window.draw(casesSelection[i]);
 		}
 
 		window.draw(nomCrea);
-		window.draw(spritePortraitCrea);
+		//window.draw(spritePortraitCrea);
 		//Crea
 		window.draw(spritePerso);
 		//Curseur

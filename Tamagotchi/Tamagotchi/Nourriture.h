@@ -3,12 +3,7 @@
 
 using namespace std;
 
-enum typeNourriture
-{
-	fruit,
-	viande,
-	biscuit
-};
+
 
 
 class Nourriture
@@ -17,6 +12,12 @@ public:
 	Nourriture();
 	~Nourriture();
 
+	enum typeNourriture
+	{
+		fruit,
+		viande,
+		biscuit
+	};
 
 	int donnerAManger(typeNourriture);
 
