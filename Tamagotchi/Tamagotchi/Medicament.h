@@ -1,10 +1,7 @@
 #pragma once
-#include "Nourriture.h"
 #include "Creature.h"
 
-
-
-class Medicament : public Nourriture
+class Medicament
 {
 public:
 	Medicament();
@@ -24,5 +21,6 @@ private:
 protected:
 	int nouveauStatut;
 
+	typeMedicament medoc;
 };
 

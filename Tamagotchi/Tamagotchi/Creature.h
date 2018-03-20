@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Nourriture.h"
+#include "Medicament.h"
 #include <iostream>
 #include "SFML\Graphics.hpp"
 
@@ -12,13 +13,7 @@ enum Statut
 	extenue
 };
 
-enum Stade
-{
-	oeuf,
-	enfant,
-	ado,
-	adulte
-};
+
 
 using namespace std;
 
@@ -43,7 +38,7 @@ public:
 
 
 	int faireCaca();
-	void jouer();
+	//void jouer();
 	int laver();
 
 
@@ -57,7 +52,7 @@ private:
 	int joieMax=100;
 	int joieActuel;
 	int statut=enforme;
-	int stade=oeuf;
+	//int stade=oeuf;
 	bool enVie=true;
 	int nbNourris=0;
 	int nbCacas=0;

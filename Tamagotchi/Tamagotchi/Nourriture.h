@@ -3,9 +3,6 @@
 
 using namespace std;
 
-
-
-
 class Nourriture
 {
 public:
@@ -31,7 +28,7 @@ protected:
 	int joieRestaure;
 	int faimRestaure;
 
-
+	typeNourriture nourriture;
 
 };
 

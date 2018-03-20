@@ -18,7 +18,7 @@ Jeu::Jeu()
 	sf::Texture alpha;
 	sf::Texture jour;
 	sf::Texture nuit;
-	
+
 	backgroundDay.loadFromFile("background1.png");
 	backgroundNight.loadFromFile("background2.png");
 	texturePerso.loadFromFile("Poupon.png");
@@ -92,6 +92,8 @@ Jeu::Jeu()
 	nomCrea.setPosition(482, 410);
 	//Creation nourriture
 	Nourriture Repas;
+	//Creation medicament
+	Medicament Soin;
 
 	//Creation horloge interne
 	sf::Clock clock;
@@ -102,25 +104,62 @@ Jeu::Jeu()
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+			{
 				window.close();
+			}
+
+
+			// event.Type == event.MouseButtonReleased && event.MouseButton.Button == sf::Mouse::Left
+
+
+			if (casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			{
+				gameState::menu;
+			}
+			else if (casesSelection[1].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				Repas.donnerAManger(Repas.fruit);
+			}
+			else if (casesSelection[2].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				Repas.donnerAManger(Repas.viande);
+			}
+			else if (casesSelection[3].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				Repas.donnerAManger(Repas.biscuit);
+			}
+			else if (casesSelection[4].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				Soin.soigner(Soin.stimulant);
+			}
+			else if (casesSelection[5].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				Soin.soigner(Soin.hyperproteine);
+			}
+			else if (casesSelection[6].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				Soin.soigner(Soin.antidepresseur);
+			}
+			else if (casesSelection[7].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				Bestiole.laver();
+			}
+			else if (casesSelection[8].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				isDay = true;
+			}
+			else if (casesSelection[9].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				isDay = false;
+			}
 		}
+		window.setKeyRepeatEnabled(false);
 
 		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 
-		if (casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		{
-			gameState::menu;
-		}
-		else if (casesSelection[8].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)))
-		{
-			isDay = true;
-		}
-		else if (casesSelection[9].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)))
-		{
-			isDay = false;
-		}
-
 		
+
+
 
 		/*sf::FloatRect boxBiscuit = spriteBiscuit.getGlobalBounds();
 		sf::FloatRect boxFruit = spriteFruit.getGlobalBounds();
@@ -171,7 +210,7 @@ Jeu::Jeu()
 			//	}
 			//}
 
-				
+
 		window.clear();
 		//UI
 		if (isDay == true)
@@ -180,15 +219,15 @@ Jeu::Jeu()
 			window.draw(backgroundD);
 			window.draw(spriteSoleil);
 		}
-
+		
 		if (isDay == false)
 		{
 			window.clear();
 			window.draw(backgroundN);
 			window.draw(spriteLune);
 		}
-		
-		for (int i = 0; i < casesSelection.size();i++)
+
+		for (int i = 0; i < casesSelection.size(); i++)
 		{
 			window.draw(casesSelection[i]);
 		}

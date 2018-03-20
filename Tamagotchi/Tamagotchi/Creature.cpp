@@ -54,14 +54,7 @@ void Creature::setStatut()
 	this->statut = enforme;
 }
 
-int Creature::getStade()
-{
-	return stade;
-}
-void Creature::setStade()
-{
-	this->stade = oeuf;
-}
+
 
 int Creature::faireCaca()
 {
