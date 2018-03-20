@@ -33,8 +33,8 @@ public:
 	void setJoie();
 	int getStatut();
 	void setStatut();
-	int getStade();
-	void setStade();
+	//int getStade();
+	//void setStade();
 
 
 	int faireCaca();

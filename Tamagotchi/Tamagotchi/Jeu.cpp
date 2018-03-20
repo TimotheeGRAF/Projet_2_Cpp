@@ -157,9 +157,6 @@ Jeu::Jeu()
 
 		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 
-		
-
-
 
 		/*sf::FloatRect boxBiscuit = spriteBiscuit.getGlobalBounds();
 		sf::FloatRect boxFruit = spriteFruit.getGlobalBounds();
