@@ -130,15 +130,15 @@ Jeu::Jeu()
 			}
 			else if (casesSelection[4].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
-				Soin.soigner(Soin.stimulant);
+				Bestiole.soigner(Soin.stimulant, Bestiole);
 			}
 			else if (casesSelection[5].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
-				Soin.soigner(Soin.hyperproteine);
+				Bestiole.soigner(Soin.hyperproteine, Bestiole);
 			}
 			else if (casesSelection[6].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
-				Soin.soigner(Soin.antidepresseur);
+				Bestiole.soigner(Soin.antidepresseur, Bestiole);
 			}
 			else if (casesSelection[7].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
@@ -206,6 +206,21 @@ Jeu::Jeu()
 			//		spriteBiscuit.setPosition(480, 705);
 			//	}
 			//}
+
+
+		//Logique Creature
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 		window.clear();

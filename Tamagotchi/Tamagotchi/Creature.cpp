@@ -49,7 +49,7 @@ int Creature::getStatut()
 {
 	return statut;
 }
-void Creature::setStatut()
+void Creature::setStatut(Statut stats)
 {
 	this->statut = enforme;
 }
@@ -67,4 +67,31 @@ int Creature::laver()
 	nbCacas = 0;
 	joieActuel++;
 	return	nbLave++;
+}
+
+int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
+{
+	switch (medoc)
+	{
+	case Medicament::typeMedicament::antidepresseur:
+		cout << "COCAIN" << endl;
+		animal.setStatut(deprime);
+		break;
+	case Medicament::typeMedicament::hyperproteine:
+		cout << "PROTEIN POWDER" << endl;
+
+		animal.setStatut(affame);
+
+		break;
+	case Medicament::typeMedicament::stimulant:
+		cout << "REDBULL" << endl;
+
+		animal.setStatut(extenue);
+
+		break;
+	default:
+		break;
+	}
+
+	return animal.getStatut();
 }

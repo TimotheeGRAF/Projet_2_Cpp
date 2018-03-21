@@ -32,18 +32,23 @@ public:
 	int getJoie();
 	void setJoie();
 	int getStatut();
-	void setStatut();
+	void setStatut(Statut);
 	//int getStade();
 	//void setStade();
+	int getNbNourris();
+	void setNbNourris();
+	int getNbCacas();
+	void setNbCacas();
 
 
 	int faireCaca();
-	//void jouer();
+	int soigner(Medicament::typeMedicament, Creature animal);
 	int laver();
 
 
 private:
 
+	Statut stats;
 	string nom;
 	int pvMax=100;
 	int pvActuel;
@@ -52,7 +57,6 @@ private:
 	int joieMax=100;
 	int joieActuel;
 	int statut=enforme;
-	//int stade=oeuf;
 	bool enVie=true;
 	int nbNourris=0;
 	int nbCacas=0;

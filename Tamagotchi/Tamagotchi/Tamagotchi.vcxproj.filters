@@ -27,6 +27,9 @@
     <ClInclude Include="Nourriture.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Creature.cpp">
@@ -42,6 +45,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Nourriture.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

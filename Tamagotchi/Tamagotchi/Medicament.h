@@ -1,5 +1,4 @@
 #pragma once
-#include "Creature.h"
 
 class Medicament
 {
@@ -14,13 +13,10 @@ public:
 		stimulant
 	};
 
-	int soigner(typeMedicament);
-
 private:
 
 protected:
-	int nouveauStatut;
 
-	typeMedicament medoc;
+
 };
 
