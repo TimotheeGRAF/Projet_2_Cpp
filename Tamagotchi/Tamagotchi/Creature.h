@@ -24,21 +24,19 @@ public:
 	~Creature();
 
 	string getNom();
-	void setNom();
+	void setNom(string nomCrea);
 	int getPV();
-	void setPV();
+	void setPV(int pdV);
 	int getEnergie();
-	void setEnergie();
+	void setEnergie(int nrj);
 	int getJoie();
-	void setJoie();
+	void setJoie(int joie);
 	int getStatut();
 	void setStatut(Statut);
-	//int getStade();
-	//void setStade();
 	int getNbNourris();
-	void setNbNourris();
+	void setNbNourris(int nbN);
 	int getNbCacas();
-	void setNbCacas();
+	void setNbCacas(int nbKK);
 
 
 	int faireCaca();

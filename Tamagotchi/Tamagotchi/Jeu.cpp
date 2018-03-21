@@ -87,7 +87,7 @@ Jeu::Jeu()
 	nomCrea.setFillColor(sf::Color::Black);
 	//Creation créature
 	Creature Bestiole;
-	Bestiole.setNom();
+	Bestiole.setNom("Poupette");
 	nomCrea.setString(Bestiole.getNom());
 	nomCrea.setPosition(482, 410);
 	//Creation nourriture
@@ -210,8 +210,14 @@ Jeu::Jeu()
 
 		//Logique Creature
 
-
-
+		if (Bestiole.getNbNourris() == 3)
+		{
+			Bestiole.faireCaca();
+		}
+		else if (Bestiole.getNbCacas() == 3)
+		{
+			Bestiole.setStatut(deprime);
+		}
 
 
 

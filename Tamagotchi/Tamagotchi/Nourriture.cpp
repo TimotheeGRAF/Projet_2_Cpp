@@ -21,6 +21,7 @@ int Nourriture::donnerAManger(typeNourriture nourriture)
 		PVrestaure = 10;
 		joieRestaure = 10;
 		faimRestaure = 5;
+
 		break;
 	case viande:
 		cout << "VIANDE" << endl;

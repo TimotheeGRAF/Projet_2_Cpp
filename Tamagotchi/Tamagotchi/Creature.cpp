@@ -13,36 +13,36 @@ string Creature::getNom()
 {
 	return this->nom;
 }
-void Creature::setNom()
+void Creature::setNom(string nomCrea)
 {
- this->nom="Poupette";
+ this->nom=nomCrea;
 }
 
 int Creature::getPV()
 {
 	return pvActuel;
 }
-void Creature::setPV()
+void Creature::setPV(int pdV)
 {
-	this->pvActuel = 100;
+	this->pvActuel = pdV;
 }
 
 int Creature::getEnergie()
 {
 	return energieActuel;
 }
-void Creature::setEnergie()
+void Creature::setEnergie(int nrj)
 {
-	this->energieActuel = 100;
+	this->energieActuel = nrj;
 }
 
 int Creature::getJoie()
 {
 	return joieActuel;
 }
-void Creature::setJoie()
+void Creature::setJoie(int joie)
 {
-	this->energieActuel = 100;
+	this->energieActuel = joie;
 }
 
 int Creature::getStatut()
@@ -51,22 +51,25 @@ int Creature::getStatut()
 }
 void Creature::setStatut(Statut stats)
 {
-	this->statut = enforme;
+	this->statut = stats;
 }
+
 
 
 
 int Creature::faireCaca()
 {
-	nbNourris = 0;
-	return nbCacas++;
+	this->nbNourris = 0;
+	return this->nbCacas++;
 }
+
+
 
 int Creature::laver()
 {
-	nbCacas = 0;
-	joieActuel++;
-	return	nbLave++;
+	this->nbCacas = 0;
+	this->joieActuel++;
+	return	this->nbLave++;
 }
 
 int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
@@ -75,18 +78,18 @@ int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
 	{
 	case Medicament::typeMedicament::antidepresseur:
 		cout << "COCAIN" << endl;
-		animal.setStatut(deprime);
+		animal.setStatut(enforme);
 		break;
 	case Medicament::typeMedicament::hyperproteine:
 		cout << "PROTEIN POWDER" << endl;
 
-		animal.setStatut(affame);
+		animal.setStatut(enforme);
 
 		break;
 	case Medicament::typeMedicament::stimulant:
 		cout << "REDBULL" << endl;
 
-		animal.setStatut(extenue);
+		animal.setStatut(enforme);
 
 		break;
 	default:
@@ -94,4 +97,25 @@ int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
 	}
 
 	return animal.getStatut();
+}
+
+
+int Creature::getNbNourris()
+{
+	return nbNourris;
+}
+
+void Creature::setNbNourris(int nbN)
+{
+	this->nbNourris = nbN;
+}
+
+int Creature::getNbCacas()
+{
+	return nbCacas;
+}
+
+void Creature::setNbCacas(int nbKK)
+{
+	this->nbCacas = nbKK;
 }
