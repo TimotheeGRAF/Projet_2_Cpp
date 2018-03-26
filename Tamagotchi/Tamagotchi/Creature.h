@@ -37,6 +37,8 @@ public:
 	void setExpMax(int expM);
 	int getExpActuel();
 	void setExpActuel(int expGain);
+	int getNiveau();
+	void setNiveau(int lvl);
 	void setStade(Stade stadeEvolution);
 	int getEnergie();
 	void setEnergie(int nrj);
@@ -53,9 +55,11 @@ public:
 	void setNbCacas(int nbKK);
 
 
+	int caresser();
 	int faireCaca();
 	int soigner(Medicament::typeMedicament, Creature animal);
 	int laver();
+	int gagnerNiveau(Creature animal);
 	void evoluer(Creature animal, Stade stadeEvolution);
 
 
@@ -65,16 +69,16 @@ private:
 	Statut stats;
 	string nom;
 	int pvMax=100;
-	int pvActuel;
+	int pvActuel=75;
 	int energieMax=100;
-	int energieActuel;
+	int energieActuel=75;
 	int joieMax=100;
-	int joieActuel;
+	int joieActuel=75;
 	int expMax = 50;
-	int expActuel;
+	int expActuel=0;
 	int niveau = 1;
 	int faimMax = 100;
-	int faimActuel;
+	int faimActuel=75;
 	int statut=enforme;
 	bool enVie=true;
 	int nbNourris=0;

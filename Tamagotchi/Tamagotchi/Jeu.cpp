@@ -7,6 +7,15 @@ using namespace std;
 
 Jeu::Jeu()
 {
+}
+
+
+Jeu::~Jeu()
+{
+}
+
+void Jeu::jouer()
+{
 	sf::RenderWindow window(sf::VideoMode(665, 800), "Un Xénomorph d'amour");
 
 	//Textures
@@ -164,48 +173,48 @@ Jeu::Jeu()
 
 		//On bouge le sprite du biscuit via drag&drop avec la souris
 
-			//if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxBiscuit.intersects(boxSouris)))
-			//{
+		//if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxBiscuit.intersects(boxSouris)))
+		//{
 
 
-			//	spriteBiscuit.setPosition(posSouris.x, posSouris.y);
-			//	if (boxBiscuit.intersects(boxFruit))
-			//	{
-			//		spriteFruit.setPosition(360, 705);
-			//	}
-			//	else if (boxBiscuit.intersects(boxViande))
-			//	{
-			//		spriteViande.setPosition(420, 705);
-			//	}
-			//}
-			//else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxFruit.intersects(boxSouris)))
-			//{	
+		//	spriteBiscuit.setPosition(posSouris.x, posSouris.y);
+		//	if (boxBiscuit.intersects(boxFruit))
+		//	{
+		//		spriteFruit.setPosition(360, 705);
+		//	}
+		//	else if (boxBiscuit.intersects(boxViande))
+		//	{
+		//		spriteViande.setPosition(420, 705);
+		//	}
+		//}
+		//else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxFruit.intersects(boxSouris)))
+		//{	
 
-			//	posSouris = sf::Mouse::getPosition(window);
-			//	spriteFruit.setPosition(posSouris.x, posSouris.y);
-			//	if (boxFruit.intersects(boxViande))
-			//	{
-			//		spriteViande.setPosition(420, 705);
-			//	}
-			//	else if (boxFruit.intersects(boxBiscuit))
-			//	{
-			//		spriteBiscuit.setPosition(480, 705);
-			//	}
-			//}
-			//else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxViande.intersects(boxSouris)))
-			//{	
+		//	posSouris = sf::Mouse::getPosition(window);
+		//	spriteFruit.setPosition(posSouris.x, posSouris.y);
+		//	if (boxFruit.intersects(boxViande))
+		//	{
+		//		spriteViande.setPosition(420, 705);
+		//	}
+		//	else if (boxFruit.intersects(boxBiscuit))
+		//	{
+		//		spriteBiscuit.setPosition(480, 705);
+		//	}
+		//}
+		//else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxViande.intersects(boxSouris)))
+		//{	
 
-			//	posSouris = sf::Mouse::getPosition(window);
-			//	spriteViande.setPosition(posSouris.x, posSouris.y);
-			//	if (boxViande.intersects(boxFruit))
-			//	{
-			//		spriteFruit.setPosition(360, 705);
-			//	}
-			//	else if (boxViande.intersects(boxBiscuit))
-			//	{
-			//		spriteBiscuit.setPosition(480, 705);
-			//	}
-			//}
+		//	posSouris = sf::Mouse::getPosition(window);
+		//	spriteViande.setPosition(posSouris.x, posSouris.y);
+		//	if (boxViande.intersects(boxFruit))
+		//	{
+		//		spriteFruit.setPosition(360, 705);
+		//	}
+		//	else if (boxViande.intersects(boxBiscuit))
+		//	{
+		//		spriteBiscuit.setPosition(480, 705);
+		//	}
+		//}
 
 
 		//Logique Creature
@@ -220,7 +229,7 @@ Jeu::Jeu()
 		}
 		else if (Bestiole.getExpActuel() == Bestiole.getExpMax())
 		{
-			Bestiole.gagnerNiveau();
+			Bestiole.gagnerNiveau(Bestiole);
 		}
 		else if (Bestiole.getNiveau() == 3)
 		{
@@ -257,7 +266,7 @@ Jeu::Jeu()
 			window.draw(backgroundD);
 			window.draw(spriteSoleil);
 		}
-		
+
 		if (isDay == false)
 		{
 			window.clear();
@@ -271,16 +280,10 @@ Jeu::Jeu()
 		}
 
 		window.draw(nomCrea);
-		//window.draw(spritePortraitCrea);
 		//Crea
 		window.draw(spritePerso);
 		//Curseur
 		window.draw(spriteCursor);
 		window.display();
 	}
-}
-
-
-Jeu::~Jeu()
-{
 }

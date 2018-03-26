@@ -12,9 +12,14 @@ public:
 	~Jeu();
 
 	enum gameState {
-		jouer,
-		menu
+		game,
+		menu,
+		save,
+		load,
+		igmenu
 	};
+
+	void jouer();
 
 private:
 
