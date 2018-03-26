@@ -214,9 +214,29 @@ Jeu::Jeu()
 		{
 			Bestiole.faireCaca();
 		}
-		else if (Bestiole.getNbCacas() == 3)
+		else if (Bestiole.getNbCacas() >= 3)
 		{
 			Bestiole.setStatut(deprime);
+		}
+		else if (Bestiole.getExpActuel() == Bestiole.getExpMax())
+		{
+			Bestiole.gagnerNiveau();
+		}
+		else if (Bestiole.getNiveau() == 3)
+		{
+			Bestiole.evoluer(Bestiole, enfant);
+		}
+		else if (Bestiole.getEnergie() <= 20)
+		{
+			Bestiole.setStatut(extenue);
+		}
+		else if (Bestiole.getJoie() <= 20)
+		{
+			Bestiole.setStatut(deprime);
+		}
+		else if (Bestiole.getFaim() <= 20)
+		{
+			Bestiole.setStatut(affame);
 		}
 
 

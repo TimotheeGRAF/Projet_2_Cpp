@@ -13,6 +13,12 @@ enum Statut
 	extenue
 };
 
+enum Stade
+{
+	oeuf,
+	enfant,
+	adulte
+};
 
 
 using namespace std;
@@ -27,12 +33,20 @@ public:
 	void setNom(string nomCrea);
 	int getPV();
 	void setPV(int pdV);
+	int getExpMax();
+	void setExpMax(int expM);
+	int getExpActuel();
+	void setExpActuel(int expGain);
+	void setStade(Stade stadeEvolution);
 	int getEnergie();
 	void setEnergie(int nrj);
 	int getJoie();
 	void setJoie(int joie);
 	int getStatut();
 	void setStatut(Statut);
+	int getFaim();
+	void setFaim(int faim);
+
 	int getNbNourris();
 	void setNbNourris(int nbN);
 	int getNbCacas();
@@ -42,10 +56,12 @@ public:
 	int faireCaca();
 	int soigner(Medicament::typeMedicament, Creature animal);
 	int laver();
+	void evoluer(Creature animal, Stade stadeEvolution);
 
 
 private:
 
+	Stade stadeEvolution;
 	Statut stats;
 	string nom;
 	int pvMax=100;
@@ -54,6 +70,11 @@ private:
 	int energieActuel;
 	int joieMax=100;
 	int joieActuel;
+	int expMax = 50;
+	int expActuel;
+	int niveau = 1;
+	int faimMax = 100;
+	int faimActuel;
 	int statut=enforme;
 	bool enVie=true;
 	int nbNourris=0;

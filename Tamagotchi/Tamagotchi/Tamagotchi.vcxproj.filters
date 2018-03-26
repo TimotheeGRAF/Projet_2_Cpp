@@ -69,13 +69,7 @@
     <Image Include="HungryBar.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="Adulte.png">
-      <Filter>content</Filter>
-    </Image>
     <Image Include="coeur.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="portraitCrea.png">
       <Filter>content</Filter>
     </Image>
     <Image Include="background1.png">

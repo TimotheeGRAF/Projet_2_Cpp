@@ -15,7 +15,7 @@ string Creature::getNom()
 }
 void Creature::setNom(string nomCrea)
 {
- this->nom=nomCrea;
+	this->nom = nomCrea;
 }
 
 int Creature::getPV()
@@ -69,7 +69,7 @@ int Creature::laver()
 {
 	this->nbCacas = 0;
 	this->joieActuel++;
-	return	this->nbLave++;
+	return this->nbLave++;
 }
 
 int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
@@ -99,6 +99,28 @@ int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
 	return animal.getStatut();
 }
 
+void Creature::evoluer(Creature animal, Stade stadeEvolution)
+{
+	switch (stadeEvolution)
+	{
+	case oeuf:
+		animal.setStade(enfant);
+		break;
+
+	case enfant:
+		animal.setStade(adulte);
+		break;
+
+	default:
+		break;
+	}
+}
+
+void Creature::setStade(Stade stadeE)
+{
+	this->stadeEvolution = stadeE;
+}
+
 
 int Creature::getNbNourris()
 {
@@ -118,4 +140,34 @@ int Creature::getNbCacas()
 void Creature::setNbCacas(int nbKK)
 {
 	this->nbCacas = nbKK;
+}
+
+int Creature::getExpMax()
+{
+	return expMax;
+}
+
+void Creature::setExpMax(int expM)
+{
+	this->expMax = expM;
+}
+
+int Creature::getExpActuel()
+{
+	return expActuel;
+}
+
+void Creature::setExpActuel(int expGain)
+{
+	this->expActuel = expActuel + expGain;
+}
+
+int Creature::getFaim()
+{
+	return faimActuel;
+}
+
+void Creature::setFaim(int faimGain)
+{
+	this->faimActuel = faimActuel + faimGain;
 }

@@ -137,7 +137,6 @@
     <Font Include="Mak Dah.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Adulte.png" />
     <Image Include="background1.png" />
     <Image Include="background2.png" />
     <Image Include="coeur.png" />
@@ -146,7 +145,6 @@
     <Image Include="HealthBar.png" />
     <Image Include="HungryBar.png" />
     <Image Include="Lune.png" />
-    <Image Include="portraitCrea.png" />
     <Image Include="Poupon.png" />
     <Image Include="Soleil.png" />
   </ItemGroup>
