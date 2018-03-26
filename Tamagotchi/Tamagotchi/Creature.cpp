@@ -103,7 +103,7 @@ int Creature::getExpActuel()
 }
 void Creature::setExpActuel(int expGain)
 {
-	this->expActuel = expActuel + expGain;
+	this->expActuel = expGain;
 }
 
 int Creature::getFaim()
@@ -176,6 +176,7 @@ int Creature::gagnerNiveau(Creature animal)
 	animal.setEnergie(animal.energieMax);
 	animal.setJoie(animal.joieMax);
 	animal.setFaim(animal.faimMax);
+	animal.setExpActuel(0);
 
 	return animal.getNiveau();
 }

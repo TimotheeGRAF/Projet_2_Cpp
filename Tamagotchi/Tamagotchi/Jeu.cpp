@@ -258,6 +258,7 @@ void Jeu::jouer()
 
 
 
+
 		window.clear();
 		//UI
 		if (isDay == true)
@@ -274,7 +275,7 @@ void Jeu::jouer()
 			window.draw(spriteLune);
 		}
 
-		for (int i = 0; i < casesSelection.size(); i++)
+		for (unsigned int i = 0; i < casesSelection.size(); i++)
 		{
 			window.draw(casesSelection[i]);
 		}
