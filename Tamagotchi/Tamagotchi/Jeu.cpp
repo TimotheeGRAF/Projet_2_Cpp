@@ -2,13 +2,11 @@
 #include <iostream>
 #include <vector>
 
-
 using namespace std;
 
 Jeu::Jeu()
 {
 }
-
 
 Jeu::~Jeu()
 {
@@ -16,7 +14,7 @@ Jeu::~Jeu()
 
 void Jeu::jouer()
 {
-	sf::RenderWindow window(sf::VideoMode(665, 800), "Un Xénomorph d'amour");
+	sf::RenderWindow window(sf::VideoMode(665, 800), "What does the fox say ?");
 
 	//Textures
 	sf::Texture backgroundDay;
@@ -27,21 +25,41 @@ void Jeu::jouer()
 	sf::Texture alpha;
 	sf::Texture jour;
 	sf::Texture nuit;
+	sf::Texture fruit;
+	sf::Texture viande;
+	sf::Texture muffin;
+	sf::Texture stim;
+	sf::Texture medkit;
+	sf::Texture antidep;
+	sf::Texture barreVie;
+	sf::Texture barreFaim;
+	sf::Texture barreNrj;
 
 	backgroundDay.loadFromFile("background1.png");
 	backgroundNight.loadFromFile("background2.png");
 	texturePerso.loadFromFile("Poupon.png");
 	cursor.loadFromFile("Cursor.png");
-	//portraitCrea.loadFromFile("portraitCrea.png");
 	jour.loadFromFile("Soleil.png");
 	nuit.loadFromFile("Lune.png");
+	fruit.loadFromFile("Fruit.png");
+	viande.loadFromFile("Viande.png");
+	muffin.loadFromFile("Biscuit.png");
+	stim.loadFromFile("Stim.png");
+	medkit.loadFromFile("Medkit.png");
+	antidep.loadFromFile("Antidep.png");
+	barreVie.loadFromFile("Healthbar.png");
+	barreFaim.loadFromFile("HungryBar.png");
+	barreNrj.loadFromFile("EnergyBar.png");
 
 	//Rectangles de sélection
-	sf::IntRect rectSource(0, 0, 240, 275);
+	sf::IntRect rectSource(0, 0, 209, 240);
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	sf::IntRect selectBox(0, 0, 50, 50);
-	//sf::IntRect rectPortraitCrea(0, 0, 100, 128);
+	sf::IntRect rectFruit(0, 0, 50, 41);	//Marche aussi pour la viande
+	sf::IntRect rectMuffin(0, 0, 50, 45);
+	sf::IntRect rectMedkit(0, 0, 50, 38);
 	sf::IntRect daynight(0, 0, 100, 100);
+	sf::IntRect rectBar(0, 0, 169, 16);
 	//Création des sprites
 	sf::Sprite backgroundD(backgroundDay);
 	sf::Sprite backgroundN(backgroundNight);
@@ -49,7 +67,16 @@ void Jeu::jouer()
 	sf::Sprite spriteLune(nuit, daynight);
 	sf::Sprite spritePerso(texturePerso, rectSource);
 	sf::Sprite spriteCursor(cursor, rectCursor);
-	//sf::Sprite spritePortraitCrea(portraitCrea, rectPortraitCrea);
+	sf::Sprite spriteFruit(fruit, rectFruit);
+	sf::Sprite spriteViande(viande, rectFruit);
+	sf::Sprite spriteMuffin(muffin, rectMuffin);
+	sf::Sprite spriteStim(stim, selectBox);
+	sf::Sprite spriteMedkit(medkit, rectMedkit);
+	sf::Sprite spriteAntidep(antidep, selectBox);
+	sf::Sprite spritePvBar(barreVie, rectBar);
+	sf::Sprite spriteHungryBar(barreFaim, rectBar);
+	sf::Sprite spriteEnergyBar(barreNrj, rectBar);
+
 	sf::Sprite spriteSelection(alpha, selectBox);
 	spriteSelection.setColor(sf::Color::Transparent);
 
@@ -61,25 +88,33 @@ void Jeu::jouer()
 	}
 
 	bool isDay = true;
+	bool isDragging = false;
 
 	//Coordonnées
 	sf::Vector2i posSouris;
-	spritePerso.setPosition(100, 345);
-	//spritePortraitCrea.setPosition(10, 674);
+	spritePerso.setPosition(100, 380);
 	spriteSoleil.setPosition(460, 10);
 	spriteLune.setPosition(460, 10);
+	spritePvBar.setPosition(7, 6);
+	spriteHungryBar.setPosition(7, 58);
+	spriteEnergyBar.setPosition(7, 33);
+
 	casesSelection[0].setPosition(150, 710);
 	casesSelection[1].setPosition(231, 685);
+	spriteFruit.setPosition(231, 690);
 	casesSelection[2].setPosition(308, 685);
+	spriteViande.setPosition(308, 690);
 	casesSelection[3].setPosition(386, 685);
+	spriteMuffin.setPosition(386, 687);
 	casesSelection[4].setPosition(231, 745);
+	spriteStim.setPosition(231, 745);
 	casesSelection[5].setPosition(308, 745);
+	spriteMedkit.setPosition(308, 748);
 	casesSelection[6].setPosition(386, 745);
+	spriteAntidep.setPosition(386, 745);
 	casesSelection[7].setPosition(478, 713);
 	casesSelection[8].setPosition(575, 684);
 	casesSelection[9].setPosition(575, 741);
-	//Bordures des Sprites
-	sf::FloatRect boxPerso = spritePerso.getGlobalBounds();
 	//Limitation du framerate
 	window.setFramerateLimit(60);
 	//Curseur visible ou non
@@ -96,7 +131,7 @@ void Jeu::jouer()
 	nomCrea.setFillColor(sf::Color::Black);
 	//Creation créature
 	Creature Bestiole;
-	Bestiole.setNom("Poupette");
+	Bestiole.setNom("Starfox");
 	nomCrea.setString(Bestiole.getNom());
 	nomCrea.setPosition(482, 410);
 	//Creation nourriture
@@ -117,148 +152,144 @@ void Jeu::jouer()
 				window.close();
 			}
 
-
-			// event.Type == event.MouseButtonReleased && event.MouseButton.Button == sf::Mouse::Left
-
+			spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 
 			if (casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
 				gameState::menu;
 			}
-			else if (casesSelection[1].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+
+			//Fruit
+			if (spriteFruit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging==false)
+			{
+					spriteFruit.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+					isDragging = true;
+			}
+			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteFruit.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
 				Repas.donnerAManger(Repas.fruit);
+				spriteFruit.setPosition(231, 690);
 			}
-			else if (casesSelection[2].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+
+			//Viande
+			if (spriteViande.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+			{
+				spriteViande.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+				isDragging = true;
+			}
+			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteViande.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
 				Repas.donnerAManger(Repas.viande);
+				spriteViande.setPosition(308, 690);
 			}
-			else if (casesSelection[3].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			//Muffin
+			if (spriteMuffin.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+			{
+				spriteMuffin.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+				isDragging = true;
+			}
+			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteMuffin.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
 				Repas.donnerAManger(Repas.biscuit);
+				spriteMuffin.setPosition(386, 687);
 			}
-			else if (casesSelection[4].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			//Stimulant
+			if (spriteStim.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+			{
+				spriteStim.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+				isDragging = true;
+			}
+			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteStim.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
 				Bestiole.soigner(Soin.stimulant, Bestiole);
+				spriteStim.setPosition(231, 745);
 			}
-			else if (casesSelection[5].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			//Medkit
+			if (spriteMedkit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+			{
+				spriteMedkit.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+				isDragging = true;
+			}
+			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteMedkit.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
 				Bestiole.soigner(Soin.hyperproteine, Bestiole);
+				spriteMedkit.setPosition(308, 748);
 			}
-			else if (casesSelection[6].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			//Antidep
+			if (spriteAntidep.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+			{
+				spriteAntidep.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+				isDragging = true;
+			}
+			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteAntidep.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
 				Bestiole.soigner(Soin.antidepresseur, Bestiole);
+				spriteAntidep.setPosition(386, 745);
 			}
-			else if (casesSelection[7].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			else
+			{
+				isDragging = false;
+			}
+
+
+			//Laver
+			if (casesSelection[7].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				Bestiole.laver();
 			}
-			else if (casesSelection[8].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			//Jour
+			if (casesSelection[8].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				isDay = true;
 			}
-			else if (casesSelection[9].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+
+			//Nuit
+			if (casesSelection[9].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				isDay = false;
 			}
 		}
-		window.setKeyRepeatEnabled(false);
-
-		spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
-
-
-		/*sf::FloatRect boxBiscuit = spriteBiscuit.getGlobalBounds();
-		sf::FloatRect boxFruit = spriteFruit.getGlobalBounds();
-		sf::FloatRect boxViande = spriteViande.getGlobalBounds();*/
-
-		//On bouge le sprite du biscuit via drag&drop avec la souris
-
-		//if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxBiscuit.intersects(boxSouris)))
-		//{
-
-
-		//	spriteBiscuit.setPosition(posSouris.x, posSouris.y);
-		//	if (boxBiscuit.intersects(boxFruit))
-		//	{
-		//		spriteFruit.setPosition(360, 705);
-		//	}
-		//	else if (boxBiscuit.intersects(boxViande))
-		//	{
-		//		spriteViande.setPosition(420, 705);
-		//	}
-		//}
-		//else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxFruit.intersects(boxSouris)))
-		//{	
-
-		//	posSouris = sf::Mouse::getPosition(window);
-		//	spriteFruit.setPosition(posSouris.x, posSouris.y);
-		//	if (boxFruit.intersects(boxViande))
-		//	{
-		//		spriteViande.setPosition(420, 705);
-		//	}
-		//	else if (boxFruit.intersects(boxBiscuit))
-		//	{
-		//		spriteBiscuit.setPosition(480, 705);
-		//	}
-		//}
-		//else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && (boxViande.intersects(boxSouris)))
-		//{	
-
-		//	posSouris = sf::Mouse::getPosition(window);
-		//	spriteViande.setPosition(posSouris.x, posSouris.y);
-		//	if (boxViande.intersects(boxFruit))
-		//	{
-		//		spriteFruit.setPosition(360, 705);
-		//	}
-		//	else if (boxViande.intersects(boxBiscuit))
-		//	{
-		//		spriteBiscuit.setPosition(480, 705);
-		//	}
-		//}
 
 
 		//Logique Creature
 
+		//Faire ses besoins
 		if (Bestiole.getNbNourris() == 3)
 		{
 			Bestiole.faireCaca();
 		}
+		//Statut deprime
 		else if (Bestiole.getNbCacas() >= 3)
 		{
 			Bestiole.setStatut(deprime);
 		}
+		//Gain niveau
 		else if (Bestiole.getExpActuel() == Bestiole.getExpMax())
 		{
 			Bestiole.gagnerNiveau(Bestiole);
 		}
+		//Evolution
 		else if (Bestiole.getNiveau() == 3)
 		{
 			Bestiole.evoluer(Bestiole, enfant);
 		}
+		//Statut extenue
 		else if (Bestiole.getEnergie() <= 20)
 		{
 			Bestiole.setStatut(extenue);
 		}
+		//Statut deprime
 		else if (Bestiole.getJoie() <= 20)
 		{
 			Bestiole.setStatut(deprime);
 		}
+		//Statut affame
 		else if (Bestiole.getFaim() <= 20)
 		{
 			Bestiole.setStatut(affame);
 		}
 
-
-
-
-
-
-
-
-
-
-
-
+		window.setKeyRepeatEnabled(false);
 		window.clear();
 		//UI
 		if (isDay == true)
@@ -280,9 +311,23 @@ void Jeu::jouer()
 			window.draw(casesSelection[i]);
 		}
 
+
+
 		window.draw(nomCrea);
 		//Crea
 		window.draw(spritePerso);
+		//Aliment & Medicament
+		window.draw(spriteStim);
+		window.draw(spriteMedkit);
+		window.draw(spriteAntidep);
+		window.draw(spriteFruit);
+		window.draw(spriteViande);
+		window.draw(spriteMuffin);
+
+		window.draw(spritePvBar);
+		window.draw(spriteEnergyBar);
+		window.draw(spriteHungryBar);
+
 		//Curseur
 		window.draw(spriteCursor);
 		window.display();

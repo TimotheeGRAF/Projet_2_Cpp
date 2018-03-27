@@ -87,5 +87,26 @@
     <Image Include="Soleil.png">
       <Filter>content</Filter>
     </Image>
+    <Image Include="Antidep.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Biscuit.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Douche.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Fruit.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Medkit.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Stim.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Viande.png">
+      <Filter>content</Filter>
+    </Image>
   </ItemGroup>
 </Project>

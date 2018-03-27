@@ -138,16 +138,23 @@
     <Font Include="Mak Dah.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Antidep.png" />
     <Image Include="background1.png" />
     <Image Include="background2.png" />
+    <Image Include="Biscuit.png" />
     <Image Include="coeur.png" />
     <Image Include="Cursor.png" />
+    <Image Include="Douche.png" />
     <Image Include="EnergyBar.png" />
+    <Image Include="Fruit.png" />
     <Image Include="HealthBar.png" />
     <Image Include="HungryBar.png" />
     <Image Include="Lune.png" />
+    <Image Include="Medkit.png" />
     <Image Include="Poupon.png" />
     <Image Include="Soleil.png" />
+    <Image Include="Stim.png" />
+    <Image Include="Viande.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
