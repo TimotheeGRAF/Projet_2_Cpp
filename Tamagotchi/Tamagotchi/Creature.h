@@ -33,6 +33,7 @@ public:
 	void setNom(string nomCrea);
 	int getPV();
 	void setPV(int pdV);
+	int getPVMax();
 	int getExpMax();
 	void setExpMax(int expM);
 	int getExpActuel();
@@ -42,12 +43,15 @@ public:
 	void setStade(Stade stadeEvolution);
 	int getEnergie();
 	void setEnergie(int nrj);
+	int getEnergieMax();
 	int getJoie();
 	void setJoie(int joie);
+	int getJoieMax();
 	int getStatut();
 	void setStatut(Statut);
 	int getFaim();
 	void setFaim(int faim);
+	int getFaimMax();
 
 	int getNbNourris();
 	void setNbNourris(int nbN);
@@ -57,6 +61,7 @@ public:
 
 	int caresser();
 	int faireCaca();
+	void donnerAManger(Nourriture::typeNourriture, Creature animal);
 	int soigner(Medicament::typeMedicament, Creature animal);
 	int laver();
 	int gagnerNiveau(Creature animal);
@@ -69,18 +74,18 @@ private:
 	Statut stats;
 	string nom;
 	int pvMax=100;
-	int pvActuel=75;
+	int pvActuel=50;
 	int energieMax=100;
-	int energieActuel=75;
+	int energieActuel=100;
 	int joieMax=100;
-	int joieActuel=75;
+	int joieActuel=100;
 	int expMax = 50;
 	int expActuel=0;
 	int niveau = 1;
 	int faimMax = 100;
-	int faimActuel=75;
+	int faimActuel=50;
 	int statut=enforme;
-	bool enVie=true;
+	bool enVie = true;
 	int nbNourris=0;
 	int nbCacas=0;
 	int nbLave=0;
@@ -88,6 +93,7 @@ private:
 
 
 protected:
+
 
 };
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "Creature.h"
+#include <iostream>
 
 using namespace std;
 
@@ -16,17 +16,11 @@ public:
 		biscuit
 	};
 
-	int donnerAManger(typeNourriture);
-
-
 private:
 
 
 protected:
 	int compteurNourriture=0;
-	int PVrestaure;
-	int joieRestaure;
-	int faimRestaure;
 
 	typeNourriture nourriture;
 

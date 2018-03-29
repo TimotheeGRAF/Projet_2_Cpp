@@ -29,6 +29,11 @@ void Creature::setPV(int pdV)
 	this->pvActuel = pdV;
 }
 
+int Creature::getPVMax()
+{
+	return pvMax;
+}
+
 int Creature::getEnergie()
 {
 	return energieActuel;
@@ -38,6 +43,11 @@ void Creature::setEnergie(int nrj)
 	this->energieActuel = nrj;
 }
 
+int Creature::getEnergieMax()
+{
+	return energieMax;
+}
+
 int Creature::getJoie()
 {
 	return joieActuel;
@@ -45,6 +55,11 @@ int Creature::getJoie()
 void Creature::setJoie(int joie)
 {
 	this->energieActuel = joie;
+}
+
+int Creature::getJoieMax()
+{
+	return joieMax;
 }
 
 int Creature::getStatut()
@@ -112,7 +127,12 @@ int Creature::getFaim()
 }
 void Creature::setFaim(int faim)
 {
-	this->faimActuel =faim;
+	this->faimActuel = faim;
+}
+
+int Creature::getFaimMax()
+{
+	return faimMax;
 }
 
 
@@ -130,9 +150,101 @@ int Creature::faireCaca()
 int Creature::laver()
 {
 	this->nbCacas = 0;
-	this->joieActuel++;
+	this->joieActuel= this->joieActuel+20;
 	return this->nbLave++;
 }
+
+
+//Donner à manger
+void Creature::donnerAManger(Nourriture::typeNourriture repas, Creature animal)
+{
+	switch (repas)
+	{
+	case Nourriture::fruit:
+		
+		this->faimActuel += 5;
+		if (this->faimActuel > this->faimMax)
+		{
+			this->faimActuel = this->faimMax;
+		}
+		this->joieActuel += 5;
+		if (this->joieActuel > this->pvMax)
+		{
+			this->joieActuel = this->joieMax;
+		}
+
+		this->pvActuel += 10;
+		if (this->pvActuel > this->pvMax)
+		{
+			this->pvActuel = this->pvMax;
+		}
+
+		this->expActuel += 15;
+		if (this->expActuel > this->expMax)
+		{
+			animal.gagnerNiveau(animal);
+			this->expActuel = 0;
+		}
+		break;
+
+	case Nourriture::viande:
+		
+		this->faimActuel += 10;
+		if (this->faimActuel > this->faimMax)
+		{
+			this->faimActuel = this->faimMax;
+		}
+
+		this->joieActuel += 5;
+		if (this->joieActuel > this->pvMax)
+		{
+			this->joieActuel = this->joieMax;
+		}
+
+		this->pvActuel += 5;
+		if (this->pvActuel > this->pvMax)
+		{
+			this->pvActuel = this->pvMax;
+		}
+
+		this->expActuel += 15;
+		if (this->expActuel > this->expMax)
+		{
+			animal.gagnerNiveau(animal);
+			this->expActuel = 0;
+		}
+		break;
+
+	case Nourriture::biscuit:
+		
+		this->faimActuel += 5;
+		if (this->faimActuel > this->faimMax)
+		{
+			this->faimActuel = this->faimMax;
+		}
+
+		this->joieActuel += 10;
+		if (this->joieActuel > this->pvMax)
+		{
+			this->joieActuel = this->joieMax;
+		}
+
+		this->pvActuel -=5 ;
+
+		this->expActuel += 15;
+		if (this->expActuel > this->expMax)
+		{
+			animal.gagnerNiveau(animal);
+			this->expActuel = 0;
+		}
+		break;
+
+	default:
+		break;
+	}
+}
+
+
 
 //Soigner Creature et changer statut
 int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
@@ -141,19 +253,24 @@ int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
 	{
 	case Medicament::typeMedicament::antidepresseur:
 		cout << "COCAIN" << endl;
-		animal.setStatut(enforme);
+		if (animal.getStatut() == deprime)
+		{
+			animal.setStatut(enforme);
+		}
 		break;
 	case Medicament::typeMedicament::hyperproteine:
 		cout << "PROTEIN POWDER" << endl;
-
-		animal.setStatut(enforme);
-
+		if (animal.getStatut() == affame)
+		{
+			animal.setStatut(enforme);
+		}
 		break;
 	case Medicament::typeMedicament::stimulant:
 		cout << "REDBULL" << endl;
-
-		animal.setStatut(enforme);
-
+		if (animal.getStatut() == extenue)
+		{
+			animal.setStatut(enforme);
+		}
 		break;
 	default:
 		break;

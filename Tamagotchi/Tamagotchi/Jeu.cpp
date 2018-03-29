@@ -16,6 +16,10 @@ void Jeu::jouer()
 {
 	sf::RenderWindow window(sf::VideoMode(665, 800), "What does the fox say ?");
 
+	//Creation créature
+	Creature Bestiole;
+
+
 	//Textures
 	sf::Texture backgroundDay;
 	sf::Texture backgroundNight;
@@ -34,6 +38,7 @@ void Jeu::jouer()
 	sf::Texture barreVie;
 	sf::Texture barreFaim;
 	sf::Texture barreNrj;
+	sf::Texture barreJoie;
 
 	backgroundDay.loadFromFile("background1.png");
 	backgroundNight.loadFromFile("background2.png");
@@ -50,6 +55,7 @@ void Jeu::jouer()
 	barreVie.loadFromFile("Healthbar.png");
 	barreFaim.loadFromFile("HungryBar.png");
 	barreNrj.loadFromFile("EnergyBar.png");
+	barreJoie.loadFromFile("HappinessBar.png");
 
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 209, 240);
@@ -59,7 +65,10 @@ void Jeu::jouer()
 	sf::IntRect rectMuffin(0, 0, 50, 45);
 	sf::IntRect rectMedkit(0, 0, 50, 38);
 	sf::IntRect daynight(0, 0, 100, 100);
-	sf::IntRect rectBar(0, 0, 169, 16);
+	sf::IntRect rectBarVie(0, 0, int(169 * Bestiole.getPV() / Bestiole.getPVMax()), 16);
+	sf::IntRect rectBarFaim(0, 0, int(169 * Bestiole.getFaim() / Bestiole.getFaimMax()), 16);
+	sf::IntRect rectBarNrj(0, 0, int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax()), 16);
+	sf::IntRect rectBarJoie(0, 0, int(169 * Bestiole.getJoie() / Bestiole.getJoieMax()), 16);
 	//Création des sprites
 	sf::Sprite backgroundD(backgroundDay);
 	sf::Sprite backgroundN(backgroundNight);
@@ -73,9 +82,10 @@ void Jeu::jouer()
 	sf::Sprite spriteStim(stim, selectBox);
 	sf::Sprite spriteMedkit(medkit, rectMedkit);
 	sf::Sprite spriteAntidep(antidep, selectBox);
-	sf::Sprite spritePvBar(barreVie, rectBar);
-	sf::Sprite spriteHungryBar(barreFaim, rectBar);
-	sf::Sprite spriteEnergyBar(barreNrj, rectBar);
+	sf::Sprite spritePvBar(barreVie, rectBarVie);
+	sf::Sprite spriteHungryBar(barreFaim, rectBarFaim);
+	sf::Sprite spriteEnergyBar(barreNrj, rectBarNrj);
+	sf::Sprite spriteJoieBar(barreJoie, rectBarJoie);
 
 	sf::Sprite spriteSelection(alpha, selectBox);
 	spriteSelection.setColor(sf::Color::Transparent);
@@ -95,9 +105,10 @@ void Jeu::jouer()
 	spritePerso.setPosition(100, 380);
 	spriteSoleil.setPosition(460, 10);
 	spriteLune.setPosition(460, 10);
-	spritePvBar.setPosition(7, 6);
-	spriteHungryBar.setPosition(7, 58);
-	spriteEnergyBar.setPosition(7, 33);
+	spritePvBar.setPosition(75, 6);
+	spriteHungryBar.setPosition(75, 33);
+	spriteEnergyBar.setPosition(74, 58);
+	spriteJoieBar.setPosition(74, 86);
 
 	casesSelection[0].setPosition(150, 710);
 	casesSelection[1].setPosition(231, 685);
@@ -129,8 +140,7 @@ void Jeu::jouer()
 	nomCrea.setFont(font);
 	nomCrea.setCharacterSize(36);
 	nomCrea.setFillColor(sf::Color::Black);
-	//Creation créature
-	Creature Bestiole;
+
 	Bestiole.setNom("Starfox");
 	nomCrea.setString(Bestiole.getNom());
 	nomCrea.setPosition(482, 410);
@@ -160,14 +170,20 @@ void Jeu::jouer()
 			}
 
 			//Fruit
-			if (spriteFruit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging==false)
+			if (spriteFruit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
 			{
-					spriteFruit.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-					isDragging = true;
+				spriteFruit.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+				isDragging = true;
 			}
 			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteFruit.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
-				Repas.donnerAManger(Repas.fruit);
+				Bestiole.donnerAManger(Repas.fruit, Bestiole);
+				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+				spritePvBar.setTextureRect(rectBarVie);
+				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+				spriteHungryBar.setTextureRect(rectBarFaim);
+				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+				spriteJoieBar.setTextureRect(rectBarJoie);
 				spriteFruit.setPosition(231, 690);
 			}
 
@@ -179,7 +195,13 @@ void Jeu::jouer()
 			}
 			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteViande.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
-				Repas.donnerAManger(Repas.viande);
+				Bestiole.donnerAManger(Repas.viande, Bestiole);
+				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+				spritePvBar.setTextureRect(rectBarVie);
+				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+				spriteHungryBar.setTextureRect(rectBarFaim);
+				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+				spriteJoieBar.setTextureRect(rectBarJoie);
 				spriteViande.setPosition(308, 690);
 			}
 			//Muffin
@@ -190,7 +212,13 @@ void Jeu::jouer()
 			}
 			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteMuffin.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
-				Repas.donnerAManger(Repas.biscuit);
+				Bestiole.donnerAManger(Repas.viande, Bestiole);
+				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+				spritePvBar.setTextureRect(rectBarVie);
+				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+				spriteHungryBar.setTextureRect(rectBarFaim);
+				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+				spriteJoieBar.setTextureRect(rectBarJoie);
 				spriteMuffin.setPosition(386, 687);
 			}
 			//Stimulant
@@ -249,7 +277,6 @@ void Jeu::jouer()
 				isDay = false;
 			}
 		}
-
 
 		//Logique Creature
 
@@ -315,6 +342,7 @@ void Jeu::jouer()
 
 		window.draw(nomCrea);
 		//Crea
+		
 		window.draw(spritePerso);
 		//Aliment & Medicament
 		window.draw(spriteStim);
@@ -327,6 +355,7 @@ void Jeu::jouer()
 		window.draw(spritePvBar);
 		window.draw(spriteEnergyBar);
 		window.draw(spriteHungryBar);
+		window.draw(spriteJoieBar);
 
 		//Curseur
 		window.draw(spriteCursor);
