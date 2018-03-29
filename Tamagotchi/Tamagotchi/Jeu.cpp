@@ -149,20 +149,26 @@ void Jeu::jouer()
 	//Creation medicament
 	Medicament Soin;
 
-	//Creation horloge interne
-	sf::Clock clock;
+
+	
 
 	while (window.isOpen())
 	{
+		//Creation horloge interne
+		sf::Clock clock;
 		sf::Event event;
+		sf::Time tick = sf::seconds(0.7f);
+
 		while (window.pollEvent(event))
 		{
+
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
 
 			spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
+
 
 			if (casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
@@ -278,6 +284,13 @@ void Jeu::jouer()
 			}
 		}
 
+		if (tick.asSeconds())
+		{
+			
+			clock.restart();
+		}
+
+
 		//Logique Creature
 
 		//Faire ses besoins
@@ -342,8 +355,11 @@ void Jeu::jouer()
 
 		window.draw(nomCrea);
 		//Crea
-		
-		window.draw(spritePerso);
+		if (Bestiole.enVie = true)
+		{
+			window.draw(spritePerso);
+		}
+
 		//Aliment & Medicament
 		window.draw(spriteStim);
 		window.draw(spriteMedkit);

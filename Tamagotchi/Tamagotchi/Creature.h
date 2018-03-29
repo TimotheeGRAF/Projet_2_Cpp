@@ -29,6 +29,7 @@ public:
 	Creature();
 	~Creature();
 
+	bool enVie = true;
 	string getNom();
 	void setNom(string nomCrea);
 	int getPV();
@@ -85,7 +86,7 @@ private:
 	int faimMax = 100;
 	int faimActuel=50;
 	int statut=enforme;
-	bool enVie = true;
+
 	int nbNourris=0;
 	int nbCacas=0;
 	int nbLave=0;
