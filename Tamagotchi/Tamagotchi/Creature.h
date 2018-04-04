@@ -77,9 +77,9 @@ private:
 	int pvMax=100;
 	int pvActuel=50;
 	int energieMax=100;
-	int energieActuel=100;
+	int energieActuel=50;
 	int joieMax=100;
-	int joieActuel=100;
+	int joieActuel=50;
 	int expMax = 50;
 	int expActuel=0;
 	int niveau = 1;

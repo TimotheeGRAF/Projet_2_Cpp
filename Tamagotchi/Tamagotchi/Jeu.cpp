@@ -149,15 +149,14 @@ void Jeu::jouer()
 	//Creation medicament
 	Medicament Soin;
 
-
-	
+	sf::Clock clock;
+	float elapsed=0;
 
 	while (window.isOpen())
 	{
 		//Creation horloge interne
-		sf::Clock clock;
+
 		sf::Event event;
-		sf::Time tick = sf::seconds(0.7f);
 
 		while (window.pollEvent(event))
 		{
@@ -282,16 +281,23 @@ void Jeu::jouer()
 			{
 				isDay = false;
 			}
-		}
 
-		if (tick.asSeconds())
-		{
-			
-			clock.restart();
 		}
 
 
 		//Logique Creature
+
+		// Horloge interne et attributs diminuant en fonction du temps
+		elapsed += clock.restart().asMilliseconds();
+
+		if (elapsed >= 3000)
+		{
+			Bestiole.setFaim(Bestiole.getFaim() - 5);
+			rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+			spriteHungryBar.setTextureRect(rectBarFaim);
+
+			elapsed = 0;
+		}
 
 		//Faire ses besoins
 		if (Bestiole.getNbNourris() == 3)
@@ -329,8 +335,12 @@ void Jeu::jouer()
 			Bestiole.setStatut(affame);
 		}
 
-		window.setKeyRepeatEnabled(false);
+
+
 		window.clear();
+
+
+
 		//UI
 		if (isDay == true)
 		{
@@ -350,8 +360,6 @@ void Jeu::jouer()
 		{
 			window.draw(casesSelection[i]);
 		}
-
-
 
 		window.draw(nomCrea);
 		//Crea

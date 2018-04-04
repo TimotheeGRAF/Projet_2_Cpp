@@ -162,18 +162,18 @@ void Creature::donnerAManger(Nourriture::typeNourriture repas, Creature animal)
 	{
 	case Nourriture::fruit:
 		
-		this->faimActuel += 5;
+		this->faimActuel += 15;
 		if (this->faimActuel > this->faimMax)
 		{
 			this->faimActuel = this->faimMax;
 		}
-		this->joieActuel += 5;
+		this->joieActuel += 15;
 		if (this->joieActuel > this->pvMax)
 		{
 			this->joieActuel = this->joieMax;
 		}
 
-		this->pvActuel += 10;
+		this->pvActuel += 20;
 		if (this->pvActuel > this->pvMax)
 		{
 			this->pvActuel = this->pvMax;
@@ -189,19 +189,19 @@ void Creature::donnerAManger(Nourriture::typeNourriture repas, Creature animal)
 
 	case Nourriture::viande:
 		
-		this->faimActuel += 10;
+		this->faimActuel += 20;
 		if (this->faimActuel > this->faimMax)
 		{
 			this->faimActuel = this->faimMax;
 		}
 
-		this->joieActuel += 5;
+		this->joieActuel += 15;
 		if (this->joieActuel > this->pvMax)
 		{
 			this->joieActuel = this->joieMax;
 		}
 
-		this->pvActuel += 5;
+		this->pvActuel += 15;
 		if (this->pvActuel > this->pvMax)
 		{
 			this->pvActuel = this->pvMax;
@@ -217,19 +217,19 @@ void Creature::donnerAManger(Nourriture::typeNourriture repas, Creature animal)
 
 	case Nourriture::biscuit:
 		
-		this->faimActuel += 5;
+		this->faimActuel += 15;
 		if (this->faimActuel > this->faimMax)
 		{
 			this->faimActuel = this->faimMax;
 		}
 
-		this->joieActuel += 10;
+		this->joieActuel += 20;
 		if (this->joieActuel > this->pvMax)
 		{
 			this->joieActuel = this->joieMax;
 		}
 
-		this->pvActuel -=5 ;
+		this->pvActuel -=15 ;
 
 		this->expActuel += 15;
 		if (this->expActuel > this->expMax)
