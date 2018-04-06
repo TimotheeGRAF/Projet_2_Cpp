@@ -39,6 +39,7 @@ void Jeu::jouer()
 	sf::Texture barreFaim;
 	sf::Texture barreNrj;
 	sf::Texture barreJoie;
+	sf::Texture menu;
 
 	backgroundDay.loadFromFile("background1.png");
 	backgroundNight.loadFromFile("background2.png");
@@ -56,6 +57,8 @@ void Jeu::jouer()
 	barreFaim.loadFromFile("HungryBar.png");
 	barreNrj.loadFromFile("EnergyBar.png");
 	barreJoie.loadFromFile("HappinessBar.png");
+	menu.loadFromFile("GameMenu.png");
+
 
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 209, 240);
@@ -69,6 +72,7 @@ void Jeu::jouer()
 	sf::IntRect rectBarFaim(0, 0, int(169 * Bestiole.getFaim() / Bestiole.getFaimMax()), 16);
 	sf::IntRect rectBarNrj(0, 0, int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax()), 16);
 	sf::IntRect rectBarJoie(0, 0, int(169 * Bestiole.getJoie() / Bestiole.getJoieMax()), 16);
+	sf::IntRect rectMainMenu(0, 0, 340, 440);
 	//Création des sprites
 	sf::Sprite backgroundD(backgroundDay);
 	sf::Sprite backgroundN(backgroundNight);
@@ -86,6 +90,7 @@ void Jeu::jouer()
 	sf::Sprite spriteHungryBar(barreFaim, rectBarFaim);
 	sf::Sprite spriteEnergyBar(barreNrj, rectBarNrj);
 	sf::Sprite spriteJoieBar(barreJoie, rectBarJoie);
+	sf::Sprite spriteMainMenu(menu, rectMainMenu);
 
 	sf::Sprite spriteSelection(alpha, selectBox);
 	spriteSelection.setColor(sf::Color::Transparent);
@@ -109,6 +114,7 @@ void Jeu::jouer()
 	spriteHungryBar.setPosition(75, 33);
 	spriteEnergyBar.setPosition(74, 58);
 	spriteJoieBar.setPosition(74, 86);
+	spriteMainMenu.setPosition(162, 180);
 
 	casesSelection[0].setPosition(150, 710);
 	casesSelection[1].setPosition(231, 685);
@@ -171,7 +177,11 @@ void Jeu::jouer()
 
 			if (casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
-				gameState::menu;
+				onMenu = true;
+			}
+			if (event.type == event.KeyReleased && event.key.code == sf::Keyboard::Escape)
+			{
+				onMenu = false;
 			}
 
 			//Fruit
@@ -197,6 +207,7 @@ void Jeu::jouer()
 			{
 				spriteViande.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 				isDragging = true;
+				Repas.viande;
 			}
 			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteViande.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
@@ -290,11 +301,15 @@ void Jeu::jouer()
 		// Horloge interne et attributs diminuant en fonction du temps
 		elapsed += clock.restart().asMilliseconds();
 
-		if (elapsed >= 3000)
+		if (elapsed >= 4000 && onMenu==false)
 		{
 			Bestiole.setFaim(Bestiole.getFaim() - 5);
 			rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
 			spriteHungryBar.setTextureRect(rectBarFaim);
+
+			Bestiole.setEnergie(Bestiole.getEnergie() - 5);
+			rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
+			spriteEnergyBar.setTextureRect(rectBarNrj);
 
 			elapsed = 0;
 		}
@@ -380,6 +395,12 @@ void Jeu::jouer()
 		window.draw(spriteEnergyBar);
 		window.draw(spriteHungryBar);
 		window.draw(spriteJoieBar);
+
+		if (onMenu == true)
+		{
+			window.draw(spriteMainMenu);
+
+		}
 
 		//Curseur
 		window.draw(spriteCursor);

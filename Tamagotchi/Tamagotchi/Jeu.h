@@ -26,6 +26,7 @@ private:
 
 
 protected:
+	bool onMenu = false;
 
 };
 

@@ -108,5 +108,17 @@
     <Image Include="Viande.png">
       <Filter>content</Filter>
     </Image>
+    <Image Include="boutonMenu.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="GameMenu.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="HappinessBar.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="MenuButton.png">
+      <Filter>content</Filter>
+    </Image>
   </ItemGroup>
 </Project>
