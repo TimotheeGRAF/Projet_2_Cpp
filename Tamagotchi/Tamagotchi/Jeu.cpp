@@ -40,6 +40,9 @@ void Jeu::jouer()
 	sf::Texture barreNrj;
 	sf::Texture barreJoie;
 	sf::Texture menu;
+	sf::Texture menuIG;
+	sf::Texture options;
+	sf::Texture chargement;
 
 	backgroundDay.loadFromFile("background1.png");
 	backgroundNight.loadFromFile("background2.png");
@@ -58,10 +61,13 @@ void Jeu::jouer()
 	barreNrj.loadFromFile("EnergyBar.png");
 	barreJoie.loadFromFile("HappinessBar.png");
 	menu.loadFromFile("GameMenu.png");
+	menuIG.loadFromFile("GameMenuIG.png");
+	options.loadFromFile("Options.png");
+	chargement.loadFromFile("Load.png");
 
 
 	//Rectangles de sélection
-	sf::IntRect rectSource(0, 0, 209, 240);
+	sf::IntRect rectSource(0, 0, 275, 240);
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	sf::IntRect selectBox(0, 0, 50, 50);
 	sf::IntRect rectFruit(0, 0, 50, 41);	//Marche aussi pour la viande
@@ -73,6 +79,8 @@ void Jeu::jouer()
 	sf::IntRect rectBarNrj(0, 0, int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax()), 16);
 	sf::IntRect rectBarJoie(0, 0, int(169 * Bestiole.getJoie() / Bestiole.getJoieMax()), 16);
 	sf::IntRect rectMainMenu(0, 0, 340, 440);
+	sf::IntRect rectOptions(0, 0, 440, 340);    //Marche aussi pour ecran chargement
+	sf::IntRect rectBoutons(0, 0, 180, 25);
 	//Création des sprites
 	sf::Sprite backgroundD(backgroundDay);
 	sf::Sprite backgroundN(backgroundNight);
@@ -91,6 +99,12 @@ void Jeu::jouer()
 	sf::Sprite spriteEnergyBar(barreNrj, rectBarNrj);
 	sf::Sprite spriteJoieBar(barreJoie, rectBarJoie);
 	sf::Sprite spriteMainMenu(menu, rectMainMenu);
+	sf::Sprite spriteMenuIG(menuIG, rectMainMenu);
+	sf::Sprite spriteOptions(options, rectOptions);
+	sf::Sprite spriteChargement(chargement, rectOptions);
+	
+	sf::Sprite spriteBoutons(alpha, rectBoutons);
+	spriteBoutons.setColor(sf::Color::Transparent);
 
 	sf::Sprite spriteSelection(alpha, selectBox);
 	spriteSelection.setColor(sf::Color::Transparent);
@@ -115,6 +129,9 @@ void Jeu::jouer()
 	spriteEnergyBar.setPosition(74, 58);
 	spriteJoieBar.setPosition(74, 86);
 	spriteMainMenu.setPosition(162, 180);
+	spriteMenuIG.setPosition(162, 180);
+	spriteOptions.setPosition(112, 330);
+	spriteChargement.setPosition(112, 330);
 
 	casesSelection[0].setPosition(150, 710);
 	casesSelection[1].setPosition(231, 685);
@@ -296,6 +313,7 @@ void Jeu::jouer()
 		}
 
 
+
 		//Logique Creature
 
 		// Horloge interne et attributs diminuant en fonction du temps
@@ -351,7 +369,6 @@ void Jeu::jouer()
 		}
 
 
-
 		window.clear();
 
 
@@ -398,8 +415,7 @@ void Jeu::jouer()
 
 		if (onMenu == true)
 		{
-			window.draw(spriteMainMenu);
-
+			window.draw(spriteMenuIG);
 		}
 
 		//Curseur

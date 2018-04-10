@@ -1,14 +1,15 @@
 ﻿  Jeu.cpp
-Jeu.cpp(190): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(208): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(226): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(243): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(254): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(265): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(203): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(221): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(239): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(256): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(267): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(278): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  main.cpp
   Génération de code en cours
-  2 of 379 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  2 of 375 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    10 functions had inline decision re-evaluated but remain unchanged
   Fin de la génération du code
-  Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.exe
-  Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.pdb (Full PDB)
+  Tamagotchi.vcxproj -> F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.exe
+  Tamagotchi.vcxproj -> F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.pdb (Full PDB)

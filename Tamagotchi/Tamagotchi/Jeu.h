@@ -20,6 +20,7 @@ public:
 	};
 
 	void jouer();
+	void menuG();
 
 private:
 
