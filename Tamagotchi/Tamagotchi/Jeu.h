@@ -4,6 +4,10 @@
 #include "Creature.h"
 #include "Collision.h"
 #include <iostream>
+#include <vector>
+#include "Sound.h"
+#include "Graphics.h"
+#include "BDD.h"
 
 class Jeu
 {
@@ -14,20 +18,24 @@ public:
 	enum gameState {
 		game,
 		menu,
-		save,
-		load,
-		igmenu
-	};
+		igmenu,
+		options
 
+	};
+	bool onMenu = false;
+	bool onOptions = false;
+
+	void chooseState(gameState);
 	void jouer();
-	void menuG();
+	void save(Creature Fox);
+	void load(Creature Fox);
 
 private:
 
 
 
 protected:
-	bool onMenu = false;
+
 
 };
 

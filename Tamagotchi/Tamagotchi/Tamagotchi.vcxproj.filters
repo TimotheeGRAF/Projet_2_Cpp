@@ -27,7 +27,13 @@
     <ClInclude Include="Nourriture.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
+    <ClInclude Include="Graphics.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="BDD.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +53,13 @@
     <ClCompile Include="Nourriture.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
+    <ClCompile Include="Graphics.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="BDD.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

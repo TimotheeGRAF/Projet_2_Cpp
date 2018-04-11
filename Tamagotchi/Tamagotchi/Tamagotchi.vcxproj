@@ -120,19 +120,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Collision.h" />
+    <ClInclude Include="BDD.h" />
     <ClInclude Include="Creature.h" />
+    <ClInclude Include="Graphics.h" />
     <ClInclude Include="Jeu.h" />
     <ClInclude Include="Medicament.h" />
     <ClInclude Include="Nourriture.h" />
+    <ClInclude Include="Sound.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="BDD.cpp" />
     <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Jeu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Medicament.cpp" />
     <ClCompile Include="Nourriture.cpp" />
+    <ClCompile Include="Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Mak Dah.ttf" />

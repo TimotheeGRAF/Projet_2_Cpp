@@ -2,6 +2,7 @@
 
 int main()
 {
+
 	Jeu Tamagotchi;
 	Tamagotchi.jouer();
 	return 0;

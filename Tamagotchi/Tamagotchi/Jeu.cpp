@@ -1,6 +1,5 @@
 #include "Jeu.h"
-#include <iostream>
-#include <vector>
+
 
 using namespace std;
 
@@ -12,12 +11,29 @@ Jeu::~Jeu()
 {
 }
 
+
+void Jeu::chooseState(Jeu::gameState)
+{
+	switch (gameState)
+	{
+	case game: 
+
+	default:
+		break;
+	}
+}
+
+
 void Jeu::jouer()
 {
 	sf::RenderWindow window(sf::VideoMode(665, 800), "What does the fox say ?");
 
 	//Creation créature
 	Creature Bestiole;
+	//Creation nourriture
+	Nourriture Repas;
+	//Creation medicament
+	Medicament Soin;
 
 
 	//Textures
@@ -115,6 +131,12 @@ void Jeu::jouer()
 	{
 		casesSelection.push_back(spriteSelection);
 	}
+	//Création vector de sprites boutons
+	vector<sf::Sprite> boutonsMenu;
+	for (int j = 0; j <= 5; j++)
+	{
+		boutonsMenu.push_back(spriteBoutons);
+	}
 
 	bool isDay = true;
 	bool isDragging = false;
@@ -132,6 +154,13 @@ void Jeu::jouer()
 	spriteMenuIG.setPosition(162, 180);
 	spriteOptions.setPosition(112, 330);
 	spriteChargement.setPosition(112, 330);
+
+	boutonsMenu[0].setPosition(240,285);	//Nouvelle partie / Sauvegarder
+	boutonsMenu[1].setPosition(240,342);	//Charger
+	boutonsMenu[2].setPosition(240,400);	//Options
+	boutonsMenu[3].setPosition(240,460);	//Reprendre
+	boutonsMenu[4].setPosition(240,536);	//Quitter
+
 
 	casesSelection[0].setPosition(150, 710);
 	casesSelection[1].setPosition(231, 685);
@@ -154,7 +183,7 @@ void Jeu::jouer()
 	//Curseur visible ou non
 	window.setMouseCursorVisible(false);
 	//On dessine un curseur de souris perso à la position du curseur.
-	spriteCursor.setTextureRect(rectCursor);
+	/*spriteCursor.setTextureRect(rectCursor);*/
 
 	//Police de caractère et texte
 	sf::Font font;
@@ -167,18 +196,15 @@ void Jeu::jouer()
 	Bestiole.setNom("Starfox");
 	nomCrea.setString(Bestiole.getNom());
 	nomCrea.setPosition(482, 410);
-	//Creation nourriture
-	Nourriture Repas;
-	//Creation medicament
-	Medicament Soin;
 
+
+	//Creation horloge interne
 	sf::Clock clock;
 	float elapsed=0;
 
 	while (window.isOpen())
 	{
-		//Creation horloge interne
-
+		//Creation event catcher
 		sf::Event event;
 
 		while (window.pollEvent(event))
@@ -191,15 +217,38 @@ void Jeu::jouer()
 
 			spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 
-
+			//On clique sur un bouton pour ouvrir le menu, on fait échap pour le refermer
 			if (casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
 				onMenu = true;
 			}
-			if (event.type == event.KeyReleased && event.key.code == sf::Keyboard::Escape)
+			if ((event.type == event.KeyReleased && event.key.code == sf::Keyboard::Escape) || (boutonsMenu[3].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				onMenu = false;
 			}
+
+			//Dans le menu :
+			if (onMenu == true)
+			{
+				//if ((boutonsMenu[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+				//{
+				//	save(Bestiole);
+				//}
+				//else if ((boutonsMenu[1].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+				//{
+				//	load(Bestiole);
+				//}
+				if ((boutonsMenu[2].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+				{
+					onOptions = true;
+				}
+				else
+				{
+					onOptions = false;
+				}
+			}
+			
+
 
 			//Fruit
 			if (spriteFruit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
@@ -298,6 +347,8 @@ void Jeu::jouer()
 			{
 				Bestiole.laver();
 			}
+
+
 			//Jour
 			if (casesSelection[8].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
@@ -311,8 +362,6 @@ void Jeu::jouer()
 			}
 
 		}
-
-
 
 		//Logique Creature
 
@@ -368,10 +417,7 @@ void Jeu::jouer()
 			Bestiole.setStatut(affame);
 		}
 
-
 		window.clear();
-
-
 
 		//UI
 		if (isDay == true)
@@ -380,26 +426,22 @@ void Jeu::jouer()
 			window.draw(backgroundD);
 			window.draw(spriteSoleil);
 		}
-
 		if (isDay == false)
 		{
 			window.clear();
 			window.draw(backgroundN);
 			window.draw(spriteLune);
 		}
-
 		for (unsigned int i = 0; i < casesSelection.size(); i++)
 		{
 			window.draw(casesSelection[i]);
 		}
-
 		window.draw(nomCrea);
 		//Crea
 		if (Bestiole.enVie = true)
 		{
 			window.draw(spritePerso);
 		}
-
 		//Aliment & Medicament
 		window.draw(spriteStim);
 		window.draw(spriteMedkit);
@@ -407,7 +449,6 @@ void Jeu::jouer()
 		window.draw(spriteFruit);
 		window.draw(spriteViande);
 		window.draw(spriteMuffin);
-
 		window.draw(spritePvBar);
 		window.draw(spriteEnergyBar);
 		window.draw(spriteHungryBar);
@@ -416,10 +457,20 @@ void Jeu::jouer()
 		if (onMenu == true)
 		{
 			window.draw(spriteMenuIG);
+			window.draw(boutonsMenu[0]);
+			window.draw(boutonsMenu[1]);
+			window.draw(boutonsMenu[2]);
+			window.draw(boutonsMenu[3]);
+			window.draw(boutonsMenu[4]);
 		}
-
+		else if (onMenu == true && onOptions == true)
+		{
+			window.draw(spriteMenuIG);
+			window.draw(spriteOptions);
+		}
 		//Curseur
 		window.draw(spriteCursor);
 		window.display();
 	}
 }
+
