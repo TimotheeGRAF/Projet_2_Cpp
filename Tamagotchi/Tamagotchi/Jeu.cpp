@@ -379,6 +379,7 @@ void Jeu::jouer()
 				Bestiole.soigner(Soin.antidepresseur, Bestiole);
 				spriteAntidep.setPosition(386, 745);
 			}
+			/*Je suis entrain de glisser-déposer*/
 			else
 			{
 				isDragging = false;
@@ -389,6 +390,7 @@ void Jeu::jouer()
 			if (casesSelection[7].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				Bestiole.laver();
+				/*Mettre ici le fait de nettoyer le caca et enlever le statut malade de la créature*/
 			}
 
 
@@ -411,46 +413,123 @@ void Jeu::jouer()
 		// Horloge interne et attributs diminuant en fonction du temps
 		elapsed += clock.restart().asMilliseconds();
 
-		if (elapsed >= 2000 && onMenu==false)
+		if (elapsed >= 3000 && onMenu==false)
 		{
-			Bestiole.setFaim(Bestiole.getFaim() - 3);
-			rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
-			spriteHungryBar.setTextureRect(rectBarFaim);
-			if (Bestiole.getFaim() <= 0)
-			{
-				Bestiole.setFaim(0+3);
-			}
-
+			/*Cette partie du code bug et ça me gonfle,  dès que je met 3 if ou alors juste la partie "Joie" , l'ensemble déconne et les barres se figent : problème de timer ? overload de mémoire ?*/
 			if (isDay == true)
 			{
+				//Faim
+				Bestiole.setFaim(Bestiole.getFaim() - 4);
+				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+				spriteHungryBar.setTextureRect(rectBarFaim);
+
+				//Energie
 				Bestiole.setEnergie(Bestiole.getEnergie() - 3);
 				rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
 				spriteEnergyBar.setTextureRect(rectBarNrj);
-				if (Bestiole.getEnergie() <= 0)
-				{
-					Bestiole.setEnergie(0+3);
-				}
+
+				//Joie
+				Bestiole.setJoie(Bestiole.getJoie() - 2);
+				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+				spriteJoieBar.setTextureRect(rectBarJoie);
 			}
 			else if (isDay == false)
 			{
+				//Faim
+				Bestiole.setFaim(Bestiole.getFaim() - 1);
+				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+				spriteHungryBar.setTextureRect(rectBarFaim);
+
+				//Energie
 				Bestiole.setEnergie(Bestiole.getEnergie() + 5);
 				rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
 				spriteEnergyBar.setTextureRect(rectBarNrj);
-				if (Bestiole.getEnergie() >= Bestiole.getEnergieMax())
-				{
-					Bestiole.setEnergie(Bestiole.getEnergieMax()-5);
-				}
+
+				//Joie
+				Bestiole.setJoie(Bestiole.getJoie() + 2);
+				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+				spriteJoieBar.setTextureRect(rectBarJoie);
 			}
 
+			//Gestion erreur si nombre supérieur à la quantité max
+			//Energie
+			if (Bestiole.getEnergie() >= Bestiole.getEnergieMax())
+			{
+				Bestiole.setEnergie(Bestiole.getEnergieMax());
+				rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
+				spriteEnergyBar.setTextureRect(rectBarNrj);
+			}
+			//Faim
+			if (Bestiole.getFaim() >= Bestiole.getFaimMax())
+			{
+				Bestiole.setFaim(Bestiole.getFaimMax());
+				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+				spriteHungryBar.setTextureRect(rectBarFaim);
+			}
+			//Joie
+			if (Bestiole.getJoie() >= Bestiole.getJoieMax())
+			{
+				Bestiole.setJoie(Bestiole.getJoieMax());
+				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+				spriteJoieBar.setTextureRect(rectBarJoie);
+			}
+			/*Faire ICI la gestion des erreur quand les barres atteignent une valeur "négative" en les mettant à 0*/
+			
+
 			elapsed = 0;
+
+
+
+			//if (Bestiole.getFaim() >= 0)
+			//{
+			//	Bestiole.setFaim(Bestiole.getFaim() - 4);
+			//	rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+			//	spriteHungryBar.setTextureRect(rectBarFaim);
+			//}
+			//else if ((Bestiole.getFaim() >= 0) && isDay == false)
+			//{
+			//	Bestiole.setFaim(Bestiole.getFaim() - 1);
+			//	rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+			//	spriteHungryBar.setTextureRect(rectBarFaim);
+			
+
+			////Energie
+			//if (Bestiole.getEnergie() >= 0)
+			//{
+			//	Bestiole.setEnergie(Bestiole.getEnergie() - 3);
+			//	rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
+			//	spriteEnergyBar.setTextureRect(rectBarNrj);
+			//}
+			//else if ((Bestiole.getEnergie()<=Bestiole.getEnergieMax()) && isDay == false)
+			//{
+			//	Bestiole.setEnergie(Bestiole.getEnergie() + 5);
+			//	rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
+			//	spriteEnergyBar.setTextureRect(rectBarNrj);
+			//}
+
+			////Joie
+			//if (Bestiole.getJoie()>= 0)
+			//{
+			//	Bestiole.setJoie(Bestiole.getJoie() - 3);
+			//	rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+			//	spriteJoieBar.setTextureRect(rectBarJoie);
+			//}
+			//else if ((Bestiole.getJoie() <= Bestiole.getJoieMax()) && isDay == false)
+			//{
+			//	Bestiole.setJoie(Bestiole.getJoie() + 2);
+			//	rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+			//	spriteJoieBar.setTextureRect(rectBarJoie);
+			//}
 		}
 
 		//Faire ses besoins
 		if (Bestiole.getNbNourris() == 3)
 		{
 			Bestiole.faireCaca();
+			/*intégrer la création de sprite et l'apparition de caca*/
 		}
 
+		/*Ici je détermine quel est le statut de la créature selon ses attributs et la quantité de hp/faim/joie/énergie qu'elle possède*/
 
 		//Statut deprime
 		if ((Bestiole.getNbCacas() >= 3) || (Bestiole.getJoie()<=20))
@@ -479,7 +558,7 @@ void Jeu::jouer()
 
 		
 		
-		
+		/*Par manque de temps, je n'exploiterai pas le gain de niveau et d'évolution*/
 		//Gain niveau
 		if (Bestiole.getExpActuel() == Bestiole.getExpMax())
 		{
@@ -508,6 +587,7 @@ void Jeu::jouer()
 			window.draw(backgroundN);
 			window.draw(spriteLune);
 		}
+		//Je dessine les cases de l'UI
 		for (unsigned int i = 0; i < casesSelection.size(); i++)
 		{
 			window.draw(casesSelection[i]);
@@ -516,6 +596,7 @@ void Jeu::jouer()
 		//Crea
 		if (Bestiole.enVie = true)
 		{
+			//Selon le statut de la créature, on dessine tel ou tel sprite
 			switch (Bestiole.getStatut())
 			{
 			case idle:
@@ -551,6 +632,7 @@ void Jeu::jouer()
 		window.draw(spriteHungryBar);
 		window.draw(spriteJoieBar);
 
+		//Je trace les boutons d'intéraction quand je suis dans le menu
 		if (onMenu == true)
 		{
 			window.draw(spriteMenuIG);
@@ -560,6 +642,7 @@ void Jeu::jouer()
 			window.draw(boutonsMenu[3]);
 			window.draw(boutonsMenu[4]);
 		}
+		//Si je suis dans le menu des options
 		else if (onMenu == true && onOptions == true)
 		{
 			window.draw(spriteMenuIG);
