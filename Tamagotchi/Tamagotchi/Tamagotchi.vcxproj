@@ -147,10 +147,19 @@
     <Image Include="background2.png" />
     <Image Include="Biscuit.png" />
     <Image Include="boutonMenu.png" />
+    <Image Include="bubble.png" />
     <Image Include="coeur.png" />
     <Image Include="Cursor.png" />
     <Image Include="Douche.png" />
+    <Image Include="egg.png" />
+    <Image Include="egg_almostcracked.png" />
+    <Image Include="egg_cracked.png" />
     <Image Include="EnergyBar.png" />
+    <Image Include="fox_excited.png" />
+    <Image Include="fox_sad.png" />
+    <Image Include="fox_sick.png" />
+    <Image Include="fox_sleep.png" />
+    <Image Include="fox_tired.png" />
     <Image Include="Fruit.png" />
     <Image Include="GameMenu.png" />
     <Image Include="HappinessBar.png" />
@@ -159,6 +168,7 @@
     <Image Include="Lune.png" />
     <Image Include="Medkit.png" />
     <Image Include="MenuButton.png" />
+    <Image Include="poop.png" />
     <Image Include="Poupon.png" />
     <Image Include="Soleil.png" />
     <Image Include="Stim.png" />

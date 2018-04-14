@@ -12,16 +12,19 @@ Jeu::~Jeu()
 }
 
 
-void Jeu::chooseState(Jeu::gameState)
-{
-	switch (gameState)
-	{
-	case game: 
-
-	default:
-		break;
-	}
-}
+//void Jeu::chooseState(Jeu::gameState)
+//{
+//	switch (gameState)
+//	{
+//	case game: 
+//			jouer();
+//		break;
+//	case menu:
+//			mainMenu();
+//	default:
+//		break;
+//	}
+//}
 
 
 void Jeu::jouer()
@@ -34,14 +37,25 @@ void Jeu::jouer()
 	Nourriture Repas;
 	//Creation medicament
 	Medicament Soin;
+	bool isDay = true;
+	bool isDragging = false;
 
 
 	//Textures
 	sf::Texture backgroundDay;
 	sf::Texture backgroundNight;
 	sf::Texture texturePerso;
+	sf::Texture persoTriste;
+	sf::Texture persoFatigue;
+	sf::Texture persoDormir;
+	sf::Texture persoMalade;
+	sf::Texture persoHappy;
+	sf::Texture oeufIntact;
+	sf::Texture oeufAlmCracked;
+	sf::Texture oeufCracked;
+	sf::Texture poop;
+	sf::Texture dialogBox;
 	sf::Texture cursor;
-	sf::Texture portraitCrea;
 	sf::Texture alpha;
 	sf::Texture jour;
 	sf::Texture nuit;
@@ -63,6 +77,16 @@ void Jeu::jouer()
 	backgroundDay.loadFromFile("background1.png");
 	backgroundNight.loadFromFile("background2.png");
 	texturePerso.loadFromFile("Poupon.png");
+	persoTriste.loadFromFile("fox_sad.png");
+	persoFatigue.loadFromFile("fox_tired.png");
+	persoDormir.loadFromFile("fox_sleep.png");
+	persoMalade.loadFromFile("fox_sick.png");
+	persoHappy.loadFromFile("fox_excited.png");
+	oeufIntact.loadFromFile("egg.png");
+	oeufAlmCracked.loadFromFile("egg_almostcracked.png");
+	oeufCracked.loadFromFile("egg_cracked.png");
+	poop.loadFromFile("poop.png");
+	dialogBox.loadFromFile("bubble.png");
 	cursor.loadFromFile("Cursor.png");
 	jour.loadFromFile("Soleil.png");
 	nuit.loadFromFile("Lune.png");
@@ -84,6 +108,9 @@ void Jeu::jouer()
 
 	//Rectangles de sélection
 	sf::IntRect rectSource(0, 0, 275, 240);
+	sf::IntRect rectHappy(0, 0, 245, 240);
+	sf::IntRect rectOtherEmotion(0, 0, 345, 240);
+	sf::IntRect rectOeuf(0, 0, 250, 300);
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	sf::IntRect selectBox(0, 0, 50, 50);
 	sf::IntRect rectFruit(0, 0, 50, 41);	//Marche aussi pour la viande
@@ -97,12 +124,24 @@ void Jeu::jouer()
 	sf::IntRect rectMainMenu(0, 0, 340, 440);
 	sf::IntRect rectOptions(0, 0, 440, 340);    //Marche aussi pour ecran chargement
 	sf::IntRect rectBoutons(0, 0, 180, 25);
-	//Création des sprites
+	
+
+	//Sprite Background
 	sf::Sprite backgroundD(backgroundDay);
 	sf::Sprite backgroundN(backgroundNight);
 	sf::Sprite spriteSoleil(jour, daynight);
 	sf::Sprite spriteLune(nuit, daynight);
+
+	//Sprite Bestiole
 	sf::Sprite spritePerso(texturePerso, rectSource);
+	sf::Sprite spritePersoFatigue(persoFatigue, rectOtherEmotion);
+	sf::Sprite spritePersoDeprime(persoTriste, rectOtherEmotion);
+	sf::Sprite spritePersoDodo(persoDormir, rectOtherEmotion);
+	sf::Sprite spritePersoHappy(persoHappy, rectHappy);
+	sf::Sprite spritePersoSick(persoMalade, rectOtherEmotion);
+	sf::Sprite spriteOeuf(oeufIntact, rectOeuf);
+
+	//Sprites interface
 	sf::Sprite spriteCursor(cursor, rectCursor);
 	sf::Sprite spriteFruit(fruit, rectFruit);
 	sf::Sprite spriteViande(viande, rectFruit);
@@ -118,13 +157,10 @@ void Jeu::jouer()
 	sf::Sprite spriteMenuIG(menuIG, rectMainMenu);
 	sf::Sprite spriteOptions(options, rectOptions);
 	sf::Sprite spriteChargement(chargement, rectOptions);
-	
 	sf::Sprite spriteBoutons(alpha, rectBoutons);
 	spriteBoutons.setColor(sf::Color::Transparent);
-
 	sf::Sprite spriteSelection(alpha, selectBox);
 	spriteSelection.setColor(sf::Color::Transparent);
-
 	//création vector de sprites de sélection
 	vector<sf::Sprite> casesSelection;
 	for (int i = 1; i <= 10; i++)
@@ -138,12 +174,19 @@ void Jeu::jouer()
 		boutonsMenu.push_back(spriteBoutons);
 	}
 
-	bool isDay = true;
-	bool isDragging = false;
 
 	//Coordonnées
 	sf::Vector2i posSouris;
+	//Coordonnées bestiole
 	spritePerso.setPosition(100, 380);
+	spritePersoFatigue.setPosition(100,380);
+	spritePersoDeprime.setPosition(100, 380);
+	spritePersoDodo.setPosition(100, 380);
+	spritePersoHappy.setPosition(100, 380);
+	spritePersoSick.setPosition(100, 380);
+	spriteOeuf.setPosition(100, 380);
+	
+	//Coordonnées UI
 	spriteSoleil.setPosition(460, 10);
 	spriteLune.setPosition(460, 10);
 	spritePvBar.setPosition(75, 6);
@@ -154,14 +197,14 @@ void Jeu::jouer()
 	spriteMenuIG.setPosition(162, 180);
 	spriteOptions.setPosition(112, 330);
 	spriteChargement.setPosition(112, 330);
-
+	//Boutons menu ig/main
 	boutonsMenu[0].setPosition(240,285);	//Nouvelle partie / Sauvegarder
 	boutonsMenu[1].setPosition(240,342);	//Charger
 	boutonsMenu[2].setPosition(240,400);	//Options
 	boutonsMenu[3].setPosition(240,460);	//Reprendre
 	boutonsMenu[4].setPosition(240,536);	//Quitter
 
-
+	//Boutons Interface
 	casesSelection[0].setPosition(150, 710);
 	casesSelection[1].setPosition(231, 685);
 	spriteFruit.setPosition(231, 690);
@@ -368,15 +411,36 @@ void Jeu::jouer()
 		// Horloge interne et attributs diminuant en fonction du temps
 		elapsed += clock.restart().asMilliseconds();
 
-		if (elapsed >= 4000 && onMenu==false)
+		if (elapsed >= 2000 && onMenu==false)
 		{
-			Bestiole.setFaim(Bestiole.getFaim() - 5);
+			Bestiole.setFaim(Bestiole.getFaim() - 3);
 			rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
 			spriteHungryBar.setTextureRect(rectBarFaim);
+			if (Bestiole.getFaim() <= 0)
+			{
+				Bestiole.setFaim(0+3);
+			}
 
-			Bestiole.setEnergie(Bestiole.getEnergie() - 5);
-			rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
-			spriteEnergyBar.setTextureRect(rectBarNrj);
+			if (isDay == true)
+			{
+				Bestiole.setEnergie(Bestiole.getEnergie() - 3);
+				rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
+				spriteEnergyBar.setTextureRect(rectBarNrj);
+				if (Bestiole.getEnergie() <= 0)
+				{
+					Bestiole.setEnergie(0+3);
+				}
+			}
+			else if (isDay == false)
+			{
+				Bestiole.setEnergie(Bestiole.getEnergie() + 5);
+				rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
+				spriteEnergyBar.setTextureRect(rectBarNrj);
+				if (Bestiole.getEnergie() >= Bestiole.getEnergieMax())
+				{
+					Bestiole.setEnergie(Bestiole.getEnergieMax()-5);
+				}
+			}
 
 			elapsed = 0;
 		}
@@ -386,13 +450,38 @@ void Jeu::jouer()
 		{
 			Bestiole.faireCaca();
 		}
+
+
 		//Statut deprime
-		else if (Bestiole.getNbCacas() >= 3)
+		if ((Bestiole.getNbCacas() >= 3) || (Bestiole.getJoie()<=20))
 		{
 			Bestiole.setStatut(deprime);
 		}
+		//Statut extenue
+		else if (Bestiole.getEnergie() <= 20)
+		{
+			Bestiole.setStatut(extenue);
+		}
+		//Statut heureux
+		else if ((Bestiole.getJoie() >= 70 && Bestiole.getFaim() >= 70 && Bestiole.getEnergie() >= 70) && Bestiole.getStatut() != malade && isDay==true)
+		{
+			Bestiole.setStatut(heureux);
+		}
+		//Statut dort
+		else if (isDay == false)
+		{
+			Bestiole.setStatut(dort);
+		}
+		else
+		{
+			Bestiole.setStatut(idle);
+		}
+
+		
+		
+		
 		//Gain niveau
-		else if (Bestiole.getExpActuel() == Bestiole.getExpMax())
+		if (Bestiole.getExpActuel() == Bestiole.getExpMax())
 		{
 			Bestiole.gagnerNiveau(Bestiole);
 		}
@@ -401,21 +490,8 @@ void Jeu::jouer()
 		{
 			Bestiole.evoluer(Bestiole, enfant);
 		}
-		//Statut extenue
-		else if (Bestiole.getEnergie() <= 20)
-		{
-			Bestiole.setStatut(extenue);
-		}
-		//Statut deprime
-		else if (Bestiole.getJoie() <= 20)
-		{
-			Bestiole.setStatut(deprime);
-		}
-		//Statut affame
-		else if (Bestiole.getFaim() <= 20)
-		{
-			Bestiole.setStatut(affame);
-		}
+
+
 
 		window.clear();
 
@@ -440,7 +516,28 @@ void Jeu::jouer()
 		//Crea
 		if (Bestiole.enVie = true)
 		{
-			window.draw(spritePerso);
+			switch (Bestiole.getStatut())
+			{
+			case idle:
+				window.draw(spritePerso);
+				break;
+			case extenue:
+				window.draw(spritePersoFatigue);
+				break;
+			case deprime:
+				window.draw(spritePersoDeprime);
+				break;
+			case heureux:
+				window.draw(spritePersoHappy);
+				break;
+			case dort:
+				window.draw(spritePersoDodo);
+				break;
+			case malade:
+				window.draw(spritePersoSick);
+				break;
+			}
+
 		}
 		//Aliment & Medicament
 		window.draw(spriteStim);

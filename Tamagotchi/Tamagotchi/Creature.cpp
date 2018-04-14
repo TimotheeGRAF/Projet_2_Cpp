@@ -252,24 +252,21 @@ int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
 	switch (medoc)
 	{
 	case Medicament::typeMedicament::antidepresseur:
-		cout << "COCAIN" << endl;
 		if (animal.getStatut() == deprime)
 		{
-			animal.setStatut(enforme);
+			animal.setStatut(idle);
 		}
 		break;
-	case Medicament::typeMedicament::hyperproteine:
-		cout << "PROTEIN POWDER" << endl;
+	/*case Medicament::typeMedicament::hyperproteine:
 		if (animal.getStatut() == affame)
 		{
-			animal.setStatut(enforme);
+			animal.setStatut(idle);
 		}
-		break;
+		break;*/
 	case Medicament::typeMedicament::stimulant:
-		cout << "REDBULL" << endl;
 		if (animal.getStatut() == extenue)
 		{
-			animal.setStatut(enforme);
+			animal.setStatut(idle);
 		}
 		break;
 	default:

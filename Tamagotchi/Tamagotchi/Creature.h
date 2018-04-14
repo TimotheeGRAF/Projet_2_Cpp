@@ -7,10 +7,13 @@
 
 enum Statut
 {
-	enforme,
+	idle,
 	deprime,
-	affame,
-	extenue
+	heureux,
+	extenue,
+	dort,
+	malade
+
 };
 
 enum Stade
@@ -60,7 +63,6 @@ public:
 	void setNbCacas(int nbKK);
 
 
-	int caresser();
 	int faireCaca();
 	void donnerAManger(Nourriture::typeNourriture, Creature animal);
 	int soigner(Medicament::typeMedicament, Creature animal);
@@ -75,9 +77,9 @@ private:
 	Statut stats;
 	string nom;
 	int pvMax=100;
-	int pvActuel=50;
+	int pvActuel=100;
 	int energieMax=100;
-	int energieActuel=50;
+	int energieActuel=100;
 	int joieMax=100;
 	int joieActuel=50;
 	int expMax = 50;
@@ -85,7 +87,7 @@ private:
 	int niveau = 1;
 	int faimMax = 100;
 	int faimActuel=50;
-	int statut=enforme;
+	int statut=idle;
 
 	int nbNourris=0;
 	int nbCacas=0;

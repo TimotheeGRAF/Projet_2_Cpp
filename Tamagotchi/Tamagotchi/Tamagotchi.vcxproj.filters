@@ -132,5 +132,35 @@
     <Image Include="MenuButton.png">
       <Filter>content</Filter>
     </Image>
+    <Image Include="egg.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="egg_almostcracked.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="egg_cracked.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="fox_excited.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="fox_sad.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="fox_sick.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="fox_sleep.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="fox_tired.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="poop.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="bubble.png">
+      <Filter>content</Filter>
+    </Image>
   </ItemGroup>
 </Project>
