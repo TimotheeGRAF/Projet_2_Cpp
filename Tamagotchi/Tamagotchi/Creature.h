@@ -81,14 +81,13 @@ private:
 	int energieMax=100;
 	int energieActuel=100;
 	int joieMax=100;
-	int joieActuel=50;
+	int joieActuel=100;
 	int expMax = 50;
 	int expActuel=0;
 	int niveau = 1;
 	int faimMax = 100;
-	int faimActuel=50;
+	int faimActuel=100;
 	int statut=idle;
-
 	int nbNourris=0;
 	int nbCacas=0;
 	int nbLave=0;

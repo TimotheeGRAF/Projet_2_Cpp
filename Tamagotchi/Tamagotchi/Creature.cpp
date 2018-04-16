@@ -54,7 +54,7 @@ int Creature::getJoie()
 }
 void Creature::setJoie(int joie)
 {
-	this->energieActuel = joie;
+	this->joieActuel = joie;
 }
 
 int Creature::getJoieMax()

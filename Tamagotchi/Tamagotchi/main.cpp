@@ -4,6 +4,7 @@ int main()
 {
 
 	Jeu Tamagotchi;
-	Tamagotchi.jouer();
+	Tamagotchi.chooseState(Tamagotchi, Tamagotchi.game);
+
 	return 0;
 }

@@ -17,18 +17,21 @@ public:
 
 	enum gameState {
 		game,
-		menu,
-		igmenu,
-		options
-
+		menu
 	};
+
 	bool onMenu = false;
 	bool onOptions = false;
 
-	void chooseState(gameState);
+	
+
+	void chooseState(Jeu tamago, Jeu::gameState state);
+	void titlescreen();
 	void jouer();
 	void save(Creature Fox);
 	void load(Creature Fox);
+
+
 
 private:
 

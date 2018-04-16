@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Antidep.png" />
+    <Image Include="background.png" />
     <Image Include="background1.png" />
     <Image Include="background2.png" />
     <Image Include="Biscuit.png" />

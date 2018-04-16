@@ -12,20 +12,64 @@ Jeu::~Jeu()
 }
 
 
-//void Jeu::chooseState(Jeu::gameState)
-//{
-//	switch (gameState)
-//	{
-//	case game: 
-//			jouer();
-//		break;
-//	case menu:
-//			mainMenu();
-//	default:
-//		break;
-//	}
-//}
+void Jeu::chooseState(Jeu tamago, Jeu::gameState state)
+{
+	switch (state)
+	{
+	case game:
+		tamago.jouer();
+		break;
+	case menu:
+		tamago.titlescreen();
+		break;
+	default:
+		break;
+	}
+}
 
+void Jeu::titlescreen()
+{
+	sf::RenderWindow window(sf::VideoMode(665, 800), "What does the fox say ?");
+
+	//Curseur
+	sf::Vector2i posSouris;
+	sf::Texture cursor;
+	cursor.loadFromFile("Cursor.png");
+	sf::IntRect rectCursor(0, 0, 32, 38);
+	sf::Sprite spriteCursor(cursor, rectCursor);
+	window.setMouseCursorVisible(false);
+
+	//Background
+	sf::Texture background;
+	background.loadFromFile("background.png");
+	sf::Sprite spriteBackground(background);
+
+	while (window.isOpen())
+	{
+		//Creation event catcher
+		sf::Event event;
+
+		while (window.pollEvent(event))
+		{
+
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+
+			spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
+		}
+
+
+		window.clear();
+		//Curseur
+		window.draw(spriteBackground);
+
+		window.draw(spriteCursor);
+
+		window.display();
+	}
+}
 
 void Jeu::jouer()
 {
@@ -124,6 +168,8 @@ void Jeu::jouer()
 	sf::IntRect rectMainMenu(0, 0, 340, 440);
 	sf::IntRect rectOptions(0, 0, 440, 340);    //Marche aussi pour ecran chargement
 	sf::IntRect rectBoutons(0, 0, 180, 25);
+	sf::IntRect rectPoop(0, 0, 80, 62);
+
 	
 
 	//Sprite Background
@@ -140,6 +186,7 @@ void Jeu::jouer()
 	sf::Sprite spritePersoHappy(persoHappy, rectHappy);
 	sf::Sprite spritePersoSick(persoMalade, rectOtherEmotion);
 	sf::Sprite spriteOeuf(oeufIntact, rectOeuf);
+	sf::Sprite spritePoop(poop, rectPoop);
 
 	//Sprites interface
 	sf::Sprite spriteCursor(cursor, rectCursor);
@@ -185,6 +232,7 @@ void Jeu::jouer()
 	spritePersoHappy.setPosition(100, 380);
 	spritePersoSick.setPosition(100, 380);
 	spriteOeuf.setPosition(100, 380);
+	spritePoop.setPosition(100, 120);
 	
 	//Coordonnées UI
 	spriteSoleil.setPosition(460, 10);
@@ -225,8 +273,6 @@ void Jeu::jouer()
 	window.setFramerateLimit(60);
 	//Curseur visible ou non
 	window.setMouseCursorVisible(false);
-	//On dessine un curseur de souris perso à la position du curseur.
-	/*spriteCursor.setTextureRect(rectCursor);*/
 
 	//Police de caractère et texte
 	sf::Font font;
@@ -261,11 +307,11 @@ void Jeu::jouer()
 			spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 
 			//On clique sur un bouton pour ouvrir le menu, on fait échap pour le refermer
-			if (casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			if ( onMenu==false && ((casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))))
 			{
 				onMenu = true;
 			}
-			if ((event.type == event.KeyReleased && event.key.code == sf::Keyboard::Escape) || (boutonsMenu[3].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			if (onMenu==true &&  ((event.type == event.KeyReleased && event.key.code == sf::Keyboard::Escape) || (boutonsMenu[3].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)))
 			{
 				onMenu = false;
 			}
@@ -413,45 +459,41 @@ void Jeu::jouer()
 		// Horloge interne et attributs diminuant en fonction du temps
 		elapsed += clock.restart().asMilliseconds();
 
-		if (elapsed >= 3000 && onMenu==false)
+		if (elapsed >= 3000 && onMenu == false && isDay==false)
 		{
-			/*Cette partie du code bug et ça me gonfle,  dès que je met 3 if ou alors juste la partie "Joie" , l'ensemble déconne et les barres se figent : problème de timer ? overload de mémoire ?*/
-			if (isDay == true)
+			//Faim
+			Bestiole.setFaim(Bestiole.getFaim() - 1);
+			//Energie
+			Bestiole.setEnergie(Bestiole.getEnergie() + 7);
+			rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+			spriteHungryBar.setTextureRect(rectBarFaim);
+			rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
+			spriteEnergyBar.setTextureRect(rectBarNrj);
+
+			elapsed = 0;
+		}
+		else if (elapsed >= 3000 && onMenu == false && isDay == true)
+		{
+			if (Bestiole.getFaim() != 0)
 			{
-				//Faim
 				Bestiole.setFaim(Bestiole.getFaim() - 4);
 				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
 				spriteHungryBar.setTextureRect(rectBarFaim);
-
-				//Energie
+			}
+			if (Bestiole.getEnergie() != 0)
+			{
 				Bestiole.setEnergie(Bestiole.getEnergie() - 3);
 				rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
 				spriteEnergyBar.setTextureRect(rectBarNrj);
-
-				//Joie
+			}
+			if (Bestiole.getJoie() != 0)
+			{
 				Bestiole.setJoie(Bestiole.getJoie() - 2);
 				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
 				spriteJoieBar.setTextureRect(rectBarJoie);
 			}
-			else if (isDay == false)
-			{
-				//Faim
-				Bestiole.setFaim(Bestiole.getFaim() - 1);
-				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
-				spriteHungryBar.setTextureRect(rectBarFaim);
 
-				//Energie
-				Bestiole.setEnergie(Bestiole.getEnergie() + 5);
-				rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
-				spriteEnergyBar.setTextureRect(rectBarNrj);
-
-				//Joie
-				Bestiole.setJoie(Bestiole.getJoie() + 2);
-				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
-				spriteJoieBar.setTextureRect(rectBarJoie);
-			}
-
-			//Gestion erreur si nombre supérieur à la quantité max
+		//Gestion d'erreur si les barres trop "trop pleines"
 			//Energie
 			if (Bestiole.getEnergie() >= Bestiole.getEnergieMax())
 			{
@@ -473,66 +515,33 @@ void Jeu::jouer()
 				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
 				spriteJoieBar.setTextureRect(rectBarJoie);
 			}
-			/*Faire ICI la gestion des erreur quand les barres atteignent une valeur "négative" en les mettant à 0*/
-			
+		//Gstion d'erreur si les barres sont "trop vides"
+			//Energie
+			if (Bestiole.getEnergie() <= 0)
+			{
+				Bestiole.setEnergie(0);
+			}
+			//Faim
+			if (Bestiole.getFaim() <= 0)
+			{
+				Bestiole.setFaim(0);
+			}
+			//Joie
+			if (Bestiole.getJoie() <= 0)
+			{
+				Bestiole.setJoie(0);
+			}
 
 			elapsed = 0;
+		}
 
-
-
-			//if (Bestiole.getFaim() >= 0)
-			//{
-			//	Bestiole.setFaim(Bestiole.getFaim() - 4);
-			//	rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
-			//	spriteHungryBar.setTextureRect(rectBarFaim);
-			//}
-			//else if ((Bestiole.getFaim() >= 0) && isDay == false)
-			//{
-			//	Bestiole.setFaim(Bestiole.getFaim() - 1);
-			//	rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
-			//	spriteHungryBar.setTextureRect(rectBarFaim);
 			
 
-			////Energie
-			//if (Bestiole.getEnergie() >= 0)
-			//{
-			//	Bestiole.setEnergie(Bestiole.getEnergie() - 3);
-			//	rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
-			//	spriteEnergyBar.setTextureRect(rectBarNrj);
-			//}
-			//else if ((Bestiole.getEnergie()<=Bestiole.getEnergieMax()) && isDay == false)
-			//{
-			//	Bestiole.setEnergie(Bestiole.getEnergie() + 5);
-			//	rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
-			//	spriteEnergyBar.setTextureRect(rectBarNrj);
-			//}
-
-			////Joie
-			//if (Bestiole.getJoie()>= 0)
-			//{
-			//	Bestiole.setJoie(Bestiole.getJoie() - 3);
-			//	rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
-			//	spriteJoieBar.setTextureRect(rectBarJoie);
-			//}
-			//else if ((Bestiole.getJoie() <= Bestiole.getJoieMax()) && isDay == false)
-			//{
-			//	Bestiole.setJoie(Bestiole.getJoie() + 2);
-			//	rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
-			//	spriteJoieBar.setTextureRect(rectBarJoie);
-			//}
-		}
-
-		//Faire ses besoins
-		if (Bestiole.getNbNourris() == 3)
-		{
-			Bestiole.faireCaca();
-			/*intégrer la création de sprite et l'apparition de caca*/
-		}
 
 		/*Ici je détermine quel est le statut de la créature selon ses attributs et la quantité de hp/faim/joie/énergie qu'elle possède*/
 
 		//Statut deprime
-		if ((Bestiole.getNbCacas() >= 3) || (Bestiole.getJoie()<=20))
+		if (Bestiole.getJoie()<=20)
 		{
 			Bestiole.setStatut(deprime);
 		}
@@ -545,6 +554,10 @@ void Jeu::jouer()
 		else if ((Bestiole.getJoie() >= 70 && Bestiole.getFaim() >= 70 && Bestiole.getEnergie() >= 70) && Bestiole.getStatut() != malade && isDay==true)
 		{
 			Bestiole.setStatut(heureux);
+		}
+		else if (Bestiole.getNbCacas() >= 3)
+		{
+			Bestiole.setStatut(malade);
 		}
 		//Statut dort
 		else if (isDay == false)
@@ -569,7 +582,6 @@ void Jeu::jouer()
 		{
 			Bestiole.evoluer(Bestiole, enfant);
 		}
-
 
 
 		window.clear();
@@ -618,7 +630,10 @@ void Jeu::jouer()
 				window.draw(spritePersoSick);
 				break;
 			}
-
+		}
+		else if (Bestiole.getNbNourris() >= 2)
+		{
+			window.draw(spritePoop);
 		}
 		//Aliment & Medicament
 		window.draw(spriteStim);
@@ -653,4 +668,3 @@ void Jeu::jouer()
 		window.display();
 	}
 }
-
