@@ -2,12 +2,11 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Window.hpp>
 #include "Creature.h"
-#include "Collision.h"
 #include <iostream>
 #include <vector>
 #include "Sound.h"
-#include "Graphics.h"
-#include "BDD.h"
+#include "sqlite3.h"
+
 
 class Jeu
 {
@@ -23,19 +22,24 @@ public:
 	bool onMenu = false;
 	bool onOptions = false;
 
+	void openDatabase();
+	void closeDatabase();
+	bool executeQuery(string query);
+
 	
 
 	void chooseState(Jeu tamago, Jeu::gameState state);
 	void titlescreen();
 	void jouer();
-	void save(Creature Fox);
-	void load(Creature Fox);
+	bool save(int pv, int faim, int nrj, int joie, int nbCaca, int nbNourris);
+	vector<Creature*>* load();
 
 
 
 private:
 
-
+	sqlite3 * db;
+	string dbfile;
 
 protected:
 

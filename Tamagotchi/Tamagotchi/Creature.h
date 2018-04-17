@@ -44,7 +44,8 @@ public:
 	void setExpActuel(int expGain);
 	int getNiveau();
 	void setNiveau(int lvl);
-	void setStade(Stade stadeEvolution);
+	int getStade();
+	void setStade(Stade stadeCrea);
 	int getEnergie();
 	void setEnergie(int nrj);
 	int getEnergieMax();
@@ -67,13 +68,13 @@ public:
 	void donnerAManger(Nourriture::typeNourriture, Creature animal);
 	int soigner(Medicament::typeMedicament, Creature animal);
 	int laver();
-	int gagnerNiveau(Creature animal);
-	void evoluer(Creature animal, Stade stadeEvolution);
+	//int gagnerNiveau(Creature animal);
+	//void evoluer(Creature animal, Stade stadeCrea);
 
 
 private:
 
-	Stade stadeEvolution;
+	Stade stadeCrea;
 	Statut stats;
 	string nom;
 	int pvMax=100;

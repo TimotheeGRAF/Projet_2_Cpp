@@ -5,11 +5,103 @@ using namespace std;
 
 Jeu::Jeu()
 {
+	dbfile = "./database.db";
 }
 
 Jeu::~Jeu()
 {
 }
+
+void Jeu::openDatabase()
+{
+	sqlite3_initialize();
+	sqlite3_open(dbfile.c_str(), &db);
+}
+
+void Jeu::closeDatabase()
+{
+	sqlite3_close_v2(db);
+	sqlite3_shutdown();
+}
+
+
+bool Jeu::executeQuery(string query)
+{
+	char * errmsg = 0;
+	if (sqlite3_exec(db, query.c_str(), NULL, 0, &errmsg) != SQLITE_OK)
+	{
+		cout << errmsg << endl;
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool Jeu::save(int pv, int faim, int nrj, int joie, int nbCaca, int nbNourris)
+{
+	char bpv[10];
+	char bfaim[10];
+	char bnrj[10];
+	char bjoie[10];
+	char bnbCaca[10];
+	char bnbNourris[10];
+	sprintf_s(bpv, "%d", pv);
+	sprintf_s(bfaim, "%d", faim);
+	sprintf_s(bnrj, "%d", nrj);
+	sprintf_s(bjoie, "%d", joie);
+	sprintf_s(bnbCaca, "%d", nbCaca);
+	sprintf_s(bnbNourris, "%d", nbNourris);
+
+
+	string query = "INSERT INTO Creature VALUES('";
+	query += bpv;
+	query += ",";
+	query += bfaim;
+	query += ",";
+	query += bnrj;
+	query += ",";
+	query += bjoie;
+	query += ",";
+	query += bnbCaca;
+	query += ",";
+	query += bnbNourris;
+	query += ")";
+
+	return executeQuery(query);
+}
+
+
+vector<Creature*>* Jeu::load()
+{
+	string query = "SELECT rowid, * FROM Creature";
+	vector<Creature*>* crea = new vector<Creature*>;
+	int i;
+
+	sqlite3_stmt * stmt;
+	sqlite3_prepare_v2(db, query.c_str(), strlen(query.c_str()) + 1, &stmt, NULL);
+
+	do {
+		i = sqlite3_step(stmt);
+		if (i == SQLITE_ROW)
+		{
+			Creature * creature = new Creature();
+			crea->push_back(creature);
+
+			
+			creature->setPV(sqlite3_column_int(stmt, 1));
+			creature->setFaim(sqlite3_column_int(stmt, 2));
+			creature->setEnergie(sqlite3_column_int(stmt, 3));
+			creature->setJoie(sqlite3_column_int(stmt, 4));
+			creature->setNbCacas(sqlite3_column_int(stmt, 5));
+			creature->setNbNourris(sqlite3_column_int(stmt, 6));
+		}
+	} while (i == SQLITE_ROW);
+
+	return crea;
+}
+
 
 
 void Jeu::chooseState(Jeu tamago, Jeu::gameState state)
@@ -36,13 +128,32 @@ void Jeu::titlescreen()
 	sf::Texture cursor;
 	cursor.loadFromFile("Cursor.png");
 	sf::IntRect rectCursor(0, 0, 32, 38);
-	sf::Sprite spriteCursor(cursor, rectCursor);
+	sf::Sprite spriteCursorTitre(cursor, rectCursor);
 	window.setMouseCursorVisible(false);
 
+	//Boutons
+	sf::IntRect rectBoutons(0, 0, 180, 25);
+	sf::Texture alpha;
+	sf::Sprite spriteBoutons(alpha, rectBoutons);
+	spriteBoutons.setColor(sf::Color::Red);
+	//Création vector de sprites boutons
+	vector<sf::Sprite> boutonsMenu;
+	for (int i = 0; i <= 3; i++)
+	{
+		boutonsMenu.push_back(spriteBoutons);
+	}
+	//Boutons menu ig/main
+	boutonsMenu[0].setPosition(240, 285);	//Nouvelle partie
+	boutonsMenu[1].setPosition(240, 342);	//Charger
+	boutonsMenu[2].setPosition(240, 400);	//Options
+	boutonsMenu[3].setPosition(240, 536);	//Quitter
+
+
 	//Background
-	sf::Texture background;
-	background.loadFromFile("background.png");
-	sf::Sprite spriteBackground(background);
+	sf::Texture backgroundTitre;
+	backgroundTitre.loadFromFile("background.png");
+	sf::Sprite spriteBackgroundTitre(backgroundTitre);
+
 
 	while (window.isOpen())
 	{
@@ -51,21 +162,29 @@ void Jeu::titlescreen()
 
 		while (window.pollEvent(event))
 		{
+			spriteCursorTitre.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed || (boutonsMenu[3].getGlobalBounds().intersects(spriteCursorTitre.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				window.close();
 			}
 
-			spriteCursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
+			if ((boutonsMenu[0].getGlobalBounds().intersects(spriteCursorTitre.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				window.close();
+				jouer();
+			}
+			
 		}
 
 
 		window.clear();
-		//Curseur
-		window.draw(spriteBackground);
 
-		window.draw(spriteCursor);
+		window.draw(boutonsMenu[0]);
+		window.draw(boutonsMenu[3]);
+
+		window.draw(spriteBackgroundTitre);
+		window.draw(spriteCursorTitre);
 
 		window.display();
 	}
@@ -77,13 +196,15 @@ void Jeu::jouer()
 
 	//Creation créature
 	Creature Bestiole;
+	Bestiole.setStade(oeuf);
 	//Creation nourriture
 	Nourriture Repas;
 	//Creation medicament
 	Medicament Soin;
+	//Variables globales
 	bool isDay = true;
 	bool isDragging = false;
-
+	int compteurClic = 0;
 
 	//Textures
 	sf::Texture backgroundDay;
@@ -231,8 +352,8 @@ void Jeu::jouer()
 	spritePersoDodo.setPosition(100, 380);
 	spritePersoHappy.setPosition(100, 380);
 	spritePersoSick.setPosition(100, 380);
-	spriteOeuf.setPosition(100, 380);
-	spritePoop.setPosition(100, 120);
+	spriteOeuf.setPosition(100, 320);
+	spritePoop.setPosition(80, 560);
 	
 	//Coordonnées UI
 	spriteSoleil.setPosition(460, 10);
@@ -338,6 +459,13 @@ void Jeu::jouer()
 			}
 			
 
+			//Clics sur l'oeuf pour le casser
+			if (Bestiole.getStade()==oeuf && (spriteCursor.getGlobalBounds().intersects(spriteOeuf.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)))
+			{
+				compteurClic++;
+			}
+
+
 
 			//Fruit
 			if (spriteFruit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
@@ -436,7 +564,8 @@ void Jeu::jouer()
 			if (casesSelection[7].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				Bestiole.laver();
-				/*Mettre ici le fait de nettoyer le caca et enlever le statut malade de la créature*/
+				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+				spriteJoieBar.setTextureRect(rectBarJoie);
 			}
 
 
@@ -459,20 +588,59 @@ void Jeu::jouer()
 		// Horloge interne et attributs diminuant en fonction du temps
 		elapsed += clock.restart().asMilliseconds();
 
-		if (elapsed >= 3000 && onMenu == false && isDay==false)
+		if (Bestiole.enVie==true && elapsed >= 3000 && onMenu == false && isDay==false && Bestiole.getStade()==enfant)
 		{
 			//Faim
-			Bestiole.setFaim(Bestiole.getFaim() - 1);
-			//Energie
-			Bestiole.setEnergie(Bestiole.getEnergie() + 7);
+			Bestiole.setFaim(Bestiole.getFaim() - 2);
 			rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
 			spriteHungryBar.setTextureRect(rectBarFaim);
+			//Energie
+			Bestiole.setEnergie(Bestiole.getEnergie() + 7);
 			rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
 			spriteEnergyBar.setTextureRect(rectBarNrj);
 
+			//Gestion d'erreur si les barres trop "trop pleines"
+			//Energie
+			if (Bestiole.getEnergie() >= Bestiole.getEnergieMax())
+			{
+				Bestiole.setEnergie(Bestiole.getEnergieMax());
+				rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
+				spriteEnergyBar.setTextureRect(rectBarNrj);
+			}
+			//Faim
+			if (Bestiole.getFaim() >= Bestiole.getFaimMax())
+			{
+				Bestiole.setFaim(Bestiole.getFaimMax());
+				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+				spriteHungryBar.setTextureRect(rectBarFaim);
+			}
+			//Joie
+			if (Bestiole.getJoie() >= Bestiole.getJoieMax())
+			{
+				Bestiole.setJoie(Bestiole.getJoieMax());
+				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+				spriteJoieBar.setTextureRect(rectBarJoie);
+			}
+			//Gstion d'erreur si les barres sont "trop vides"
+			//Energie
+			if (Bestiole.getEnergie() <= 0)
+			{
+				Bestiole.setEnergie(0);
+			}
+			//Faim
+			if (Bestiole.getFaim() <= 0)
+			{
+				Bestiole.setFaim(0);
+			}
+			//Joie
+			if (Bestiole.getJoie() <= 0)
+			{
+				Bestiole.setJoie(0);
+			}
+
 			elapsed = 0;
 		}
-		else if (elapsed >= 3000 && onMenu == false && isDay == true)
+		else if (Bestiole.enVie == true && elapsed >= 3000 && onMenu == false && isDay == true && Bestiole.getStade() == enfant)
 		{
 			if (Bestiole.getFaim() != 0)
 			{
@@ -488,7 +656,7 @@ void Jeu::jouer()
 			}
 			if (Bestiole.getJoie() != 0)
 			{
-				Bestiole.setJoie(Bestiole.getJoie() - 2);
+				Bestiole.setJoie(Bestiole.getJoie() - 5);
 				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
 				spriteJoieBar.setTextureRect(rectBarJoie);
 			}
@@ -535,13 +703,17 @@ void Jeu::jouer()
 			elapsed = 0;
 		}
 
-			
+		if (Bestiole.getNbNourris() >= 2)
+		{
+			Bestiole.faireCaca();
+		}
+
 
 
 		/*Ici je détermine quel est le statut de la créature selon ses attributs et la quantité de hp/faim/joie/énergie qu'elle possède*/
 
 		//Statut deprime
-		if (Bestiole.getJoie()<=20)
+		if (Bestiole.getJoie()<=20 && Bestiole.getStatut()!=malade)
 		{
 			Bestiole.setStatut(deprime);
 		}
@@ -555,7 +727,7 @@ void Jeu::jouer()
 		{
 			Bestiole.setStatut(heureux);
 		}
-		else if (Bestiole.getNbCacas() >= 3)
+		else if (Bestiole.getNbCacas() >= 3 || Bestiole.getFaim()==0 || Bestiole.getJoie() == 0 || Bestiole.getEnergie() == 0)
 		{
 			Bestiole.setStatut(malade);
 		}
@@ -568,20 +740,40 @@ void Jeu::jouer()
 		{
 			Bestiole.setStatut(idle);
 		}
+		//Statut malade
+		//La perte de points de vie est lancée si la créature est malade
+		if (Bestiole.getStatut() == malade)
+		{
+			if (elapsed >= 3000 && onMenu == false && isDay == true && Bestiole.getStade() == enfant && Bestiole.getPV()<=0)
+			{
+					Bestiole.setPV(Bestiole.getPV() - 7);
+					rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+					spritePvBar.setTextureRect(rectBarVie);
+					if (Bestiole.getPV() <= 0)
+					{
+						Bestiole.setPV(0);
+					}
+			}
+		}
+		//Créature décédée :'(
+		if (Bestiole.getPV() == 0)
+		{
+			Bestiole.enVie = false;
+		}
 
 		
 		
 		/*Par manque de temps, je n'exploiterai pas le gain de niveau et d'évolution*/
-		//Gain niveau
-		if (Bestiole.getExpActuel() == Bestiole.getExpMax())
-		{
-			Bestiole.gagnerNiveau(Bestiole);
-		}
-		//Evolution
-		else if (Bestiole.getNiveau() == 3)
-		{
-			Bestiole.evoluer(Bestiole, enfant);
-		}
+		////Gain niveau
+		//if (Bestiole.getExpActuel() == Bestiole.getExpMax())
+		//{
+		//	Bestiole.gagnerNiveau(Bestiole);
+		//}
+		////Evolution
+		//else if (Bestiole.getNiveau() == 3)
+		//{
+		//	Bestiole.evoluer(Bestiole, enfant);
+		//}
 
 
 		window.clear();
@@ -606,7 +798,31 @@ void Jeu::jouer()
 		}
 		window.draw(nomCrea);
 		//Crea
-		if (Bestiole.enVie = true)
+		if (Bestiole.getStade() == oeuf)
+		{
+			switch (compteurClic)
+			{
+			case 0:
+			case 1:
+			case 2:
+				spriteOeuf.setTexture(oeufIntact);
+				window.draw(spriteOeuf);
+				break;
+			case 3:
+			case 4:
+				spriteOeuf.setTexture(oeufAlmCracked);
+				window.draw(spriteOeuf);
+				break;
+			case 5:
+				spriteOeuf.setTexture(oeufCracked);
+				window.draw(spriteOeuf);
+				break;
+			case 6:
+				Bestiole.setStade(enfant);
+				break;
+			}
+		}
+		if (Bestiole.enVie = true && Bestiole.getStade()==enfant)
 		{
 			//Selon le statut de la créature, on dessine tel ou tel sprite
 			switch (Bestiole.getStatut())
@@ -631,10 +847,12 @@ void Jeu::jouer()
 				break;
 			}
 		}
-		else if (Bestiole.getNbNourris() >= 2)
+		
+		if (Bestiole.getNbCacas()>=1)
 		{
 			window.draw(spritePoop);
 		}
+
 		//Aliment & Medicament
 		window.draw(spriteStim);
 		window.draw(spriteMedkit);

@@ -80,9 +80,13 @@ void Creature::setNiveau(int lvl)
 	this->niveau = niveau + lvl;
 }
 
+int Creature::getStade()
+{
+	return stadeCrea;
+}
 void Creature::setStade(Stade stadeE)
 {
-	this->stadeEvolution = stadeE;
+	this->stadeCrea = stadeE;
 }
 
 int Creature::getNbNourris()
@@ -142,7 +146,8 @@ int Creature::getFaimMax()
 int Creature::faireCaca()
 {
 	this->nbNourris = 0;
-	return this->nbCacas++;
+	this->setNbCacas(getNbCacas() + 1);
+	return this->getNbCacas();
 }
 
 
@@ -151,6 +156,11 @@ int Creature::laver()
 {
 	this->nbCacas = 0;
 	this->joieActuel= this->joieActuel+20;
+	if (this->joieActuel >= 0)
+	{
+		this->setJoie(this->getJoieMax());
+	}
+
 	return this->nbLave++;
 }
 
@@ -179,12 +189,12 @@ void Creature::donnerAManger(Nourriture::typeNourriture repas, Creature animal)
 			this->pvActuel = this->pvMax;
 		}
 
-		this->expActuel += 15;
-		if (this->expActuel > this->expMax)
-		{
-			animal.gagnerNiveau(animal);
-			this->expActuel = 0;
-		}
+		//this->expActuel += 15;
+		//if (this->expActuel > this->expMax)
+		//{
+		//	animal.gagnerNiveau(animal);
+		//	this->expActuel = 0;
+		//}
 		break;
 
 	case Nourriture::viande:
@@ -207,12 +217,12 @@ void Creature::donnerAManger(Nourriture::typeNourriture repas, Creature animal)
 			this->pvActuel = this->pvMax;
 		}
 
-		this->expActuel += 15;
+		/*this->expActuel += 15;
 		if (this->expActuel > this->expMax)
 		{
 			animal.gagnerNiveau(animal);
 			this->expActuel = 0;
-		}
+		}*/
 		break;
 
 	case Nourriture::biscuit:
@@ -231,17 +241,19 @@ void Creature::donnerAManger(Nourriture::typeNourriture repas, Creature animal)
 
 		this->pvActuel -=15 ;
 
-		this->expActuel += 15;
+		/*this->expActuel += 15;
 		if (this->expActuel > this->expMax)
 		{
 			animal.gagnerNiveau(animal);
 			this->expActuel = 0;
-		}
+		}*/
 		break;
 
 	default:
 		break;
 	}
+
+	this->setNbNourris(this->getNbNourris() + 1);
 }
 
 
@@ -276,39 +288,39 @@ int Creature::soigner(Medicament::typeMedicament medoc, Creature animal)
 	return animal.getStatut();
 }
 
-// Level Up !
-int Creature::gagnerNiveau(Creature animal)
-{
-	animal.setNiveau(+1);
-	animal.pvMax = animal.pvMax + 15;
-	animal.energieMax = animal.energieMax + 10;
-	animal.joieMax = animal.joieMax + 10;
-	animal.faimMax = animal.faimMax + 10;
-	animal.expMax = animal.expMax + 50;
-
-	animal.setPV(animal.pvMax);
-	animal.setEnergie(animal.energieMax);
-	animal.setJoie(animal.joieMax);
-	animal.setFaim(animal.faimMax);
-	animal.setExpActuel(0);
-
-	return animal.getNiveau();
-}
+//// Level Up !
+//int Creature::gagnerNiveau(Creature animal)
+//{
+//	animal.setNiveau(+1);
+//	animal.pvMax = animal.pvMax + 15;
+//	animal.energieMax = animal.energieMax + 10;
+//	animal.joieMax = animal.joieMax + 10;
+//	animal.faimMax = animal.faimMax + 10;
+//	animal.expMax = animal.expMax + 50;
+//
+//	animal.setPV(animal.pvMax);
+//	animal.setEnergie(animal.energieMax);
+//	animal.setJoie(animal.joieMax);
+//	animal.setFaim(animal.faimMax);
+//	animal.setExpActuel(0);
+//
+//	return animal.getNiveau();
+//}
 
 //Evolution de la créature selon son stade
-void Creature::evoluer(Creature animal, Stade stadeEvolution)
-{
-	switch (stadeEvolution)
-	{
-	case oeuf:
-		animal.setStade(enfant);
-		break;
-
-	case enfant:
-		animal.setStade(adulte);
-		break;
-
-	default:
-		break;
-	}
-}
+//void Creature::evoluer(Creature animal, Stade stadeCrea)
+//{
+//	switch (stadeCrea)
+//	{
+//	case oeuf:
+//		animal.setStade(enfant);
+//		break;
+//
+//	case enfant:
+//		animal.setStade(adulte);
+//		break;
+//
+//	default:
+//		break;
+//	}
+//}

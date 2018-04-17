@@ -120,23 +120,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BDD.h" />
     <ClInclude Include="Creature.h" />
-    <ClInclude Include="Graphics.h" />
     <ClInclude Include="Jeu.h" />
     <ClInclude Include="Medicament.h" />
     <ClInclude Include="Nourriture.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="sqlite3.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BDD.cpp" />
     <ClCompile Include="Creature.cpp" />
-    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Jeu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Medicament.cpp" />
     <ClCompile Include="Nourriture.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="sqlite3.c" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Mak Dah.ttf" />
@@ -149,7 +147,6 @@
     <Image Include="Biscuit.png" />
     <Image Include="boutonMenu.png" />
     <Image Include="bubble.png" />
-    <Image Include="coeur.png" />
     <Image Include="Cursor.png" />
     <Image Include="Douche.png" />
     <Image Include="egg.png" />
@@ -162,7 +159,6 @@
     <Image Include="fox_sleep.png" />
     <Image Include="fox_tired.png" />
     <Image Include="Fruit.png" />
-    <Image Include="GameMenu.png" />
     <Image Include="HappinessBar.png" />
     <Image Include="HealthBar.png" />
     <Image Include="HungryBar.png" />
