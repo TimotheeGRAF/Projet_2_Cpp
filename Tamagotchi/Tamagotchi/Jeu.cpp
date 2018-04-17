@@ -35,6 +35,7 @@ bool Jeu::executeQuery(string query)
 	}
 	else
 	{
+		cout << "BDD remplie !"<< endl;
 		return true;
 	}
 }
@@ -440,14 +441,14 @@ void Jeu::jouer()
 			//Dans le menu :
 			if (onMenu == true)
 			{
-				//if ((boutonsMenu[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
-				//{
-				//	save(Bestiole);
-				//}
-				//else if ((boutonsMenu[1].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
-				//{
-				//	load(Bestiole);
-				//}
+				if ((boutonsMenu[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+				{
+					save(Bestiole.getPV(), Bestiole.getFaim(), Bestiole.getEnergie(), Bestiole.getJoie(), Bestiole.getNbCacas(), Bestiole.getNbNourris());
+				}
+				else if ((boutonsMenu[1].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+				{
+					load();
+				}
 				if ((boutonsMenu[2].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 				{
 					onOptions = true;

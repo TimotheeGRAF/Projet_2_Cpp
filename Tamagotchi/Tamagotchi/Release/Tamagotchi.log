@@ -1,8 +1,14 @@
-﻿  sqlite3.c
+﻿  Jeu.cpp
+Jeu.cpp(474): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(492): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(510): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(527): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(538): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(549): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   Génération de code en cours
-  1978 of 2235 functions (88.5%) were compiled, the rest were copied from previous compilation.
-    1970 functions were new in current compilation
-    29 functions had inline decision re-evaluated but remain unchanged
+  3 of 2307 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Fin de la génération du code
   Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.exe
   Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.pdb (Full PDB)
