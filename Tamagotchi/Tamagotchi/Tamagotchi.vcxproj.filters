@@ -27,9 +27,6 @@
     <ClInclude Include="Nourriture.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="sqlite3.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -48,9 +45,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Nourriture.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="sqlite3.c">

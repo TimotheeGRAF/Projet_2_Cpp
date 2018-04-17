@@ -4,7 +4,8 @@
 #include "Creature.h"
 #include <iostream>
 #include <vector>
-#include "Sound.h"
+#include <SFML\Audio\Sound.hpp>
+#include <SFML\Audio\SoundBuffer.hpp>
 #include "sqlite3.h"
 
 

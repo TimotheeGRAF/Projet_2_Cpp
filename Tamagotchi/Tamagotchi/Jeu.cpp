@@ -68,7 +68,7 @@ bool Jeu::save(int pv, int faim, int nrj, int joie, int nbCaca, int nbNourris)
 	query += bnbCaca;
 	query += ",";
 	query += bnbNourris;
-	query += ")";
+	query += "')";
 
 	return executeQuery(query);
 }
@@ -76,7 +76,7 @@ bool Jeu::save(int pv, int faim, int nrj, int joie, int nbCaca, int nbNourris)
 
 vector<Creature*>* Jeu::load()
 {
-	string query = "SELECT rowid, * FROM Creature";
+	string query = "SELECT * FROM Creature";
 	vector<Creature*>* crea = new vector<Creature*>;
 	int i;
 
@@ -123,6 +123,7 @@ void Jeu::chooseState(Jeu tamago, Jeu::gameState state)
 void Jeu::titlescreen()
 {
 	sf::RenderWindow window(sf::VideoMode(665, 800), "What does the fox say ?");
+
 
 	//Curseur
 	sf::Vector2i posSouris;
@@ -266,7 +267,6 @@ void Jeu::jouer()
 	barreFaim.loadFromFile("HungryBar.png");
 	barreNrj.loadFromFile("EnergyBar.png");
 	barreJoie.loadFromFile("HappinessBar.png");
-	menu.loadFromFile("GameMenu.png");
 	menuIG.loadFromFile("GameMenuIG.png");
 	options.loadFromFile("Options.png");
 	chargement.loadFromFile("Load.png");
@@ -322,7 +322,7 @@ void Jeu::jouer()
 	sf::Sprite spriteHungryBar(barreFaim, rectBarFaim);
 	sf::Sprite spriteEnergyBar(barreNrj, rectBarNrj);
 	sf::Sprite spriteJoieBar(barreJoie, rectBarJoie);
-	sf::Sprite spriteMainMenu(menu, rectMainMenu);
+
 	sf::Sprite spriteMenuIG(menuIG, rectMainMenu);
 	sf::Sprite spriteOptions(options, rectOptions);
 	sf::Sprite spriteChargement(chargement, rectOptions);
@@ -363,7 +363,7 @@ void Jeu::jouer()
 	spriteHungryBar.setPosition(75, 33);
 	spriteEnergyBar.setPosition(74, 58);
 	spriteJoieBar.setPosition(74, 86);
-	spriteMainMenu.setPosition(162, 180);
+
 	spriteMenuIG.setPosition(162, 180);
 	spriteOptions.setPosition(112, 330);
 	spriteChargement.setPosition(112, 330);
@@ -412,6 +412,17 @@ void Jeu::jouer()
 	//Creation horloge interne
 	sf::Clock clock;
 	float elapsed=0;
+
+
+
+	//Sons
+	sf::Sound eggCrack;
+	sf::SoundBuffer buffer;
+
+	buffer.loadFromFile("Crack.wav");
+
+	eggCrack.setBuffer(buffer);
+
 
 	while (window.isOpen())
 	{
@@ -463,6 +474,8 @@ void Jeu::jouer()
 			//Clics sur l'oeuf pour le casser
 			if (Bestiole.getStade()==oeuf && (spriteCursor.getGlobalBounds().intersects(spriteOeuf.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)))
 			{
+				eggCrack.setVolume(100);
+				eggCrack.play();
 				compteurClic++;
 			}
 

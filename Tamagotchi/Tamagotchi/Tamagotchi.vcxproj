@@ -124,7 +124,6 @@
     <ClInclude Include="Jeu.h" />
     <ClInclude Include="Medicament.h" />
     <ClInclude Include="Nourriture.h" />
-    <ClInclude Include="Sound.h" />
     <ClInclude Include="sqlite3.h" />
   </ItemGroup>
   <ItemGroup>
@@ -133,7 +132,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Medicament.cpp" />
     <ClCompile Include="Nourriture.cpp" />
-    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="sqlite3.c" />
   </ItemGroup>
   <ItemGroup>
