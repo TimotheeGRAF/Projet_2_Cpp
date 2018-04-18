@@ -156,7 +156,7 @@ int Creature::laver()
 {
 	this->nbCacas = 0;
 	this->joieActuel= this->joieActuel+20;
-	if (this->joieActuel >= 0)
+	if (this->joieActuel >= this->joieMax)
 	{
 		this->setJoie(this->getJoieMax());
 	}

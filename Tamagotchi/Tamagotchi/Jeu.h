@@ -6,6 +6,7 @@
 #include <vector>
 #include <SFML\Audio\Sound.hpp>
 #include <SFML\Audio\SoundBuffer.hpp>
+#include <SFML\Audio\Music.hpp>
 #include "sqlite3.h"
 
 
@@ -26,14 +27,15 @@ public:
 	void openDatabase();
 	void closeDatabase();
 	bool executeQuery(string query);
+	string quotesql(const string& s);
 
 	
 
-	void chooseState(Jeu tamago, Jeu::gameState state);
-	void titlescreen();
-	void jouer();
+	void chooseState(Jeu tamago, Jeu::gameState state, Creature creature);
+	void titlescreen(Creature creature);
+	void jouer(Creature creature);
 	bool save(int pv, int faim, int nrj, int joie, int nbCaca, int nbNourris);
-	vector<Creature*>* load();
+	Creature load();
 
 
 

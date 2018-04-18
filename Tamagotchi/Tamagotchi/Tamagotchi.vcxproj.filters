@@ -147,5 +147,8 @@
     <Image Include="background.png">
       <Filter>content</Filter>
     </Image>
+    <Image Include="GameMenuIG.png">
+      <Filter>content</Filter>
+    </Image>
   </ItemGroup>
 </Project>

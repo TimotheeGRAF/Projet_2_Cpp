@@ -1,14 +1,16 @@
 ﻿  Jeu.cpp
-Jeu.cpp(487): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(505): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(523): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(540): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(551): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(562): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(528): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(546): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(564): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(582): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(593): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+Jeu.cpp(604): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   Génération de code en cours
-  4 of 2308 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  All 2258 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Fin de la génération du code
+Creature.obj : warning LNK4099: PDB 'vc140.pdb' n'a pu être trouvé avec 'Creature.obj' ou sur 'F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\vc140.pdb' ; l'objet sera lié sans informations de débogage
+Medicament.obj : warning LNK4099: PDB 'vc140.pdb' n'a pu être trouvé avec 'Medicament.obj' ou sur 'F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\vc140.pdb' ; l'objet sera lié sans informations de débogage
+Nourriture.obj : warning LNK4099: PDB 'vc140.pdb' n'a pu être trouvé avec 'Nourriture.obj' ou sur 'F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\vc140.pdb' ; l'objet sera lié sans informations de débogage
+sqlite3.obj : warning LNK4099: PDB 'vc140.pdb' n'a pu être trouvé avec 'sqlite3.obj' ou sur 'F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\vc140.pdb' ; l'objet sera lié sans informations de débogage
   Tamagotchi.vcxproj -> F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.exe
   Tamagotchi.vcxproj -> F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.pdb (Full PDB)

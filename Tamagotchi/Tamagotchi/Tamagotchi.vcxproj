@@ -157,6 +157,7 @@
     <Image Include="fox_sleep.png" />
     <Image Include="fox_tired.png" />
     <Image Include="Fruit.png" />
+    <Image Include="GameMenuIG.png" />
     <Image Include="HappinessBar.png" />
     <Image Include="HealthBar.png" />
     <Image Include="HungryBar.png" />
