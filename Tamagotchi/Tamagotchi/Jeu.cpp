@@ -1,11 +1,9 @@
 #include "Jeu.h"
 
-
 using namespace std;
 
 Jeu::Jeu()
 {
-	Creature Bestiole;
 	dbfile = "./database.db";
 }
 
@@ -25,18 +23,15 @@ void Jeu::closeDatabase()
 	sqlite3_shutdown();
 }
 
-
 bool Jeu::executeQuery(string query)
 {
 	char * errmsg = 0;
 	if (sqlite3_exec(db, query.c_str(), NULL, 0, &errmsg) != SQLITE_OK)
 	{
-		cout << errmsg << endl;
 		return false;
 	}
 	else
 	{
-		cout << "BDD remplie !"<< endl;
 		return true;
 	}
 }
@@ -45,7 +40,7 @@ string Jeu::quotesql(const string& s) {
 	return string("'") + s + string("'");
 }
 
-bool Jeu::save(int pv, int faim, int nrj, int joie, int nbCaca, int nbNourris)
+bool Jeu::save(Creature animal)
 {
 	char bpv[10];
 	char bfaim[10];
@@ -53,25 +48,35 @@ bool Jeu::save(int pv, int faim, int nrj, int joie, int nbCaca, int nbNourris)
 	char bjoie[10];
 	char bnbCaca[10];
 	char bnbNourris[10];
+	char bcompteurClic[10];
+
+	sprintf_s(bpv, "%d", animal.getPV());
+	sprintf_s(bfaim, "%d", animal.getFaim());
+	sprintf_s(bnrj, "%d", animal.getEnergie());
+	sprintf_s(bjoie, "%d", animal.getJoie());
+	sprintf_s(bnbCaca, "%d", animal.getNbCacas());
+	sprintf_s(bnbNourris, "%d", animal.getNbNourris());
+	sprintf_s(bcompteurClic, "%d", animal.compteurClic);
 
 
-	string query = "INSERT INTO Creature (pv, faim, nrj, joie, nbCaca, nbNourris) VALUES ("
+
+	string query = "INSERT INTO Creature (pv, faim, nrj, joie, nbCaca, nbNourris, compteurClic) VALUES ("
 		+ quotesql(bpv) + ","
 		+ quotesql(bfaim) + ","
 		+ quotesql(bnrj) + ","
 		+ quotesql(bjoie) + ","
 		+ quotesql(bnbCaca) + ","
-		+ quotesql(bnbNourris) + ");";
+		+ quotesql(bnbNourris) + ","
+		+ quotesql(bcompteurClic) + ");";
 
 	return executeQuery(query);
 }
-
 
 Creature Jeu::load()
 {
 	Creature animal;
 
-	string query = "SELECT * FROM Creature";
+	string query = "SELECT rowid, * FROM Creature";
 	int i;
 
 	sqlite3_stmt * stmt;
@@ -87,13 +92,11 @@ Creature Jeu::load()
 			animal.setJoie(sqlite3_column_int(stmt, 4));
 			animal.setNbCacas(sqlite3_column_int(stmt, 5));
 			animal.setNbNourris(sqlite3_column_int(stmt, 6));
+			animal.compteurClic = sqlite3_column_int(stmt, 7);
 		}
 	} while (i == SQLITE_ROW);
-
 	return animal;
 }
-
-
 
 void Jeu::chooseState(Jeu tamago, Jeu::gameState state, Creature Bestiole)
 {
@@ -190,7 +193,7 @@ void Jeu::titlescreen(Creature Bestiole)
 
 void Jeu::jouer(Creature Bestiole)
 {
-	sf::RenderWindow window(sf::VideoMode(665, 800), "What does the fox say ?");
+	sf::RenderWindow window(sf::VideoMode(665, 800), "TamaGoGo !");
 
 	//Creation créature
 	Bestiole.setStade(oeuf);
@@ -203,7 +206,6 @@ void Jeu::jouer(Creature Bestiole)
 	bool isDragging = false;
 	bool musicDayLaunched = false;
 	bool musicNightLaunched = false;
-	int compteurClic = 0;
 
 	//Textures
 	sf::Texture backgroundDay;
@@ -236,10 +238,9 @@ void Jeu::jouer(Creature Bestiole)
 	sf::Texture menu;
 	sf::Texture menuIG;
 	sf::Texture options;
-	sf::Texture chargement;
 
-	backgroundDay.loadFromFile("background1.png");
-	backgroundNight.loadFromFile("background2.png");
+	backgroundDay.loadFromFile("background01.png");
+	backgroundNight.loadFromFile("background02.png");
 	texturePerso.loadFromFile("Poupon.png");
 	persoTriste.loadFromFile("fox_sad.png");
 	persoFatigue.loadFromFile("fox_tired.png");
@@ -266,14 +267,14 @@ void Jeu::jouer(Creature Bestiole)
 	barreJoie.loadFromFile("HappinessBar.png");
 	menuIG.loadFromFile("GameMenuIG.png");
 	options.loadFromFile("Options.png");
-	chargement.loadFromFile("Load.png");
+
 
 
 	//Rectangles de sélection
-	sf::IntRect rectSource(0, 0, 275, 240);
-	sf::IntRect rectHappy(0, 0, 245, 240);
-	sf::IntRect rectOtherEmotion(0, 0, 345, 240);
-	sf::IntRect rectOeuf(0, 0, 250, 300);
+	sf::IntRect rectSource(0, 0, 212, 185);
+	sf::IntRect rectHappy(0, 0, 188, 185);
+	sf::IntRect rectOtherEmotion(0, 0, 263, 185);
+	sf::IntRect rectOeuf(0, 0, 193, 231);
 	sf::IntRect rectCursor(0, 0, 32, 38);
 	sf::IntRect selectBox(0, 0, 50, 50);
 	sf::IntRect rectFruit(0, 0, 50, 41);	//Marche aussi pour la viande
@@ -322,7 +323,6 @@ void Jeu::jouer(Creature Bestiole)
 
 	sf::Sprite spriteMenuIG(menuIG, rectMainMenu);
 	sf::Sprite spriteOptions(options, rectOptions);
-	sf::Sprite spriteChargement(chargement, rectOptions);
 	sf::Sprite spriteBoutons(alpha, rectBoutons);
 	spriteBoutons.setColor(sf::Color::Transparent);
 	sf::Sprite spriteSelection(alpha, selectBox);
@@ -344,73 +344,59 @@ void Jeu::jouer(Creature Bestiole)
 	//Coordonnées
 	sf::Vector2i posSouris;
 	//Coordonnées bestiole
-	spritePerso.setPosition(100, 380);
-	spritePersoFatigue.setPosition(100,380);
-	spritePersoDeprime.setPosition(100, 380);
-	spritePersoDodo.setPosition(100, 380);
-	spritePersoHappy.setPosition(100, 380);
-	spritePersoSick.setPosition(100, 380);
-	spriteOeuf.setPosition(100, 320);
+	spritePerso.setPosition(200, 460);
+	spritePersoFatigue.setPosition(200,460);
+	spritePersoDeprime.setPosition(200, 460);
+	spritePersoDodo.setPosition(200, 460);
+	spritePersoHappy.setPosition(200, 460);
+	spritePersoSick.setPosition(200, 460);
+	spriteOeuf.setPosition(200, 400);
+	//Caca
 	spritePoop.setPosition(80, 560);
 	
 	//Coordonnées UI
 	spriteSoleil.setPosition(460, 10);
 	spriteLune.setPosition(460, 10);
-	spritePvBar.setPosition(75, 6);
-	spriteHungryBar.setPosition(75, 33);
-	spriteEnergyBar.setPosition(74, 58);
-	spriteJoieBar.setPosition(74, 86);
+	//Barres
+	spritePvBar.setPosition(74, 7);
+	spriteHungryBar.setPosition(74, 33);
+	spriteEnergyBar.setPosition(73, 59);
+	spriteJoieBar.setPosition(73, 85);
 
+
+	//Dans le menu
 	spriteMenuIG.setPosition(162, 180);
 	spriteOptions.setPosition(112, 330);
-	spriteChargement.setPosition(112, 330);
+
 	//Boutons menu ig/main
-	boutonsMenu[0].setPosition(240,285);	//Nouvelle partie / Sauvegarder
-	boutonsMenu[1].setPosition(240,342);	//Charger
-	boutonsMenu[2].setPosition(240,400);	//Options
-	boutonsMenu[3].setPosition(240,460);	//Reprendre
-	boutonsMenu[4].setPosition(240,536);	//Quitter
+	boutonsMenu[0].setPosition(240,285);		//Nouvelle partie / Sauvegarder
+	boutonsMenu[1].setPosition(240,342);		//Charger
+	boutonsMenu[2].setPosition(240,400);		//Options
+	boutonsMenu[3].setPosition(240,460);		//Reprendre
+	boutonsMenu[4].setPosition(240,536);		//Quitter
 
 	//Boutons Interface
-	casesSelection[0].setPosition(150, 710);
-	casesSelection[1].setPosition(231, 685);
-	spriteFruit.setPosition(231, 690);
-	casesSelection[2].setPosition(308, 685);
-	spriteViande.setPosition(308, 690);
-	casesSelection[3].setPosition(386, 685);
-	spriteMuffin.setPosition(386, 687);
-	casesSelection[4].setPosition(231, 745);
-	spriteStim.setPosition(231, 745);
-	casesSelection[5].setPosition(308, 745);
-	spriteMedkit.setPosition(308, 748);
-	casesSelection[6].setPosition(386, 745);
-	spriteAntidep.setPosition(386, 745);
-	casesSelection[7].setPosition(478, 713);
-	casesSelection[8].setPosition(575, 684);
-	casesSelection[9].setPosition(575, 741);
+	casesSelection[0].setPosition(30, 710);	//Bouton Menu
+	spriteFruit.setPosition(110, 686);			//Fraise
+	spriteViande.setPosition(180, 690);			//Viande
+	spriteMuffin.setPosition(247, 685);			//Muffin	
+	spriteStim.setPosition(315, 680);			//Stim
+	spriteMedkit.setPosition(385, 690);			//Medkit
+	spriteAntidep.setPosition(452, 685);		//Anti Dep
+	casesSelection[7].setPosition(280, 740);	//Douche
+	casesSelection[8].setPosition(565, 680);	//Soleil
+	casesSelection[9].setPosition(565, 742);	//Lune
 	//Limitation du framerate
 	window.setFramerateLimit(60);
 	//Curseur visible ou non
 	window.setMouseCursorVisible(false);
 
 	//Police de caractère et texte
-	sf::Font font;
-	font.loadFromFile("Mak Dah.ttf");
-	sf::Text nomCrea;
-	nomCrea.setFont(font);
-	nomCrea.setCharacterSize(36);
-	nomCrea.setFillColor(sf::Color::Black);
-
 	Bestiole.setNom("Starfox");
-	nomCrea.setString(Bestiole.getNom());
-	nomCrea.setPosition(482, 410);
-
 
 	//Creation horloge interne
 	sf::Clock clock;
 	float elapsed=0;
-
-
 
 	//Sons
 	//Craquement oeuf
@@ -433,17 +419,11 @@ void Jeu::jouer(Creature Bestiole)
 	night.setBuffer(bufferNight);
 	night.setLoop(true);
 
-	
-
-
-
 	while (window.isOpen())
 	{
 		//Creation event catcher
 		sf::Event event;
 		
-		
-
 		while (window.pollEvent(event))
 
 		{
@@ -470,20 +450,16 @@ void Jeu::jouer(Creature Bestiole)
 			{
 				if ((boutonsMenu[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 				{
-					save(Bestiole.getPV(), Bestiole.getFaim(), Bestiole.getEnergie(), Bestiole.getJoie(), Bestiole.getNbCacas(), Bestiole.getNbNourris());
+					save(Bestiole);
 				}
 				else if ((boutonsMenu[1].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 				{
+
+					window.close();
+					day.stop();
+					night.stop();
+					jouer(load());
 					onMenu = false;
-					load();
-					rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
-					spriteJoieBar.setTextureRect(rectBarJoie);
-					rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
-					spritePvBar.setTextureRect(rectBarVie);
-					rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
-					spriteHungryBar.setTextureRect(rectBarFaim);
-					rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
-					spriteEnergyBar.setTextureRect(rectBarNrj);
 
 				}
 				//else if ((boutonsMenu[2].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
@@ -508,14 +484,14 @@ void Jeu::jouer(Creature Bestiole)
 					eggCrack.play();
 					
 				//Quand le compteur arrive à 6,  on charge le son Pop
-					if (compteurClic == 5)
+					if (Bestiole.compteurClic == 5)
 					{
 						bufferEgg.loadFromFile("Pop.wav");
 						eggCrack.setBuffer(bufferEgg);
 						eggCrack.play();
 					}
 
-				compteurClic++;
+				Bestiole.compteurClic++;
 			}
 
 
@@ -537,7 +513,7 @@ void Jeu::jouer(Creature Bestiole)
 				spriteHungryBar.setTextureRect(rectBarFaim);
 				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
 				spriteJoieBar.setTextureRect(rectBarJoie);
-				spriteFruit.setPosition(231, 690);
+				spriteFruit.setPosition(110, 686);
 			}
 
 			//Viande
@@ -556,7 +532,7 @@ void Jeu::jouer(Creature Bestiole)
 				spriteHungryBar.setTextureRect(rectBarFaim);
 				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
 				spriteJoieBar.setTextureRect(rectBarJoie);
-				spriteViande.setPosition(308, 690);
+				spriteViande.setPosition(180, 690);
 			}
 			//Muffin
 			if (spriteMuffin.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
@@ -573,7 +549,7 @@ void Jeu::jouer(Creature Bestiole)
 				spriteHungryBar.setTextureRect(rectBarFaim);
 				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
 				spriteJoieBar.setTextureRect(rectBarJoie);
-				spriteMuffin.setPosition(386, 687);
+				spriteMuffin.setPosition(247, 685);
 			}
 		//Les médicaments pour soigner les statuts
 			//Stimulant
@@ -585,7 +561,7 @@ void Jeu::jouer(Creature Bestiole)
 			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteStim.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
 				Bestiole.soigner(Soin.stimulant, Bestiole);
-				spriteStim.setPosition(231, 745);
+				spriteStim.setPosition(315, 680);
 			}
 			//Medkit
 			if (spriteMedkit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
@@ -596,7 +572,7 @@ void Jeu::jouer(Creature Bestiole)
 			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteMedkit.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
 				Bestiole.soigner(Soin.hyperproteine, Bestiole);
-				spriteMedkit.setPosition(308, 748);
+				spriteMedkit.setPosition(385, 690);
 			}
 			//Antidep
 			if (spriteAntidep.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
@@ -607,7 +583,7 @@ void Jeu::jouer(Creature Bestiole)
 			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteAntidep.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
 			{
 				Bestiole.soigner(Soin.antidepresseur, Bestiole);
-				spriteAntidep.setPosition(386, 745);
+				spriteAntidep.setPosition(452, 685);
 			}
 			/*Je suis entrain de glisser-déposer*/
 			else
@@ -659,6 +635,7 @@ void Jeu::jouer(Creature Bestiole)
 		// Horloge interne et attributs diminuant en fonction du temps
 		elapsed += clock.restart().asMilliseconds();
 
+		//Si la nuit est active
 		if (Bestiole.enVie==true && elapsed >= 3000 && onMenu == false && isDay==false && Bestiole.getStade()==enfant)
 		{
 			//Faim
@@ -711,6 +688,7 @@ void Jeu::jouer(Creature Bestiole)
 
 			elapsed = 0;
 		}
+		//Si c'est le jour
 		else if (Bestiole.enVie == true && elapsed >= 3000 && onMenu == false && isDay == true && Bestiole.getStade() == enfant)
 		{
 			if (Bestiole.getFaim() != 0)
@@ -730,6 +708,12 @@ void Jeu::jouer(Creature Bestiole)
 				Bestiole.setJoie(Bestiole.getJoie() - 5);
 				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
 				spriteJoieBar.setTextureRect(rectBarJoie);
+			}
+			if (Bestiole.getPV() != 0 && (Bestiole.getFaim() <= 0 || Bestiole.getEnergie() <= 0 || Bestiole.getJoie() <= 0))
+			{
+				Bestiole.setPV(Bestiole.getPV() - 6);
+				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+				spritePvBar.setTextureRect(rectBarVie);
 			}
 
 		//Gestion d'erreur si les barres trop "trop pleines"
@@ -754,6 +738,13 @@ void Jeu::jouer(Creature Bestiole)
 				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
 				spriteJoieBar.setTextureRect(rectBarJoie);
 			}
+			//PV
+			if (Bestiole.getPV() >= Bestiole.getPVMax())
+			{
+				Bestiole.setPV(Bestiole.getPVMax());
+				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+				spritePvBar.setTextureRect(rectBarVie);
+			}
 		//Gstion d'erreur si les barres sont "trop vides"
 			//Energie
 			if (Bestiole.getEnergie() <= 0)
@@ -770,7 +761,11 @@ void Jeu::jouer(Creature Bestiole)
 			{
 				Bestiole.setJoie(0);
 			}
-
+			//PV
+			if (Bestiole.getPV() <= 0)
+			{
+				Bestiole.setPV(0);
+			}
 			elapsed = 0;
 		}
 
@@ -808,21 +803,6 @@ void Jeu::jouer(Creature Bestiole)
 		else
 		{
 			Bestiole.setStatut(idle);
-		}
-		//Statut malade
-		//La perte de points de vie est lancée si la créature est malade
-		if (Bestiole.getStatut() == malade)
-		{
-			if (elapsed >= 3000 && onMenu == false && isDay == true && Bestiole.getStade() == enfant && Bestiole.getPV()>=0)
-			{
-					Bestiole.setPV(Bestiole.getPV() - 7);
-					rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
-					spritePvBar.setTextureRect(rectBarVie);
-					if (Bestiole.getPV() <= 0)
-					{
-						Bestiole.setPV(0);
-					}
-			}
 		}
 
 		//Créature décédée :'(
@@ -864,12 +844,11 @@ void Jeu::jouer(Creature Bestiole)
 		{
 			window.draw(casesSelection[i]);
 		}
-		window.draw(nomCrea);
 	//Crea
 		//Si le stade est oeuf :
 		if (Bestiole.getStade() == oeuf)
 		{
-			switch (compteurClic)
+			switch (Bestiole.compteurClic)
 			{
 			case 0:
 			case 1:
@@ -892,7 +871,7 @@ void Jeu::jouer(Creature Bestiole)
 			}
 		}
 		//Si le stade est enfant
-		if (Bestiole.enVie = true && Bestiole.getStade()==enfant)
+		if (Bestiole.getStade()==enfant)
 		{
 			//Selon le statut de la créature, on dessine tel ou tel sprite
 			switch (Bestiole.getStatut())

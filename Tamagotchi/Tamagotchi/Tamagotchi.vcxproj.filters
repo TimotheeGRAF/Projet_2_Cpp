@@ -69,12 +69,6 @@
     <Image Include="HungryBar.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="background1.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="background2.png">
-      <Filter>content</Filter>
-    </Image>
     <Image Include="Poupon.png">
       <Filter>content</Filter>
     </Image>
@@ -105,13 +99,7 @@
     <Image Include="Viande.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="boutonMenu.png">
-      <Filter>content</Filter>
-    </Image>
     <Image Include="HappinessBar.png">
-      <Filter>content</Filter>
-    </Image>
-    <Image Include="MenuButton.png">
       <Filter>content</Filter>
     </Image>
     <Image Include="egg.png">
@@ -148,6 +136,12 @@
       <Filter>content</Filter>
     </Image>
     <Image Include="GameMenuIG.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="background01.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="background02.png">
       <Filter>content</Filter>
     </Image>
   </ItemGroup>

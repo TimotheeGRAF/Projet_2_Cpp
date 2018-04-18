@@ -29,15 +29,11 @@ public:
 	bool executeQuery(string query);
 	string quotesql(const string& s);
 
-	
-
 	void chooseState(Jeu tamago, Jeu::gameState state, Creature creature);
 	void titlescreen(Creature creature);
 	void jouer(Creature creature);
-	bool save(int pv, int faim, int nrj, int joie, int nbCaca, int nbNourris);
+	bool save(Creature creature);
 	Creature load();
-
-
 
 private:
 
@@ -46,6 +42,4 @@ private:
 
 protected:
 
-
 };
-

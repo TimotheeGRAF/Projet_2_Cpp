@@ -1,0 +1,7 @@
+Bonjour et bienvenue dans l'installateur de TamaGoGo !
+
+Vous pourrez indiquer le chemin d'installation.
+
+En cas d'erreur lors de l'installation, veuillez consulter le fichier Readme.
+
+Afin d'éviter tous problèmes de lancement, il est conseillé de lancer le jeu en admnistrateur.

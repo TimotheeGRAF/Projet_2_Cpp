@@ -18,11 +18,8 @@ public:
 
 private:
 
-
 protected:
 	int compteurNourriture=0;
-
 	typeNourriture nourriture;
-
 };
 

@@ -13,7 +13,6 @@ enum Statut
 	extenue,
 	dort,
 	malade
-
 };
 
 enum Stade
@@ -22,7 +21,6 @@ enum Stade
 	enfant,
 	adulte
 };
-
 
 using namespace std;
 
@@ -34,6 +32,8 @@ public:
 
 	bool enVie = true;
 	string getNom();
+	int compteurClic = 0;
+
 	void setNom(string nomCrea);
 	int getPV();
 	void setPV(int pdV);
@@ -63,14 +63,12 @@ public:
 	int getNbCacas();
 	void setNbCacas(int nbKK);
 
-
 	int faireCaca();
 	void donnerAManger(Nourriture::typeNourriture, Creature animal);
 	int soigner(Medicament::typeMedicament, Creature animal);
 	int laver();
 	//int gagnerNiveau(Creature animal);
 	//void evoluer(Creature animal, Stade stadeCrea);
-
 
 private:
 
@@ -94,9 +92,5 @@ private:
 	int nbLave=0;
 	int nbSoigne=0;
 
-
 protected:
-
-
 };
-
