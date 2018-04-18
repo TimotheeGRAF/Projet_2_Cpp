@@ -1,0 +1,16 @@
+TamaGoGo
+
+INSTALLATION :
+
+Lancez le exe "TamaGoGo_Setup.exe" en mode administrateur pour lancer l'installation.
+
+LANCEMENT :
+
+Afin d'éviter tous problèmes de conflits, veuillez lancer le jeu en mode administrateur.
+
+
+
+
+REMERCIEMENTS :
+
+Remerciements à Arnaud "Sealeen" Chalté pour le remarquable travail graphique et chara-design.
