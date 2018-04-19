@@ -10,16 +10,12 @@ Creature::~Creature()
 }
 
 //GETTEURS ET SETTEURS
-	//Nom
-	string Creature::getNom()
-	{
-		return this->nom;
-	}
+
 	void Creature::setNom(string nomCrea)
 	{
 		this->nom = nomCrea;
 	}
-	//PV
+
 	int Creature::getPV()
 	{
 		return pvActuel;
@@ -264,18 +260,21 @@ Creature::~Creature()
 		case Medicament::typeMedicament::antidepresseur:
 			if (animal.getStatut() == deprime)
 			{
+				animal.setJoie(animal.getJoie() + 20);
 				animal.setStatut(idle);
 			}
 			break;
-		/*case Medicament::typeMedicament::hyperproteine:
-			if (animal.getStatut() == affame)
+		case Medicament::typeMedicament::hyperproteine:
+			if (animal.getStatut() == malade)
 			{
+				animal.setPV(animal.getPV() + 20);
 				animal.setStatut(idle);
 			}
-			break;*/
+			break;
 		case Medicament::typeMedicament::stimulant:
 			if (animal.getStatut() == extenue)
 			{
+				animal.setEnergie(animal.getEnergie() + 20);
 				animal.setStatut(idle);
 			}
 			break;

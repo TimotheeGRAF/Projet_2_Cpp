@@ -1,0 +1,210 @@
+\hypertarget{class_jeu}{}\section{Jeu Class Reference}
+\label{class_jeu}\index{Jeu@{Jeu}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_jeu_a16f211b45157d4163c690328b4c58e11}{game\+State}} \{ \mbox{\hyperlink{class_jeu_a16f211b45157d4163c690328b4c58e11adb4300e04004c791ccfeabca44990b46}{game}}, 
+\mbox{\hyperlink{class_jeu_a16f211b45157d4163c690328b4c58e11a65b492d15279ae678bd36111361984b5}{menu}}
+ \}
+\begin{DoxyCompactList}\small\item\em Les etats du jeu possibles pour un \mbox{\hyperlink{class_jeu}{Jeu}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_jeu_ae9a9c041791ba6e43ff421f7f4e830b3}{open\+Database}} ()
+\begin{DoxyCompactList}\small\item\em Ouvre la base de donnee. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_jeu_a0980e132d96a7501a2a3a81822ddd23e}{close\+Database}} ()
+\begin{DoxyCompactList}\small\item\em Ferme la base de donnee. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_jeu_abe4332d004a734a45c0196486c12b143}{execute\+Query}} (string query)
+\begin{DoxyCompactList}\small\item\em Lance avec S\+Q\+Lite la requete cree. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_jeu_a7a82ad71316130320710a9f9622fd7a5}{quotesql}} (const string \&s)
+\begin{DoxyCompactList}\small\item\em Cree une liaison entre les bindings des valeurs et la base de donnee. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_jeu_a7c3e6c659b7244aafb1a2880a7fd1532}{choose\+State}} (\mbox{\hyperlink{class_jeu}{Jeu}} tamago, \mbox{\hyperlink{class_jeu_a16f211b45157d4163c690328b4c58e11}{Jeu\+::game\+State}} state, \mbox{\hyperlink{class_creature}{Creature}} creature)
+\begin{DoxyCompactList}\small\item\em Determine l\textquotesingle{}etat du jeu dans lequel il se trouve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_jeu_a1613d6e144db51957faec8befebc404f}{titlescreen}} (\mbox{\hyperlink{class_creature}{Creature}} creature)
+\begin{DoxyCompactList}\small\item\em Contient la logique et le deroulement du \mbox{\hyperlink{class_jeu}{Jeu}} a l\textquotesingle{}ecran titre. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_jeu_a6994e5a795a45011d720eb907bbcdbf7}{jouer}} (\mbox{\hyperlink{class_creature}{Creature}} creature)
+\begin{DoxyCompactList}\small\item\em Contient la fenetre de jeu pour jouer \+: fenetre principale pour l\textquotesingle{}utilisateur. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_jeu_a0f3e367b5fd68cf18cbf77fb680626ce}{save}} (\mbox{\hyperlink{class_creature}{Creature}} creature)
+\begin{DoxyCompactList}\small\item\em Sauvegarde. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_creature}{Creature}} \mbox{\hyperlink{class_jeu_ad565c3239ac44b4335e7a2b6b799070a}{load}} ()
+\begin{DoxyCompactList}\small\item\em Chargement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_jeu_a79c0878f63a17732b39a5076d67a16a2}\label{class_jeu_a79c0878f63a17732b39a5076d67a16a2}} 
+bool {\bfseries on\+Menu} = false
+\item 
+\mbox{\Hypertarget{class_jeu_a7f7bf4a7d214357f24a53c4e120522ee}\label{class_jeu_a7f7bf4a7d214357f24a53c4e120522ee}} 
+bool {\bfseries on\+Options} = false
+\item 
+\mbox{\Hypertarget{class_jeu_ab4aa49e5e48558bf94c87276215cd62d}\label{class_jeu_ab4aa49e5e48558bf94c87276215cd62d}} 
+int {\bfseries difficulte} = 1
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_jeu_a16f211b45157d4163c690328b4c58e11}\label{class_jeu_a16f211b45157d4163c690328b4c58e11}} 
+\index{Jeu@{Jeu}!game\+State@{game\+State}}
+\index{game\+State@{game\+State}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{game\+State}{gameState}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_jeu_a16f211b45157d4163c690328b4c58e11}{Jeu\+::game\+State}}}
+
+
+
+Les etats du jeu possibles pour un \mbox{\hyperlink{class_jeu}{Jeu}}. 
+
+La table de correspondance des etats de jeu est disponible en modification par la methode choose\+State. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{game@{game}!Jeu@{Jeu}}\index{Jeu@{Jeu}!game@{game}}}\mbox{\Hypertarget{class_jeu_a16f211b45157d4163c690328b4c58e11adb4300e04004c791ccfeabca44990b46}\label{class_jeu_a16f211b45157d4163c690328b4c58e11adb4300e04004c791ccfeabca44990b46}} 
+game&jouer \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{menu@{menu}!Jeu@{Jeu}}\index{Jeu@{Jeu}!menu@{menu}}}\mbox{\Hypertarget{class_jeu_a16f211b45157d4163c690328b4c58e11a65b492d15279ae678bd36111361984b5}\label{class_jeu_a16f211b45157d4163c690328b4c58e11a65b492d15279ae678bd36111361984b5}} 
+menu&ecran titre \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_jeu_a7c3e6c659b7244aafb1a2880a7fd1532}\label{class_jeu_a7c3e6c659b7244aafb1a2880a7fd1532}} 
+\index{Jeu@{Jeu}!choose\+State@{choose\+State}}
+\index{choose\+State@{choose\+State}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{choose\+State()}{chooseState()}}
+{\footnotesize\ttfamily void Jeu\+::choose\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_jeu}{Jeu}}}]{tamago,  }\item[{\mbox{\hyperlink{class_jeu_a16f211b45157d4163c690328b4c58e11}{Jeu\+::game\+State}}}]{state,  }\item[{\mbox{\hyperlink{class_creature}{Creature}}}]{creature }\end{DoxyParamCaption})}
+
+
+
+Determine l\textquotesingle{}etat du jeu dans lequel il se trouve. 
+
+Selon une enumeration, le jeu est dans l\textquotesingle{}un ou l\textquotesingle{}autre state(jeu ou menu) 
+\begin{DoxyParams}{Parameters}
+{\em tamago} & \mbox{\hyperlink{class_jeu}{Jeu}} actif \\
+\hline
+{\em state} & game\+State dans lequel le jeu va se trouver \\
+\hline
+{\em creature} & \mbox{\hyperlink{class_creature}{Creature}} active dans le jeu \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_jeu_a0980e132d96a7501a2a3a81822ddd23e}\label{class_jeu_a0980e132d96a7501a2a3a81822ddd23e}} 
+\index{Jeu@{Jeu}!close\+Database@{close\+Database}}
+\index{close\+Database@{close\+Database}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{close\+Database()}{closeDatabase()}}
+{\footnotesize\ttfamily void Jeu\+::close\+Database (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Ferme la base de donnee. 
+
+Ferme la base de donnee \mbox{\Hypertarget{class_jeu_abe4332d004a734a45c0196486c12b143}\label{class_jeu_abe4332d004a734a45c0196486c12b143}} 
+\index{Jeu@{Jeu}!execute\+Query@{execute\+Query}}
+\index{execute\+Query@{execute\+Query}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{execute\+Query()}{executeQuery()}}
+{\footnotesize\ttfamily bool Jeu\+::execute\+Query (\begin{DoxyParamCaption}\item[{string}]{query }\end{DoxyParamCaption})}
+
+
+
+Lance avec S\+Q\+Lite la requete cree. 
+
+Lance avec S\+Q\+Lite3 la requete contenue dans un string 
+\begin{DoxyParams}{Parameters}
+{\em query} & string contenant la requete S\+QL \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Un {\itshape bool} representant le succes ou l\textquotesingle{}echec de la requete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_jeu_a6994e5a795a45011d720eb907bbcdbf7}\label{class_jeu_a6994e5a795a45011d720eb907bbcdbf7}} 
+\index{Jeu@{Jeu}!jouer@{jouer}}
+\index{jouer@{jouer}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{jouer()}{jouer()}}
+{\footnotesize\ttfamily void Jeu\+::jouer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_creature}{Creature}}}]{creature }\end{DoxyParamCaption})}
+
+
+
+Contient la fenetre de jeu pour jouer \+: fenetre principale pour l\textquotesingle{}utilisateur. 
+
+Contient la logique du jeu et les interaction avec \mbox{\hyperlink{class_creature}{Creature}}, \mbox{\hyperlink{class_nourriture}{Nourriture}} et \mbox{\hyperlink{class_medicament}{Medicament}}, contient aussi les graphismes et sons 
+\begin{DoxyParams}{Parameters}
+{\em creature} & \mbox{\hyperlink{class_creature}{Creature}} pour le jeu et pouvant etre sauvegardee en B\+DD \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_jeu_ad565c3239ac44b4335e7a2b6b799070a}\label{class_jeu_ad565c3239ac44b4335e7a2b6b799070a}} 
+\index{Jeu@{Jeu}!load@{load}}
+\index{load@{load}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_creature}{Creature}} Jeu\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Chargement. 
+
+Charge via la base de donnee les caracteristiques de la creature \begin{DoxyReturn}{Returns}
+Un {\itshape \mbox{\hyperlink{class_creature}{Creature}}} representant la creature chargee; 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_jeu_ae9a9c041791ba6e43ff421f7f4e830b3}\label{class_jeu_ae9a9c041791ba6e43ff421f7f4e830b3}} 
+\index{Jeu@{Jeu}!open\+Database@{open\+Database}}
+\index{open\+Database@{open\+Database}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{open\+Database()}{openDatabase()}}
+{\footnotesize\ttfamily void Jeu\+::open\+Database (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Ouvre la base de donnee. 
+
+Ouvre la base de donnee \mbox{\Hypertarget{class_jeu_a7a82ad71316130320710a9f9622fd7a5}\label{class_jeu_a7a82ad71316130320710a9f9622fd7a5}} 
+\index{Jeu@{Jeu}!quotesql@{quotesql}}
+\index{quotesql@{quotesql}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{quotesql()}{quotesql()}}
+{\footnotesize\ttfamily string Jeu\+::quotesql (\begin{DoxyParamCaption}\item[{const string \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Cree une liaison entre les bindings des valeurs et la base de donnee. 
+
+Cree une liaison entre les bindings des valeurs et la base de donnee 
+\begin{DoxyParams}{Parameters}
+{\em s} & const string\& valeur de l\textquotesingle{}adresse où le pointeur se trouve \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Un {\itshape string} contenant des quotes afin de liers les bindings dans la requete S\+QL 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_jeu_a0f3e367b5fd68cf18cbf77fb680626ce}\label{class_jeu_a0f3e367b5fd68cf18cbf77fb680626ce}} 
+\index{Jeu@{Jeu}!save@{save}}
+\index{save@{save}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily bool Jeu\+::save (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_creature}{Creature}}}]{creature }\end{DoxyParamCaption})}
+
+
+
+Sauvegarde. 
+
+Sauvegarde en base de donnee la creature active dans \mbox{\hyperlink{class_jeu_a6994e5a795a45011d720eb907bbcdbf7}{jouer(\+Creature creature)}} et ses caracteristiques 
+\begin{DoxyParams}{Parameters}
+{\em creature} & \mbox{\hyperlink{class_creature}{Creature}} a sauvegarder en base de donnee \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Un {\itshape bool} representant le succes ou non de la sauvgarde. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_jeu_a1613d6e144db51957faec8befebc404f}\label{class_jeu_a1613d6e144db51957faec8befebc404f}} 
+\index{Jeu@{Jeu}!titlescreen@{titlescreen}}
+\index{titlescreen@{titlescreen}!Jeu@{Jeu}}
+\subsubsection{\texorpdfstring{titlescreen()}{titlescreen()}}
+{\footnotesize\ttfamily void Jeu\+::titlescreen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_creature}{Creature}}}]{creature }\end{DoxyParamCaption})}
+
+
+
+Contient la logique et le deroulement du \mbox{\hyperlink{class_jeu}{Jeu}} a l\textquotesingle{}ecran titre. 
+
+Contient la logique et le deroulement du \mbox{\hyperlink{class_jeu}{Jeu}} a l\textquotesingle{}ecran titre avec les boutons 
+\begin{DoxyParams}{Parameters}
+{\em creature} & \mbox{\hyperlink{class_creature}{Creature}} utilisee pour le chargement de partie \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_jeu_8h}{Jeu.\+h}}\item 
+Jeu.\+cpp\end{DoxyCompactItemize}

@@ -144,6 +144,7 @@
     <Image Include="background02.png" />
     <Image Include="Biscuit.png" />
     <Image Include="bubble.png" />
+    <Image Include="checkmark.png" />
     <Image Include="Cursor.png" />
     <Image Include="Douche.png" />
     <Image Include="egg.png" />
@@ -162,11 +163,22 @@
     <Image Include="HungryBar.png" />
     <Image Include="Lune.png" />
     <Image Include="Medkit.png" />
+    <Image Include="Options.png" />
     <Image Include="poop.png" />
     <Image Include="Poupon.png" />
     <Image Include="Soleil.png" />
     <Image Include="Stim.png" />
+    <Image Include="Tombe.png" />
     <Image Include="Viande.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Darkness.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Crack.wav" />
+    <Media Include="Jour.wav" />
+    <Media Include="Nuit.wav" />
+    <Media Include="Pop.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

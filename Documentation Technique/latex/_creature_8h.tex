@@ -1,0 +1,112 @@
+\hypertarget{_creature_8h}{}\section{Creature.\+h File Reference}
+\label{_creature_8h}\index{Creature.\+h@{Creature.\+h}}
+
+
+Definit la classe \mbox{\hyperlink{class_creature}{Creature}} et ses particularites.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}Nourriture.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Medicament.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include \char`\"{}S\+F\+M\+L\textbackslash{}\+Graphics.\+hpp\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_creature}{Creature}}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_creature_8h_a51cc5d61d45bf71507aceec544ad1667}{Statut}} \{ \newline
+\mbox{\hyperlink{_creature_8h_a51cc5d61d45bf71507aceec544ad1667a0e9a37114c0e458d28d52f06ec0f2242}{idle}}, 
+\mbox{\hyperlink{_creature_8h_a51cc5d61d45bf71507aceec544ad1667acfae3e03042f69ff08e65d7ea00b0d16}{deprime}}, 
+\mbox{\hyperlink{_creature_8h_a51cc5d61d45bf71507aceec544ad1667ace3047719d87d5c7cb984ed6a52091ae}{heureux}}, 
+\mbox{\hyperlink{_creature_8h_a51cc5d61d45bf71507aceec544ad1667ab6da23fa1af13cc520ae08f6acc10358}{extenue}}, 
+\newline
+\mbox{\hyperlink{_creature_8h_a51cc5d61d45bf71507aceec544ad1667a575f120584b3757fbeb18cd81bf095c5}{dort}}, 
+\mbox{\hyperlink{_creature_8h_a51cc5d61d45bf71507aceec544ad1667a358ea25eeda8bc9f24a19f14228049f6}{malade}}
+ \}
+\begin{DoxyCompactList}\small\item\em Statuts possibles pour une \mbox{\hyperlink{class_creature}{Creature}}. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{_creature_8h_ac5649289508e95d05e3577b7eccd878f}{Stade}} \{ \mbox{\hyperlink{_creature_8h_ac5649289508e95d05e3577b7eccd878fa516f6522acbcb903ef2d59078928eb82}{oeuf}}, 
+\mbox{\hyperlink{_creature_8h_ac5649289508e95d05e3577b7eccd878fa17015512ac63586b7e601709b68725e7}{enfant}}, 
+\mbox{\hyperlink{_creature_8h_ac5649289508e95d05e3577b7eccd878fae602c576cc81da6d04c600af52258f73}{adulte}}
+ \}
+\begin{DoxyCompactList}\small\item\em Stades possibles pour une \mbox{\hyperlink{class_creature}{Creature}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Definit la classe \mbox{\hyperlink{class_creature}{Creature}} et ses particularites. 
+
+\begin{DoxyAuthor}{Author}
+Timothee 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+09 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+19 Avril 2018
+\end{DoxyDate}
+Cette classe contient les methodes necessaires a la creation de la creature , elle contient aussi la definition de ses stades, statuts et caracteristique. 
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_creature_8h_ac5649289508e95d05e3577b7eccd878f}\label{_creature_8h_ac5649289508e95d05e3577b7eccd878f}} 
+\index{Creature.\+h@{Creature.\+h}!Stade@{Stade}}
+\index{Stade@{Stade}!Creature.\+h@{Creature.\+h}}
+\subsubsection{\texorpdfstring{Stade}{Stade}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_creature_8h_ac5649289508e95d05e3577b7eccd878f}{Stade}}}
+
+
+
+Stades possibles pour une \mbox{\hyperlink{class_creature}{Creature}}. 
+
+La table de correspondance des stades est disponible en modification par les getters et setters. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{oeuf@{oeuf}!Creature.\+h@{Creature.\+h}}\index{Creature.\+h@{Creature.\+h}!oeuf@{oeuf}}}\mbox{\Hypertarget{_creature_8h_ac5649289508e95d05e3577b7eccd878fa516f6522acbcb903ef2d59078928eb82}\label{_creature_8h_ac5649289508e95d05e3577b7eccd878fa516f6522acbcb903ef2d59078928eb82}} 
+oeuf&oeuf \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{enfant@{enfant}!Creature.\+h@{Creature.\+h}}\index{Creature.\+h@{Creature.\+h}!enfant@{enfant}}}\mbox{\Hypertarget{_creature_8h_ac5649289508e95d05e3577b7eccd878fa17015512ac63586b7e601709b68725e7}\label{_creature_8h_ac5649289508e95d05e3577b7eccd878fa17015512ac63586b7e601709b68725e7}} 
+enfant&enfant \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{adulte@{adulte}!Creature.\+h@{Creature.\+h}}\index{Creature.\+h@{Creature.\+h}!adulte@{adulte}}}\mbox{\Hypertarget{_creature_8h_ac5649289508e95d05e3577b7eccd878fae602c576cc81da6d04c600af52258f73}\label{_creature_8h_ac5649289508e95d05e3577b7eccd878fae602c576cc81da6d04c600af52258f73}} 
+adulte&adulte \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{_creature_8h_a51cc5d61d45bf71507aceec544ad1667}\label{_creature_8h_a51cc5d61d45bf71507aceec544ad1667}} 
+\index{Creature.\+h@{Creature.\+h}!Statut@{Statut}}
+\index{Statut@{Statut}!Creature.\+h@{Creature.\+h}}
+\subsubsection{\texorpdfstring{Statut}{Statut}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_creature_8h_a51cc5d61d45bf71507aceec544ad1667}{Statut}}}
+
+
+
+Statuts possibles pour une \mbox{\hyperlink{class_creature}{Creature}}. 
+
+La table de correspondance des statuts est disponible en modification par les getters et setters. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{idle@{idle}!Creature.\+h@{Creature.\+h}}\index{Creature.\+h@{Creature.\+h}!idle@{idle}}}\mbox{\Hypertarget{_creature_8h_a51cc5d61d45bf71507aceec544ad1667a0e9a37114c0e458d28d52f06ec0f2242}\label{_creature_8h_a51cc5d61d45bf71507aceec544ad1667a0e9a37114c0e458d28d52f06ec0f2242}} 
+idle&sans statut particulier \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{deprime@{deprime}!Creature.\+h@{Creature.\+h}}\index{Creature.\+h@{Creature.\+h}!deprime@{deprime}}}\mbox{\Hypertarget{_creature_8h_a51cc5d61d45bf71507aceec544ad1667acfae3e03042f69ff08e65d7ea00b0d16}\label{_creature_8h_a51cc5d61d45bf71507aceec544ad1667acfae3e03042f69ff08e65d7ea00b0d16}} 
+deprime&triste \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{heureux@{heureux}!Creature.\+h@{Creature.\+h}}\index{Creature.\+h@{Creature.\+h}!heureux@{heureux}}}\mbox{\Hypertarget{_creature_8h_a51cc5d61d45bf71507aceec544ad1667ace3047719d87d5c7cb984ed6a52091ae}\label{_creature_8h_a51cc5d61d45bf71507aceec544ad1667ace3047719d87d5c7cb984ed6a52091ae}} 
+heureux&heureux \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{extenue@{extenue}!Creature.\+h@{Creature.\+h}}\index{Creature.\+h@{Creature.\+h}!extenue@{extenue}}}\mbox{\Hypertarget{_creature_8h_a51cc5d61d45bf71507aceec544ad1667ab6da23fa1af13cc520ae08f6acc10358}\label{_creature_8h_a51cc5d61d45bf71507aceec544ad1667ab6da23fa1af13cc520ae08f6acc10358}} 
+extenue&fatigue \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dort@{dort}!Creature.\+h@{Creature.\+h}}\index{Creature.\+h@{Creature.\+h}!dort@{dort}}}\mbox{\Hypertarget{_creature_8h_a51cc5d61d45bf71507aceec544ad1667a575f120584b3757fbeb18cd81bf095c5}\label{_creature_8h_a51cc5d61d45bf71507aceec544ad1667a575f120584b3757fbeb18cd81bf095c5}} 
+dort&dodo \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{malade@{malade}!Creature.\+h@{Creature.\+h}}\index{Creature.\+h@{Creature.\+h}!malade@{malade}}}\mbox{\Hypertarget{_creature_8h_a51cc5d61d45bf71507aceec544ad1667a358ea25eeda8bc9f24a19f14228049f6}\label{_creature_8h_a51cc5d61d45bf71507aceec544ad1667a358ea25eeda8bc9f24a19f14228049f6}} 
+malade&malade \\
+\hline
+
+\end{DoxyEnumFields}

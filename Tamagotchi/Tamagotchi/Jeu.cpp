@@ -174,6 +174,11 @@ void Jeu::titlescreen(Creature Bestiole)
 				window.close();
 				jouer(load());				
 			}
+
+			if ((boutonsMenu[2].getGlobalBounds().intersects(spriteCursorTitre.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+
+			}
 			
 		}
 
@@ -206,6 +211,7 @@ void Jeu::jouer(Creature Bestiole)
 	bool isDragging = false;
 	bool musicDayLaunched = false;
 	bool musicNightLaunched = false;
+	bool sonActif = true;
 
 	//Textures
 	sf::Texture backgroundDay;
@@ -216,6 +222,7 @@ void Jeu::jouer(Creature Bestiole)
 	sf::Texture persoDormir;
 	sf::Texture persoMalade;
 	sf::Texture persoHappy;
+	sf::Texture tombe;
 	sf::Texture oeufIntact;
 	sf::Texture oeufAlmCracked;
 	sf::Texture oeufCracked;
@@ -238,6 +245,7 @@ void Jeu::jouer(Creature Bestiole)
 	sf::Texture menu;
 	sf::Texture menuIG;
 	sf::Texture options;
+	sf::Texture checkmark;
 
 	backgroundDay.loadFromFile("background01.png");
 	backgroundNight.loadFromFile("background02.png");
@@ -247,6 +255,7 @@ void Jeu::jouer(Creature Bestiole)
 	persoDormir.loadFromFile("fox_sleep.png");
 	persoMalade.loadFromFile("fox_sick.png");
 	persoHappy.loadFromFile("fox_excited.png");
+	tombe.loadFromFile("Tombe.png");
 	oeufIntact.loadFromFile("egg.png");
 	oeufAlmCracked.loadFromFile("egg_almostcracked.png");
 	oeufCracked.loadFromFile("egg_cracked.png");
@@ -267,30 +276,36 @@ void Jeu::jouer(Creature Bestiole)
 	barreJoie.loadFromFile("HappinessBar.png");
 	menuIG.loadFromFile("GameMenuIG.png");
 	options.loadFromFile("Options.png");
-
-
+	checkmark.loadFromFile("checkmark.png");
 
 	//Rectangles de sélection
-	sf::IntRect rectSource(0, 0, 212, 185);
-	sf::IntRect rectHappy(0, 0, 188, 185);
+	//Creature
+	sf::IntRect rectSource(0, 0, 212, 185); 
+	sf::IntRect rectHappy(0, 0, 188, 185);	
 	sf::IntRect rectOtherEmotion(0, 0, 263, 185);
 	sf::IntRect rectOeuf(0, 0, 193, 231);
+	sf::IntRect rectTombe(0, 0, 160, 212);
+	//Curseur
 	sf::IntRect rectCursor(0, 0, 32, 38);
+	//Nourriture/Medicament
 	sf::IntRect selectBox(0, 0, 50, 50);
 	sf::IntRect rectFruit(0, 0, 50, 41);	//Marche aussi pour la viande
 	sf::IntRect rectMuffin(0, 0, 50, 45);
 	sf::IntRect rectMedkit(0, 0, 50, 38);
 	sf::IntRect daynight(0, 0, 100, 100);
+	//Barres
 	sf::IntRect rectBarVie(0, 0, int(169 * Bestiole.getPV() / Bestiole.getPVMax()), 16);
 	sf::IntRect rectBarFaim(0, 0, int(169 * Bestiole.getFaim() / Bestiole.getFaimMax()), 16);
 	sf::IntRect rectBarNrj(0, 0, int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax()), 16);
 	sf::IntRect rectBarJoie(0, 0, int(169 * Bestiole.getJoie() / Bestiole.getJoieMax()), 16);
+	//UI
 	sf::IntRect rectMainMenu(0, 0, 340, 440);
-	sf::IntRect rectOptions(0, 0, 440, 340);    //Marche aussi pour ecran chargement
+	sf::IntRect rectOptions(0, 0, 440, 340);
 	sf::IntRect rectBoutons(0, 0, 180, 25);
-	sf::IntRect rectPoop(0, 0, 80, 62);
+	sf::IntRect rectCheck(0, 0, 36, 36);
+	sf::IntRect rectValider(0, 0, 138, 24);
 
-	
+	sf::IntRect rectPoop(0, 0, 80, 62);
 
 	//Sprite Background
 	sf::Sprite backgroundD(backgroundDay);
@@ -305,6 +320,7 @@ void Jeu::jouer(Creature Bestiole)
 	sf::Sprite spritePersoDodo(persoDormir, rectOtherEmotion);
 	sf::Sprite spritePersoHappy(persoHappy, rectHappy);
 	sf::Sprite spritePersoSick(persoMalade, rectOtherEmotion);
+	sf::Sprite spriteTombe(tombe, rectTombe);
 	sf::Sprite spriteOeuf(oeufIntact, rectOeuf);
 	sf::Sprite spritePoop(poop, rectPoop);
 
@@ -323,6 +339,12 @@ void Jeu::jouer(Creature Bestiole)
 
 	sf::Sprite spriteMenuIG(menuIG, rectMainMenu);
 	sf::Sprite spriteOptions(options, rectOptions);
+	sf::Sprite spriteCheckmarkBox(alpha, rectCheck);
+	spriteCheckmarkBox.setColor(sf::Color::Red);
+	sf::Sprite spriteCheckmarkSon(checkmark, rectCheck);
+	sf::Sprite spriteCheckmarkDifficulte(checkmark, rectCheck);
+	sf::Sprite spriteValider(alpha, rectValider);
+	spriteValider.setColor(sf::Color::Red);
 	sf::Sprite spriteBoutons(alpha, rectBoutons);
 	spriteBoutons.setColor(sf::Color::Transparent);
 	sf::Sprite spriteSelection(alpha, selectBox);
@@ -340,7 +362,6 @@ void Jeu::jouer(Creature Bestiole)
 		boutonsMenu.push_back(spriteBoutons);
 	}
 
-
 	//Coordonnées
 	sf::Vector2i posSouris;
 	//Coordonnées bestiole
@@ -350,6 +371,7 @@ void Jeu::jouer(Creature Bestiole)
 	spritePersoDodo.setPosition(200, 460);
 	spritePersoHappy.setPosition(200, 460);
 	spritePersoSick.setPosition(200, 460);
+	spriteTombe.setPosition(220, 418);
 	spriteOeuf.setPosition(200, 400);
 	//Caca
 	spritePoop.setPosition(80, 560);
@@ -363,10 +385,13 @@ void Jeu::jouer(Creature Bestiole)
 	spriteEnergyBar.setPosition(73, 59);
 	spriteJoieBar.setPosition(73, 85);
 
-
 	//Dans le menu
 	spriteMenuIG.setPosition(162, 180);
-	spriteOptions.setPosition(112, 330);
+	spriteOptions.setPosition(112, 230);
+	spriteCheckmarkBox.setPosition(339, 296);
+	spriteCheckmarkSon.setPosition(339, 296);
+	spriteCheckmarkDifficulte.setPosition(339, 383);
+	spriteValider.setPosition(279, 484);
 
 	//Boutons menu ig/main
 	boutonsMenu[0].setPosition(240,285);		//Nouvelle partie / Sauvegarder
@@ -419,6 +444,12 @@ void Jeu::jouer(Creature Bestiole)
 	night.setBuffer(bufferNight);
 	night.setLoop(true);
 
+	//DARKNESS my old friend...
+	sf::Sound darkness;
+	sf::SoundBuffer bufferDarkness;
+	bufferDarkness.loadFromFile("Darkness.ogg");
+	darkness.setBuffer(bufferDarkness);
+
 	while (window.isOpen())
 	{
 		//Creation event catcher
@@ -462,95 +493,110 @@ void Jeu::jouer(Creature Bestiole)
 					onMenu = false;
 
 				}
-				//else if ((boutonsMenu[2].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
-				//{
-				//	onOptions = true;
-				//}
 				else if ((boutonsMenu[4].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 				{
 					window.close();
 				}
-				else
+				else if ((boutonsMenu[2].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 				{
-					onOptions = false;
+					onOptions = true;
 				}
+			}
 
+			if ((onOptions == true && sonActif==true) && (spriteCheckmarkBox.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				sonActif = false;
+			}
+			else if ((onOptions == true && sonActif==false) && (spriteCheckmarkBox.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				sonActif = true;
+				day.play();
+				night.play();
+				eggCrack.play();
+			}
+			else if ((spriteValider.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			{
+				onOptions = false;
 			}
 			
 			//Clics sur l'oeuf pour le casser
-			if (Bestiole.getStade()==oeuf && (spriteCursor.getGlobalBounds().intersects(spriteOeuf.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)))
+			if ( (onMenu==false || onOptions==false) && (Bestiole.getStade()==oeuf && (spriteCursor.getGlobalBounds().intersects(spriteOeuf.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))))
 			{
-				//Tant que le compter de clic est différent de 6 on joue le son de coquille cassée
+				if (sonActif == true)
+				{
+					//Tant que le compter de clic est différent de 6 on joue le son de coquille cassée
 					eggCrack.play();
-					
-				//Quand le compteur arrive à 6,  on charge le son Pop
+
+					//Quand le compteur arrive à 6,  on charge le son Pop
 					if (Bestiole.compteurClic == 5)
 					{
 						bufferEgg.loadFromFile("Pop.wav");
 						eggCrack.setBuffer(bufferEgg);
 						eggCrack.play();
 					}
+				}
 
 				Bestiole.compteurClic++;
 			}
 
-
-
-
 		//Donner à manger, on redessine les barres de vie/faim/joie en fonction de la nourriture donnée
-			//Fruit
-			if (spriteFruit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+			if (Bestiole.enVie == true)
 			{
-				spriteFruit.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-				isDragging = true;
-			}
-			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteFruit.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
-			{
-				Bestiole.donnerAManger(Repas.fruit, Bestiole);
-				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
-				spritePvBar.setTextureRect(rectBarVie);
-				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
-				spriteHungryBar.setTextureRect(rectBarFaim);
-				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
-				spriteJoieBar.setTextureRect(rectBarJoie);
-				spriteFruit.setPosition(110, 686);
+				//Fruit
+				if (spriteFruit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+				{
+					spriteFruit.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+					isDragging = true;
+				}
+				else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteFruit.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
+				{
+					Bestiole.donnerAManger(Repas.fruit, Bestiole);
+					rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+					spritePvBar.setTextureRect(rectBarVie);
+					rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+					spriteHungryBar.setTextureRect(rectBarFaim);
+					rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+					spriteJoieBar.setTextureRect(rectBarJoie);
+					spriteFruit.setPosition(110, 686);
+				}
+
+				//Viande
+				if (spriteViande.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+				{
+					spriteViande.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+					isDragging = true;
+					Repas.viande;
+				}
+				else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteViande.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
+				{
+					Bestiole.donnerAManger(Repas.viande, Bestiole);
+					rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+					spritePvBar.setTextureRect(rectBarVie);
+					rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+					spriteHungryBar.setTextureRect(rectBarFaim);
+					rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+					spriteJoieBar.setTextureRect(rectBarJoie);
+					spriteViande.setPosition(180, 690);
+				}
+				//Muffin
+				if (spriteMuffin.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+				{
+					spriteMuffin.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+					isDragging = true;
+				}
+				else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteMuffin.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
+				{
+					Bestiole.donnerAManger(Repas.viande, Bestiole);
+					rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+					spritePvBar.setTextureRect(rectBarVie);
+					rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
+					spriteHungryBar.setTextureRect(rectBarFaim);
+					rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+					spriteJoieBar.setTextureRect(rectBarJoie);
+					spriteMuffin.setPosition(247, 685);
+				}
 			}
 
-			//Viande
-			if (spriteViande.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
-			{
-				spriteViande.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-				isDragging = true;
-				Repas.viande;
-			}
-			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteViande.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
-			{
-				Bestiole.donnerAManger(Repas.viande, Bestiole);
-				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
-				spritePvBar.setTextureRect(rectBarVie);
-				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
-				spriteHungryBar.setTextureRect(rectBarFaim);
-				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
-				spriteJoieBar.setTextureRect(rectBarJoie);
-				spriteViande.setPosition(180, 690);
-			}
-			//Muffin
-			if (spriteMuffin.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
-			{
-				spriteMuffin.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-				isDragging = true;
-			}
-			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteMuffin.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
-			{
-				Bestiole.donnerAManger(Repas.viande, Bestiole);
-				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
-				spritePvBar.setTextureRect(rectBarVie);
-				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
-				spriteHungryBar.setTextureRect(rectBarFaim);
-				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
-				spriteJoieBar.setTextureRect(rectBarJoie);
-				spriteMuffin.setPosition(247, 685);
-			}
 		//Les médicaments pour soigner les statuts
 			//Stimulant
 			if (spriteStim.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
@@ -613,20 +659,29 @@ void Jeu::jouer(Creature Bestiole)
 				isDay = false;
 			}
 
-
-			if (isDay == true && musicDayLaunched == false)
+			//Sons d'ambiance
+			if (sonActif == true)
+			{
+				if (isDay == true && musicDayLaunched == false)
+				{
+					night.stop();
+					day.play();
+					musicNightLaunched = false;
+					musicDayLaunched = true;
+				}
+				else if (isDay == false && musicNightLaunched == false)
+				{
+					day.stop();
+					night.play();
+					musicDayLaunched = false;
+					musicNightLaunched = true;
+				}
+			}
+			else if (sonActif==false)
 			{
 				night.stop();
-				day.play();
-				musicNightLaunched = false;
-				musicDayLaunched = true;
-			}
-			else if (isDay == false && musicNightLaunched == false)
-			{
 				day.stop();
-				night.play();
-				musicDayLaunched = false;
-				musicNightLaunched = true;
+				eggCrack.stop();
 			}
 		}
 
@@ -639,7 +694,7 @@ void Jeu::jouer(Creature Bestiole)
 		if (Bestiole.enVie==true && elapsed >= 3000 && onMenu == false && isDay==false && Bestiole.getStade()==enfant)
 		{
 			//Faim
-			Bestiole.setFaim(Bestiole.getFaim() - 2);
+			Bestiole.setFaim(Bestiole.getFaim() - 2*difficulte);
 			rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
 			spriteHungryBar.setTextureRect(rectBarFaim);
 			//Energie
@@ -693,25 +748,25 @@ void Jeu::jouer(Creature Bestiole)
 		{
 			if (Bestiole.getFaim() != 0)
 			{
-				Bestiole.setFaim(Bestiole.getFaim() - 4);
+				Bestiole.setFaim(Bestiole.getFaim() - 4 * difficulte);
 				rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
 				spriteHungryBar.setTextureRect(rectBarFaim);
 			}
 			if (Bestiole.getEnergie() != 0)
 			{
-				Bestiole.setEnergie(Bestiole.getEnergie() - 3);
+				Bestiole.setEnergie(Bestiole.getEnergie() - 3 * difficulte);
 				rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
 				spriteEnergyBar.setTextureRect(rectBarNrj);
 			}
 			if (Bestiole.getJoie() != 0)
 			{
-				Bestiole.setJoie(Bestiole.getJoie() - 5);
+				Bestiole.setJoie(Bestiole.getJoie() - 5 * difficulte);
 				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
 				spriteJoieBar.setTextureRect(rectBarJoie);
 			}
 			if (Bestiole.getPV() != 0 && (Bestiole.getFaim() <= 0 || Bestiole.getEnergie() <= 0 || Bestiole.getJoie() <= 0))
 			{
-				Bestiole.setPV(Bestiole.getPV() - 6);
+				Bestiole.setPV(Bestiole.getPV() - 6 * difficulte);
 				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
 				spritePvBar.setTextureRect(rectBarVie);
 			}
@@ -765,6 +820,9 @@ void Jeu::jouer(Creature Bestiole)
 			if (Bestiole.getPV() <= 0)
 			{
 				Bestiole.setPV(0);
+				Bestiole.setJoie(0);
+				Bestiole.setFaim(0);
+				Bestiole.setEnergie(0);
 			}
 			elapsed = 0;
 		}
@@ -871,7 +929,7 @@ void Jeu::jouer(Creature Bestiole)
 			}
 		}
 		//Si le stade est enfant
-		if (Bestiole.getStade()==enfant)
+		if (Bestiole.getStade()==enfant && Bestiole.enVie==true)
 		{
 			//Selon le statut de la créature, on dessine tel ou tel sprite
 			switch (Bestiole.getStatut())
@@ -901,6 +959,14 @@ void Jeu::jouer(Creature Bestiole)
 		{
 			window.draw(spritePoop);
 		}
+		if (Bestiole.enVie == false)
+		{
+			window.draw(spriteTombe);
+			day.stop();
+			night.stop();
+			darkness.play();
+		}
+
 
 		//Aliment & Medicament : on dessine les icones de l'interface
 		window.draw(spriteStim);
@@ -917,18 +983,26 @@ void Jeu::jouer(Creature Bestiole)
 		//Je trace les boutons d'intéraction quand je suis dans le menu
 		if (onMenu == true)
 		{
-			window.draw(spriteMenuIG);
-			window.draw(boutonsMenu[0]);
-			window.draw(boutonsMenu[1]);
-			window.draw(boutonsMenu[2]);
-			window.draw(boutonsMenu[3]);
-			window.draw(boutonsMenu[4]);
+				window.draw(spriteMenuIG);
+				window.draw(boutonsMenu[0]);
+				window.draw(boutonsMenu[1]);
+				window.draw(boutonsMenu[2]);
+				window.draw(boutonsMenu[3]);
+				window.draw(boutonsMenu[4]);
 		}
 		//Si je suis dans le menu des options
-		else if (onMenu == true && onOptions == true)
+		
+		if (onOptions == true)
 		{
-			window.draw(spriteMenuIG);
+			onMenu = false;
 			window.draw(spriteOptions);
+			window.draw(spriteCheckmarkBox);
+			window.draw(spriteCheckmarkDifficulte);
+			window.draw(spriteValider);
+		}
+		if (sonActif==true && onOptions==true)
+		{
+			window.draw(spriteCheckmarkSon);
 		}
 		//Curseur
 		window.draw(spriteCursor);

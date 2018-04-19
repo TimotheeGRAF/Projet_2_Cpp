@@ -144,5 +144,33 @@
     <Image Include="background02.png">
       <Filter>content</Filter>
     </Image>
+    <Image Include="Options.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="checkmark.png">
+      <Filter>content</Filter>
+    </Image>
+    <Image Include="Tombe.png">
+      <Filter>content</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Darkness.ogg">
+      <Filter>content</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Crack.wav">
+      <Filter>content</Filter>
+    </Media>
+    <Media Include="Jour.wav">
+      <Filter>content</Filter>
+    </Media>
+    <Media Include="Nuit.wav">
+      <Filter>content</Filter>
+    </Media>
+    <Media Include="Pop.wav">
+      <Filter>content</Filter>
+    </Media>
   </ItemGroup>
 </Project>
