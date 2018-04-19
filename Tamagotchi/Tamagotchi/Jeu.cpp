@@ -85,7 +85,7 @@ Creature Jeu::load()
 	do {
 		i = sqlite3_step(stmt);
 		if (i == SQLITE_ROW)
-		{	
+		{
 			animal.setPV(sqlite3_column_int(stmt, 1));
 			animal.setFaim(sqlite3_column_int(stmt, 2));
 			animal.setEnergie(sqlite3_column_int(stmt, 3));
@@ -172,14 +172,14 @@ void Jeu::titlescreen(Creature Bestiole)
 			if ((boutonsMenu[1].getGlobalBounds().intersects(spriteCursorTitre.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				window.close();
-				jouer(load());				
+				jouer(load());
 			}
 
 			if ((boutonsMenu[2].getGlobalBounds().intersects(spriteCursorTitre.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 
 			}
-			
+
 		}
 
 
@@ -211,6 +211,7 @@ void Jeu::jouer(Creature Bestiole)
 	bool isDragging = false;
 	bool musicDayLaunched = false;
 	bool musicNightLaunched = false;
+	bool musicDeathLaunched = false;
 	bool sonActif = true;
 
 	//Textures
@@ -260,7 +261,6 @@ void Jeu::jouer(Creature Bestiole)
 	oeufAlmCracked.loadFromFile("egg_almostcracked.png");
 	oeufCracked.loadFromFile("egg_cracked.png");
 	poop.loadFromFile("poop.png");
-	dialogBox.loadFromFile("bubble.png");
 	cursor.loadFromFile("Cursor.png");
 	jour.loadFromFile("Soleil.png");
 	nuit.loadFromFile("Lune.png");
@@ -280,8 +280,8 @@ void Jeu::jouer(Creature Bestiole)
 
 	//Rectangles de sélection
 	//Creature
-	sf::IntRect rectSource(0, 0, 212, 185); 
-	sf::IntRect rectHappy(0, 0, 188, 185);	
+	sf::IntRect rectSource(0, 0, 212, 185);
+	sf::IntRect rectHappy(0, 0, 188, 185);
 	sf::IntRect rectOtherEmotion(0, 0, 263, 185);
 	sf::IntRect rectOeuf(0, 0, 193, 231);
 	sf::IntRect rectTombe(0, 0, 160, 212);
@@ -340,11 +340,11 @@ void Jeu::jouer(Creature Bestiole)
 	sf::Sprite spriteMenuIG(menuIG, rectMainMenu);
 	sf::Sprite spriteOptions(options, rectOptions);
 	sf::Sprite spriteCheckmarkBox(alpha, rectCheck);
-	spriteCheckmarkBox.setColor(sf::Color::Red);
+	spriteCheckmarkBox.setColor(sf::Color::Transparent);
 	sf::Sprite spriteCheckmarkSon(checkmark, rectCheck);
 	sf::Sprite spriteCheckmarkDifficulte(checkmark, rectCheck);
 	sf::Sprite spriteValider(alpha, rectValider);
-	spriteValider.setColor(sf::Color::Red);
+	spriteValider.setColor(sf::Color::Transparent);
 	sf::Sprite spriteBoutons(alpha, rectBoutons);
 	spriteBoutons.setColor(sf::Color::Transparent);
 	sf::Sprite spriteSelection(alpha, selectBox);
@@ -366,7 +366,7 @@ void Jeu::jouer(Creature Bestiole)
 	sf::Vector2i posSouris;
 	//Coordonnées bestiole
 	spritePerso.setPosition(200, 460);
-	spritePersoFatigue.setPosition(200,460);
+	spritePersoFatigue.setPosition(200, 460);
 	spritePersoDeprime.setPosition(200, 460);
 	spritePersoDodo.setPosition(200, 460);
 	spritePersoHappy.setPosition(200, 460);
@@ -375,7 +375,7 @@ void Jeu::jouer(Creature Bestiole)
 	spriteOeuf.setPosition(200, 400);
 	//Caca
 	spritePoop.setPosition(80, 560);
-	
+
 	//Coordonnées UI
 	spriteSoleil.setPosition(460, 10);
 	spriteLune.setPosition(460, 10);
@@ -394,11 +394,11 @@ void Jeu::jouer(Creature Bestiole)
 	spriteValider.setPosition(279, 484);
 
 	//Boutons menu ig/main
-	boutonsMenu[0].setPosition(240,285);		//Nouvelle partie / Sauvegarder
-	boutonsMenu[1].setPosition(240,342);		//Charger
-	boutonsMenu[2].setPosition(240,400);		//Options
-	boutonsMenu[3].setPosition(240,460);		//Reprendre
-	boutonsMenu[4].setPosition(240,536);		//Quitter
+	boutonsMenu[0].setPosition(240, 285);		//Nouvelle partie / Sauvegarder
+	boutonsMenu[1].setPosition(240, 342);		//Charger
+	boutonsMenu[2].setPosition(240, 400);		//Options
+	boutonsMenu[3].setPosition(240, 460);		//Reprendre
+	boutonsMenu[4].setPosition(240, 536);		//Quitter
 
 	//Boutons Interface
 	casesSelection[0].setPosition(30, 710);	//Bouton Menu
@@ -421,7 +421,7 @@ void Jeu::jouer(Creature Bestiole)
 
 	//Creation horloge interne
 	sf::Clock clock;
-	float elapsed=0;
+	float elapsed = 0;
 
 	//Sons
 	//Craquement oeuf
@@ -449,12 +449,13 @@ void Jeu::jouer(Creature Bestiole)
 	sf::SoundBuffer bufferDarkness;
 	bufferDarkness.loadFromFile("Darkness.ogg");
 	darkness.setBuffer(bufferDarkness);
+	darkness.setLoop(true);
 
 	while (window.isOpen())
 	{
 		//Creation event catcher
 		sf::Event event;
-		
+
 		while (window.pollEvent(event))
 
 		{
@@ -467,11 +468,11 @@ void Jeu::jouer(Creature Bestiole)
 			}
 
 			//On clique sur un bouton pour ouvrir le menu, on fait échap pour le refermer
-			if ( onMenu==false && ((casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))))
+			if (onMenu == false && ((casesSelection[0].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))))
 			{
 				onMenu = true;
 			}
-			if (onMenu==true &&  ((event.type == event.KeyReleased && event.key.code == sf::Keyboard::Escape) || (boutonsMenu[3].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)))
+			if (onMenu == true && ((event.type == event.KeyReleased && event.key.code == sf::Keyboard::Escape) || (boutonsMenu[3].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)))
 			{
 				onMenu = false;
 			}
@@ -503,11 +504,11 @@ void Jeu::jouer(Creature Bestiole)
 				}
 			}
 
-			if ((onOptions == true && sonActif==true) && (spriteCheckmarkBox.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			if ((onOptions == true && sonActif == true) && (spriteCheckmarkBox.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				sonActif = false;
 			}
-			else if ((onOptions == true && sonActif==false) && (spriteCheckmarkBox.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+			else if ((onOptions == true && sonActif == false) && (spriteCheckmarkBox.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
 			{
 				sonActif = true;
 				day.play();
@@ -518,9 +519,9 @@ void Jeu::jouer(Creature Bestiole)
 			{
 				onOptions = false;
 			}
-			
+
 			//Clics sur l'oeuf pour le casser
-			if ( (onMenu==false || onOptions==false) && (Bestiole.getStade()==oeuf && (spriteCursor.getGlobalBounds().intersects(spriteOeuf.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))))
+			if ((onMenu == false || onOptions == false) && (Bestiole.getStade() == oeuf && (spriteCursor.getGlobalBounds().intersects(spriteOeuf.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))))
 			{
 				if (sonActif == true)
 				{
@@ -539,7 +540,7 @@ void Jeu::jouer(Creature Bestiole)
 				Bestiole.compteurClic++;
 			}
 
-		//Donner à manger, on redessine les barres de vie/faim/joie en fonction de la nourriture donnée
+			//Donner à manger, on redessine les barres de vie/faim/joie en fonction de la nourriture donnée
 			if (Bestiole.enVie == true)
 			{
 				//Fruit
@@ -595,70 +596,77 @@ void Jeu::jouer(Creature Bestiole)
 					spriteJoieBar.setTextureRect(rectBarJoie);
 					spriteMuffin.setPosition(247, 685);
 				}
-			}
-
-		//Les médicaments pour soigner les statuts
-			//Stimulant
-			if (spriteStim.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
-			{
-				spriteStim.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-				isDragging = true;
-			}
-			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteStim.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
-			{
-				Bestiole.soigner(Soin.stimulant, Bestiole);
-				spriteStim.setPosition(315, 680);
-			}
-			//Medkit
-			if (spriteMedkit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
-			{
-				spriteMedkit.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-				isDragging = true;
-			}
-			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteMedkit.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
-			{
-				Bestiole.soigner(Soin.hyperproteine, Bestiole);
-				spriteMedkit.setPosition(385, 690);
-			}
-			//Antidep
-			if (spriteAntidep.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
-			{
-				spriteAntidep.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-				isDragging = true;
-			}
-			else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteAntidep.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
-			{
-				Bestiole.soigner(Soin.antidepresseur, Bestiole);
-				spriteAntidep.setPosition(452, 685);
-			}
-			/*Je suis entrain de glisser-déposer*/
-			else
-			{
-				isDragging = false;
-			}
 
 
-			//Laver
-			if (casesSelection[7].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
-			{
-				Bestiole.laver();
-				rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
-				spriteJoieBar.setTextureRect(rectBarJoie);
-			}
+				//Les médicaments pour soigner les statuts
+					//Stimulant
+				if (spriteStim.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+				{
+					spriteStim.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+					isDragging = true;
+				}
+				else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteStim.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
+				{
+					Bestiole.soigner(Soin.stimulant, Bestiole);
+					spriteStim.setPosition(315, 680);
+					rectBarNrj.width = int(169 * Bestiole.getEnergie() / Bestiole.getEnergieMax());
+					spriteEnergyBar.setTextureRect(rectBarNrj);
+				}
+				//Medkit
+				if (spriteMedkit.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+				{
+					spriteMedkit.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+					isDragging = true;
+				}
+				else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteMedkit.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
+				{
+					Bestiole.soigner(Soin.hyperproteine, Bestiole);
+					spriteMedkit.setPosition(385, 690);
+					rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
+					spritePvBar.setTextureRect(rectBarVie);
 
-			//On détermine quel stade de la journée on se trouve, déclenche le statut dormir ou non
-			//Jour
-			if (casesSelection[8].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
-			{
-				isDay = true;
-			}
+				}
+				//Antidep
+				if (spriteAntidep.getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isDragging == false)
+				{
+					spriteAntidep.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+					isDragging = true;
+				}
+				else if ((event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) && spriteAntidep.getGlobalBounds().intersects(spritePerso.getGlobalBounds()))
+				{
+					Bestiole.soigner(Soin.antidepresseur, Bestiole);
+					spriteAntidep.setPosition(452, 685);
+					rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+					spriteJoieBar.setTextureRect(rectBarJoie);
+				}
+				/*Je suis entrain de glisser-déposer*/
+				else
+				{
+					isDragging = false;
+				}
 
-			//Nuit
-			if (casesSelection[9].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
-			{
-				isDay = false;
-			}
 
+				//Laver
+				if (casesSelection[7].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+				{
+					Bestiole.laver();
+					rectBarJoie.width = int(169 * Bestiole.getJoie() / Bestiole.getJoieMax());
+					spriteJoieBar.setTextureRect(rectBarJoie);
+				}
+
+				//On détermine quel stade de la journée on se trouve, déclenche le statut dormir ou non
+				//Jour
+				if (casesSelection[8].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+				{
+					isDay = true;
+				}
+
+				//Nuit
+				if (casesSelection[9].getGlobalBounds().intersects(spriteCursor.getGlobalBounds()) && (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left))
+				{
+					isDay = false;
+				}
+			}
 			//Sons d'ambiance
 			if (sonActif == true)
 			{
@@ -676,25 +684,34 @@ void Jeu::jouer(Creature Bestiole)
 					musicDayLaunched = false;
 					musicNightLaunched = true;
 				}
+				
+				if (Bestiole.enVie==false)
+				{
+					cout << "musique de ses morts" << endl;
+					day.stop();
+					night.stop();
+				}
+
 			}
-			else if (sonActif==false)
+			else if (sonActif == false)
 			{
 				night.stop();
 				day.stop();
 				eggCrack.stop();
+
 			}
 		}
 
-	//Logique Creature
+		//Logique Creature
 
-		// Horloge interne et attributs diminuant en fonction du temps
+			// Horloge interne et attributs diminuant en fonction du temps
 		elapsed += clock.restart().asMilliseconds();
 
 		//Si la nuit est active
-		if (Bestiole.enVie==true && elapsed >= 3000 && onMenu == false && isDay==false && Bestiole.getStade()==enfant)
+		if (Bestiole.enVie == true && elapsed >= 3000 && onMenu == false && isDay == false && Bestiole.getStade() == enfant)
 		{
 			//Faim
-			Bestiole.setFaim(Bestiole.getFaim() - 2*difficulte);
+			Bestiole.setFaim(Bestiole.getFaim() - 2 * difficulte);
 			rectBarFaim.width = int(169 * Bestiole.getFaim() / Bestiole.getFaimMax());
 			spriteHungryBar.setTextureRect(rectBarFaim);
 			//Energie
@@ -771,8 +788,8 @@ void Jeu::jouer(Creature Bestiole)
 				spritePvBar.setTextureRect(rectBarVie);
 			}
 
-		//Gestion d'erreur si les barres trop "trop pleines"
-			//Energie
+			//Gestion d'erreur si les barres trop "trop pleines"
+				//Energie
 			if (Bestiole.getEnergie() >= Bestiole.getEnergieMax())
 			{
 				Bestiole.setEnergie(Bestiole.getEnergieMax());
@@ -800,8 +817,8 @@ void Jeu::jouer(Creature Bestiole)
 				rectBarVie.width = int(169 * Bestiole.getPV() / Bestiole.getPVMax());
 				spritePvBar.setTextureRect(rectBarVie);
 			}
-		//Gstion d'erreur si les barres sont "trop vides"
-			//Energie
+			//Gstion d'erreur si les barres sont "trop vides"
+				//Energie
 			if (Bestiole.getEnergie() <= 0)
 			{
 				Bestiole.setEnergie(0);
@@ -835,7 +852,7 @@ void Jeu::jouer(Creature Bestiole)
 		/*Ici je détermine quel est le statut de la créature selon ses attributs et la quantité de hp/faim/joie/énergie qu'elle possède*/
 
 		//Statut deprime
-		if (Bestiole.getJoie()<=20 && Bestiole.getStatut()!=malade)
+		if (Bestiole.getJoie() <= 20 && Bestiole.getStatut() != malade)
 		{
 			Bestiole.setStatut(deprime);
 		}
@@ -845,11 +862,11 @@ void Jeu::jouer(Creature Bestiole)
 			Bestiole.setStatut(extenue);
 		}
 		//Statut heureux
-		else if ((Bestiole.getJoie() >= 70 && Bestiole.getFaim() >= 70 && Bestiole.getEnergie() >= 70) && Bestiole.getStatut() != malade && isDay==true)
+		else if ((Bestiole.getJoie() >= 70 && Bestiole.getFaim() >= 70 && Bestiole.getEnergie() >= 70) && Bestiole.getStatut() != malade && isDay == true)
 		{
 			Bestiole.setStatut(heureux);
 		}
-		else if (Bestiole.getNbCacas() >= 3 || Bestiole.getFaim()==0 || Bestiole.getJoie() == 0 || Bestiole.getEnergie() == 0)
+		else if (Bestiole.getNbCacas() >= 3 || Bestiole.getFaim() == 0 || Bestiole.getJoie() == 0 || Bestiole.getEnergie() == 0)
 		{
 			Bestiole.setStatut(malade);
 		}
@@ -864,11 +881,16 @@ void Jeu::jouer(Creature Bestiole)
 		}
 
 		//Créature décédée :'(
-		if (Bestiole.getPV() == 0)
+		if (Bestiole.getPV() <= 0)
 		{
 			Bestiole.enVie = false;
-		}		
-		
+		}
+		if (Bestiole.enVie == false && Bestiole.getStade() == enfant && musicDeathLaunched == false)
+		{
+				darkness.play();
+				musicDeathLaunched = true;
+		}
+
 		/*Par manque de temps, je n'exploiterai pas le gain de niveau et d'évolution*/
 		////Gain niveau
 		//if (Bestiole.getExpActuel() == Bestiole.getExpMax())
@@ -883,7 +905,7 @@ void Jeu::jouer(Creature Bestiole)
 
 		window.clear();
 
-	//UI
+		//UI
 		if (isDay == true)
 		{
 			window.clear();
@@ -897,13 +919,13 @@ void Jeu::jouer(Creature Bestiole)
 			window.draw(spriteLune);
 
 		}
-	//Je dessine les cases de l'UI
+		//Je dessine les cases de l'UI
 		for (unsigned int i = 0; i < casesSelection.size(); i++)
 		{
 			window.draw(casesSelection[i]);
 		}
-	//Crea
-		//Si le stade est oeuf :
+		//Crea
+			//Si le stade est oeuf :
 		if (Bestiole.getStade() == oeuf)
 		{
 			switch (Bestiole.compteurClic)
@@ -929,7 +951,7 @@ void Jeu::jouer(Creature Bestiole)
 			}
 		}
 		//Si le stade est enfant
-		if (Bestiole.getStade()==enfant && Bestiole.enVie==true)
+		if (Bestiole.getStade() == enfant && Bestiole.enVie == true)
 		{
 			//Selon le statut de la créature, on dessine tel ou tel sprite
 			switch (Bestiole.getStatut())
@@ -955,16 +977,13 @@ void Jeu::jouer(Creature Bestiole)
 			}
 		}
 		//On dessine le sprite de caca
-		if (Bestiole.getNbCacas()>=1)
+		if (Bestiole.getNbCacas() >= 1 && Bestiole.enVie == true)
 		{
 			window.draw(spritePoop);
 		}
 		if (Bestiole.enVie == false)
 		{
 			window.draw(spriteTombe);
-			day.stop();
-			night.stop();
-			darkness.play();
 		}
 
 
@@ -983,15 +1002,15 @@ void Jeu::jouer(Creature Bestiole)
 		//Je trace les boutons d'intéraction quand je suis dans le menu
 		if (onMenu == true)
 		{
-				window.draw(spriteMenuIG);
-				window.draw(boutonsMenu[0]);
-				window.draw(boutonsMenu[1]);
-				window.draw(boutonsMenu[2]);
-				window.draw(boutonsMenu[3]);
-				window.draw(boutonsMenu[4]);
+			window.draw(spriteMenuIG);
+			window.draw(boutonsMenu[0]);
+			window.draw(boutonsMenu[1]);
+			window.draw(boutonsMenu[2]);
+			window.draw(boutonsMenu[3]);
+			window.draw(boutonsMenu[4]);
 		}
 		//Si je suis dans le menu des options
-		
+
 		if (onOptions == true)
 		{
 			onMenu = false;
@@ -1000,7 +1019,7 @@ void Jeu::jouer(Creature Bestiole)
 			window.draw(spriteCheckmarkDifficulte);
 			window.draw(spriteValider);
 		}
-		if (sonActif==true && onOptions==true)
+		if (sonActif == true && onOptions == true)
 		{
 			window.draw(spriteCheckmarkSon);
 		}

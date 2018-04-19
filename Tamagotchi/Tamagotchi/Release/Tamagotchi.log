@@ -1,14 +1,2 @@
-﻿  Jeu.cpp
-Jeu.cpp(548): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(566): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(584): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(604): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(615): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-Jeu.cpp(626): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-  Génération de code en cours
-  3 of 2227 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
-  Fin de la génération du code
-  Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.exe
-  Tamagotchi.vcxproj -> C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.pdb (Full PDB)
+﻿  Tamagotchi.vcxproj -> F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.exe
+  Tamagotchi.vcxproj -> F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.pdb (Full PDB)

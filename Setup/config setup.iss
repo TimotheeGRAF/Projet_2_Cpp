@@ -2,94 +2,96 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "TamaGoGo"
-#define MyAppVersion "1.09b"
-#define MyAppPublisher "Ben & Fils"
+#define MyAppVersion "1.10"
+#define MyAppPublisher "Ben & Fils Entertainment"
 #define MyAppExeName "Tamagotchi.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{819A6B54-46BC-437C-9CF6-B49B99A31D4E}
+AppId={{08F21A91-20F9-4D7F-8B1C-3DD8EE558868}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
-DefaultGroupName={#MyAppName}
-InfoBeforeFile=C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\InfoInstallTamaGoGo.txt
-InfoAfterFile=C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\InstallEndTamaGoGo.txt
-OutputDir=C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Setup
+DisableProgramGroupPage=yes
+InfoBeforeFile=F:\Downloads\Projet 2\Projet_2_Cpp\Setup\InfoInstallTamaGoGo.txt
+InfoAfterFile=F:\Downloads\Projet 2\Projet_2_Cpp\Setup\InstallEndTamaGoGo.txt
+OutputDir=F:\Downloads\Projet 2\Projet_2_Cpp\Setup
 OutputBaseFilename=TamaGoGo_Setup
-SetupIconFile=C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\TamaGoGo.ico
+SetupIconFile=F:\Downloads\Projet 2\Projet_2_Cpp\Setup\TamaGoGo.ico
 Compression=lzma
 SolidCompression=yes
 
 [Languages]
-Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
+
 
 [Files]
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Antidep.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\background.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\background01.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\background02.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Biscuit.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\bubble.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\checkmark.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Crack.wav"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Creature.cpp"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Creature.h"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Cursor.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Darkness.ogg"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Douche.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\egg.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\egg_almostcracked.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\egg_cracked.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\EnergyBar.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_excited.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_sad.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_sick.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_sleep.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_tired.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Fruit.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\GameMenuIG.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\HappinessBar.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\HealthBar.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\HungryBar.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Jeu.cpp"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Jeu.h"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Jour.wav"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Lune.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\main.cpp"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Medicament.cpp"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Medicament.h"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Medkit.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\MenuButton.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Nourriture.cpp"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Nourriture.h"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Nuit.wav"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\OpenAL32.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Options.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\poop.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Pop.wav"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Poupon.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Soleil.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\sqlite3.c"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\sqlite3.h"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Stim.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Tombe.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\adai05\Desktop\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Viande.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Release\Tamagotchi.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Documentation Technique\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Antidep.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\background.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\background01.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\background02.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Biscuit.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\checkmark.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Crack.wav"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Creature.cpp"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Creature.h"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Cursor.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Darkness.ogg"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Douche.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\egg.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\egg_almostcracked.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\egg_cracked.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\EnergyBar.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_excited.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_sad.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_sick.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_sleep.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\fox_tired.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Fruit.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\GameMenuIG.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\HappinessBar.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\HealthBar.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\HungryBar.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Jeu.cpp"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Jeu.h"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Jour.wav"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Lune.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\main.cpp"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Medicament.cpp"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Medicament.h"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Medkit.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\MenuButton.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Nourriture.cpp"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Nourriture.h"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Nuit.wav"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\OpenAL32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Options.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\poop.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Pop.wav"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Poupon.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Soleil.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\sqlite3.c"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\sqlite3.h"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Stim.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\TamaGoGo.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Tombe.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Tamagotchi\Tamagotchi\Viande.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Setup\Manuel Technique TamaGoGo.docx"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Setup\READ ME!!.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Downloads\Projet 2\Projet_2_Cpp\Setup\TamaGoGo.ico"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+Name: "{commonprograms}\{#MyAppName}";IconFilename: {app}\TamaGoGo.ico; Filename: "{app}\{#MyAppExeName}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}";IconFilename: {app}\TamaGoGo.ico; Tasks: desktopicon
 
 [Run]

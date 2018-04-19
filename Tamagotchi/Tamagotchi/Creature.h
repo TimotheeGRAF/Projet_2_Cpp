@@ -7,7 +7,7 @@
 *
 * \details		Cette classe contient les methodes necessaires a la creation de la creature
 *				 , elle contient aussi la definition de ses stades, statuts et caracteristique.
-*			
+*
 */
 #pragma once
 #include <string>
@@ -20,7 +20,7 @@
 * \brief     Statuts possibles pour une Creature.
 * \details   La table de correspondance des statuts est disponible en modification par les getters et setters.
 */
-enum Statut 
+enum Statut
 {
 	idle,		/*!< sans statut particulier*/
 	deprime,	/*!< triste*/
@@ -281,22 +281,22 @@ private:
 	Stade stadeCrea;
 	Statut stats;
 	string nom;
-	int pvMax=100;
-	int pvActuel=100;
-	int energieMax=100;
-	int energieActuel=100;
-	int joieMax=100;
-	int joieActuel=100;
+	int pvMax = 100;
+	int pvActuel = 100;
+	int energieMax = 100;
+	int energieActuel = 100;
+	int joieMax = 100;
+	int joieActuel = 100;
 	int expMax = 50;
-	int expActuel=0;
+	int expActuel = 0;
 	int niveau = 1;
 	int faimMax = 100;
-	int faimActuel=100;
-	int statut=idle;
-	int nbNourris=0;
-	int nbCacas=0;
-	int nbLave=0;
-	int nbSoigne=0;
+	int faimActuel = 100;
+	int statut = idle;
+	int nbNourris = 0;
+	int nbCacas = 0;
+	int nbLave = 0;
+	int nbSoigne = 0;
 
 protected:
 };

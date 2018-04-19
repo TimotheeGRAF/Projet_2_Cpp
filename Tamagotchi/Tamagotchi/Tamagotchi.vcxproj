@@ -143,7 +143,6 @@
     <Image Include="background01.png" />
     <Image Include="background02.png" />
     <Image Include="Biscuit.png" />
-    <Image Include="bubble.png" />
     <Image Include="checkmark.png" />
     <Image Include="Cursor.png" />
     <Image Include="Douche.png" />

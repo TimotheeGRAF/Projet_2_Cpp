@@ -129,9 +129,6 @@
     <Image Include="poop.png">
       <Filter>content</Filter>
     </Image>
-    <Image Include="bubble.png">
-      <Filter>content</Filter>
-    </Image>
     <Image Include="background.png">
       <Filter>content</Filter>
     </Image>
