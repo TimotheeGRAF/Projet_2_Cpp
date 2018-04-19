@@ -687,7 +687,6 @@ void Jeu::jouer(Creature Bestiole)
 				
 				if (Bestiole.enVie==false)
 				{
-					cout << "musique de ses morts" << endl;
 					day.stop();
 					night.stop();
 				}
